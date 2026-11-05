@@ -1,0 +1,30 @@
+name: Public site verification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    env:
+      UNTIL_SITE_ORIGIN: https://balanov.pro/until
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm ci --prefix app --ignore-scripts
+      - run: node app/scripts/validate.mjs
+      - name: Publish verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: until-public-site-verification
+          path: .until/site-check-public/
+          if-no-files-found: error

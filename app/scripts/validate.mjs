@@ -8,21 +8,24 @@ import { chromium } from 'playwright-core'
 import { actualNodeBinary } from '../../scripts/node-binary.mjs'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const out = path.join(root, '..', '.until', 'site-check')
+const externalOrigin = process.env.UNTIL_SITE_ORIGIN?.replace(/\/+$/, '')
+const out = path.join(root, '..', '.until', externalOrigin ? 'site-check-public' : 'site-check')
 await mkdir(out, { recursive: true })
 const port = 7100
-const origin = `http://127.0.0.1:${port}`
-const server = spawn(actualNodeBinary(), [path.join(root, 'node_modules', 'vite', 'bin', 'vite.js'), 'preview', '--host', '127.0.0.1', '--port', String(port)], {
+const origin = externalOrigin || `http://127.0.0.1:${port}`
+const server = externalOrigin ? null : spawn(actualNodeBinary(), [path.join(root, 'node_modules', 'vite', 'bin', 'vite.js'), 'preview', '--host', '127.0.0.1', '--port', String(port)], {
   cwd: root,
   shell: false,
   stdio: ['ignore', 'pipe', 'pipe'],
 })
 let serverOutput = ''
-server.stdout.on('data', (chunk) => { serverOutput += chunk })
-server.stderr.on('data', (chunk) => { serverOutput += chunk })
+if (server) {
+  server.stdout.on('data', (chunk) => { serverOutput += chunk })
+  server.stderr.on('data', (chunk) => { serverOutput += chunk })
+}
 
 async function stopServer() {
-  if (server.killed) return
+  if (!server || server.killed) return
   if (process.platform === 'win32') {
     await new Promise((resolve) => {
       const killer = spawn('taskkill', ['/pid', String(server.pid), '/T', '/F'], { shell: false })
