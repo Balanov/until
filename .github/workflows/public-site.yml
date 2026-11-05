@@ -20,6 +20,8 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm ci --prefix app --ignore-scripts
+      - name: Check public HTTP connectivity
+        run: curl.exe --fail --silent --show-error --connect-timeout 10 --max-time 30 --output NUL "$env:UNTIL_SITE_ORIGIN"
       - run: node app/scripts/validate.mjs
       - name: Publish verification evidence
         if: always()

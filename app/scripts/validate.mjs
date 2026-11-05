@@ -38,14 +38,18 @@ async function stopServer() {
 }
 
 async function waitForServer() {
-  for (let attempt = 0; attempt < 100; attempt += 1) {
+  let lastError = null
+  for (let attempt = 0; attempt < (externalOrigin ? 3 : 100); attempt += 1) {
     try {
-      const response = await fetch(origin)
+      const response = await fetch(origin, { signal: AbortSignal.timeout(10_000) })
       if (response.ok) return
-    } catch { /* server is starting */ }
+      lastError = new Error(`HTTP ${response.status}`)
+    } catch (error) {
+      lastError = error
+    }
     await new Promise((resolve) => setTimeout(resolve, 200))
   }
-  throw new Error(`Preview did not start: ${serverOutput}`)
+  throw new Error(`${externalOrigin ? 'Public site' : 'Preview'} is unavailable: ${lastError?.message || serverOutput}`)
 }
 
 const executablePath = process.env.CHROME_BIN || [
@@ -70,6 +74,7 @@ try {
   await context.addInitScript(() => localStorage.setItem('until-language', 'en'))
   await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin })
   const page = await context.newPage()
+  page.setDefaultTimeout(30_000)
   page.on('console', (message) => { if (message.type() === 'error') report.consoleErrors.push(message.text()) })
   page.on('pageerror', (error) => report.pageErrors.push(error.message))
   page.on('response', (response) => { if (response.status() >= 400) report.networkErrors.push(`${response.status()} ${response.url()}`) })
