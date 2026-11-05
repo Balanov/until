@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "UNTIL: Evidence-Gated Autonomous Product Operations"
+title: "UNTIL: Evidence-Gated Autonomous Product Operations"
+type: software
+authors:
+  - family-names: Balanov
+    given-names: Anton
+version: 0.1.0
+date-released: 2026-11-05
+license: MIT
+url: "https://balanov.pro/until/"
+repository-code: "https://github.com/Balanov/until"
+keywords:
+  - autonomous agents
+  - product operations
+  - evidence
+  - durable execution
+  - self-improving agents
+  - local-first
+abstract: "Open local-first control plane for continuous, evidence-gated product cycles with role capabilities, independent verification, idempotent release candidates and bounded strategy evolution."

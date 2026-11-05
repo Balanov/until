@@ -1,0 +1,47 @@
+{
+  "format": "until-proof/v1",
+  "mode": "deterministic_fixture_not_llm_quality",
+  "title": "Synthetic persona → research guide → delivery blocked",
+  "initial": {
+    "completed": 1,
+    "failed": 0,
+    "cycles": 2
+  },
+  "tasks": [
+    {
+      "id": "task_5b8aa83f-94c0-46ea-a72c-55abe7bce4b4",
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "state": "done",
+      "attempts": 1
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "art_f0a8ce2e-a9a5-4cd3-8f8b-cb4a3f3a8953",
+      "kind": "research.guide",
+      "status": "working",
+      "hash": "e5dbc45b090b0f345c73c4d74138452bb447cd26c854a3e20de485b591cde9c5"
+    }
+  ],
+  "goal": {
+    "id": "goal_proof",
+    "title": "Reduce a real observed activation failure",
+    "outcome": "Increase activation ratio",
+    "baseline": 0.4,
+    "target": 0.55,
+    "unit": "ratio",
+    "status": "waiting_evidence",
+    "policy": {
+      "autonomy": "sandbox",
+      "maxAttempts": 3
+    },
+    "created_at": "2026-11-05T03:29:27.249Z",
+    "updated_at": "2026-11-05T03:29:27.258Z"
+  },
+  "audit": {
+    "valid": true,
+    "count": 8,
+    "head": "686787114cb8893c1ae5415b203a6553e1e4bc8c1f22b893ba4b8eb3756b02a2"
+  }
+}

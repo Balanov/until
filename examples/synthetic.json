@@ -1,0 +1,7 @@
+{
+  "goalId": "goal_activation",
+  "kind": "synthetic",
+  "source": "fixture://synthetic-persona/001",
+  "content": "A generated persona claims it would use and pay for the product. This is a hypothesis, not demand evidence.",
+  "consent": true
+}

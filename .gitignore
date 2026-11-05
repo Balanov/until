@@ -1,0 +1,14 @@
+node_modules/
+.until/
+.tmp/
+site/dist/
+app/dist/
+site/node_modules/
+coverage/
+*.log
+*.tmp
+*.bak
+.DS_Store
+reference/
+research/
+proof-runs/

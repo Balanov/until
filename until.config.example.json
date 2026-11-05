@@ -1,0 +1,20 @@
+{
+  "models": {
+    "researcher": {
+      "type": "openai-compatible",
+      "baseURL": "http://127.0.0.1:11434/v1",
+      "allowedOrigins": ["http://127.0.0.1:11434"],
+      "model": "qwen3:8b",
+      "timeoutMs": 120000
+    },
+    "owner": {
+      "type": "openai-compatible",
+      "baseURL": "http://127.0.0.1:11434/v1",
+      "allowedOrigins": ["http://127.0.0.1:11434"],
+      "model": "qwen3:8b",
+      "timeoutMs": 120000
+    }
+  },
+  "sandboxConfirmed": false,
+  "leaseMs": 30000
+}

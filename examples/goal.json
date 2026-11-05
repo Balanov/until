@@ -1,0 +1,12 @@
+{
+  "id": "goal_activation",
+  "title": "Reduce observed activation friction",
+  "outcome": "Increase the completed activation ratio",
+  "baseline": 0.4,
+  "target": 0.55,
+  "unit": "ratio",
+  "policy": {
+    "autonomy": "sandbox",
+    "maxAttempts": 3
+  }
+}

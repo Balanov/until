@@ -1,0 +1,50 @@
+{
+  "selection": {
+    "cases": [
+      {
+        "id": "sel-real-vs-noisy",
+        "preferred": "real-low-effort",
+        "opportunities": [
+          { "id": "real-low-effort", "impact": 0.7, "confidence": 0.7, "evidence": 0.95, "effort": 0.1, "kind": "interview" },
+          { "id": "loud-synthetic", "impact": 1.0, "confidence": 0.9, "evidence": 0.05, "effort": 0.2, "kind": "synthetic" }
+        ]
+      },
+      {
+        "id": "sel-evidence-vs-impact",
+        "preferred": "grounded",
+        "opportunities": [
+          { "id": "grounded", "impact": 0.6, "confidence": 0.65, "evidence": 0.9, "effort": 0.15, "kind": "metric" },
+          { "id": "large-ungrounded", "impact": 0.95, "confidence": 0.5, "evidence": 0.1, "effort": 0.7, "kind": "inferred" }
+        ]
+      }
+    ]
+  },
+  "heldout": {
+    "cases": [
+      {
+        "id": "held-payment",
+        "preferred": "paid-signal",
+        "opportunities": [
+          { "id": "paid-signal", "impact": 0.4, "confidence": 0.5, "evidence": 1.0, "effort": 0.2, "kind": "payment" },
+          { "id": "persona-enthusiasm", "impact": 1.0, "confidence": 0.85, "evidence": 0.0, "effort": 0.1, "kind": "synthetic" }
+        ]
+      },
+      {
+        "id": "held-incident",
+        "preferred": "repeated-incident",
+        "opportunities": [
+          { "id": "repeated-incident", "impact": 0.45, "confidence": 0.55, "evidence": 0.9, "effort": 0.1, "kind": "incident" },
+          { "id": "imagined-feature", "impact": 1.0, "confidence": 1.0, "evidence": 0.1, "effort": 0.05, "kind": "inferred" }
+        ]
+      },
+      {
+        "id": "held-support",
+        "preferred": "support-pattern",
+        "opportunities": [
+          { "id": "support-pattern", "impact": 0.3, "confidence": 0.4, "evidence": 0.85, "effort": 0.05, "kind": "support" },
+          { "id": "synthetic-request", "impact": 0.8, "confidence": 0.8, "evidence": 0.1, "effort": 0.3, "kind": "synthetic" }
+        ]
+      }
+    ]
+  }
+}

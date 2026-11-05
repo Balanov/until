@@ -1,0 +1,121 @@
+{
+  "format": "until-proof/v1",
+  "mode": "deterministic_fixture_not_llm_quality",
+  "title": "Real interview → verified candidate → observed outcome",
+  "initial": {
+    "completed": 6,
+    "failed": 0,
+    "cycles": 2
+  },
+  "outcome": {
+    "completed": 1,
+    "failed": 0
+  },
+  "tasks": [
+    {
+      "id": "task_1edec89a-8162-475b-94cf-1ad885c95f2f",
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_56a407ac-125b-4780-923e-ad8bc9a9d30f",
+      "role": "owner",
+      "kind": "product.contract",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_25fbde7e-3c8e-4cf8-8bf3-1df7322ff45f",
+      "role": "builder",
+      "kind": "delivery.build",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_ec7fdffc-3198-45a9-a3bd-b00964869067",
+      "role": "verifier",
+      "kind": "quality.verify",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_253b9c64-454b-4d22-8ab5-ecdeff515f25",
+      "role": "release",
+      "kind": "release.prepare",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_28df44ca-a2ad-49b3-815d-107eea5f4f97",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_69b57023-efc9-40ae-b034-b3305c750de2",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "state": "done",
+      "attempts": 1
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "art_89154d25-9844-43d8-bafe-3f058ea56cfd",
+      "kind": "research.opportunity",
+      "status": "working",
+      "hash": "d97b5172a228ed0c8e61f8a40fb5e8bbeb6f47bb939358e98e117fe4c25f0dc0"
+    },
+    {
+      "id": "art_5a58d613-47e2-4554-bffd-a558d5108f08",
+      "kind": "product.experiment",
+      "status": "verified",
+      "hash": "51b7c541a8369c604c3039d4ed32bfe0f9ab020a1d412f2923d4f5590a751d8e"
+    },
+    {
+      "id": "art_7055df28-da31-425f-8e91-5615efa34cac",
+      "kind": "outcome.request",
+      "status": "working",
+      "hash": "5ed87615152b229ac91564c38c5401c4521266b618bc338af579a6798b7601f2"
+    }
+  ],
+  "release": {
+    "id": "rel_4143088d-c9f3-4000-ad48-4c768bc46b7a",
+    "artifact_id": "art_5a58d613-47e2-4554-bffd-a558d5108f08",
+    "goal_id": "goal_proof",
+    "status": "published_candidate",
+    "receipt": {
+      "artifactId": "art_5a58d613-47e2-4554-bffd-a558d5108f08",
+      "candidate": true,
+      "hash": "51b7c541a8369c604c3039d4ed32bfe0f9ab020a1d412f2923d4f5590a751d8e",
+      "path": ".until\\releases\\rel_4143088d-c9f3-4000-ad48-4c768bc46b7a.json",
+      "provider": "until.local",
+      "releaseId": "rel_4143088d-c9f3-4000-ad48-4c768bc46b7a"
+    },
+    "idempotency_key": "95509e97f4c4e4fea393f31daf38e4476ac6f23256924c02342fb85ffcb1e875",
+    "created_at": "2026-11-05T03:29:27.177Z"
+  },
+  "goal": {
+    "id": "goal_proof",
+    "title": "Reduce a real observed activation failure",
+    "outcome": "Increase activation ratio",
+    "baseline": 0.4,
+    "target": 0.55,
+    "unit": "ratio",
+    "status": "achieved",
+    "policy": {
+      "autonomy": "sandbox",
+      "maxAttempts": 3
+    },
+    "created_at": "2026-11-05T03:29:27.139Z",
+    "updated_at": "2026-11-05T03:29:27.201Z"
+  },
+  "audit": {
+    "valid": true,
+    "count": 42,
+    "head": "d1e39445499621f7bdec99d47ed2c99d6454f818595047b8fac4c6f80cd2176f"
+  }
+}

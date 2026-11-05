@@ -1,0 +1,8 @@
+{
+  "goalId": "goal_activation",
+  "kind": "interview",
+  "source": "fixture://consenting-participant/001",
+  "content": "A real consenting participant abandoned activation after the third duplicate data entry step.",
+  "consent": true,
+  "observedAt": "2026-11-05T00:00:00.000Z"
+}

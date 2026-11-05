@@ -1,0 +1,46 @@
+{
+  "name": "until-product-loop",
+  "version": "0.1.0",
+  "description": "Evidence-gated autonomous product operations. Local-first, model-neutral, MIT.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "bin": {
+    "until": "bin/until.mjs"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./store": "./src/store.js",
+    "./policy": "./src/policy.js",
+    "./evolve": "./src/evolve.js"
+  },
+  "scripts": {
+    "test": "node --test --test-reporter=spec test/*.test.mjs",
+    "test:coverage": "node --test --experimental-test-coverage test/*.test.mjs",
+    "proof": "node scripts/proof.mjs",
+    "bench": "node scripts/bench.mjs",
+    "demo": "node bin/until.mjs demo",
+    "test:report": "node scripts/test-report.mjs",
+    "site:dev": "npm --prefix app run dev",
+    "site:build": "npm --prefix app run build",
+    "validate:site": "node app/scripts/validate.mjs",
+    "check": "node scripts/check.mjs && npm test"
+  },
+  "keywords": [
+    "ai-agents",
+    "product-management",
+    "autonomous-agents",
+    "durable-execution",
+    "self-improving-agents",
+    "evidence",
+    "local-first"
+  ],
+  "author": "Anton Balanov",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Balanov/until.git"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "goalId": "goal_activation",
+  "kind": "metric",
+  "source": "fixture://analytics/activation-after-candidate",
+  "content": "Observed activation ratio supplied after the local release candidate.",
+  "value": 0.56,
+  "unit": "ratio",
+  "consent": true
+}

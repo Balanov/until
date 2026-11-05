@@ -1,0 +1,182 @@
+{
+  "format": "until-proof/v1",
+  "version": "0.1.0",
+  "generatedAt": "2026-11-05T03:29:27.371Z",
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "arch": "x64"
+  },
+  "mode": "deterministic fixtures and adversarial kernel checks; no LLM quality or business ROI claim",
+  "passed": 10,
+  "total": 10,
+  "checks": [
+    {
+      "name": "real cycle completes six role-separated tasks",
+      "passed": true,
+      "evidence": {
+        "completed": 6,
+        "failed": 0
+      }
+    },
+    {
+      "name": "builder output receives an independent passing verdict",
+      "passed": true,
+      "evidence": {
+        "artifactId": "art_5a58d613-47e2-4554-bffd-a558d5108f08",
+        "verdict": {
+          "id": "verdict_cb9c69b5-fbdc-49c9-a981-78e1108e6cad",
+          "artifact_id": "art_5a58d613-47e2-4554-bffd-a558d5108f08",
+          "task_id": "task_ec7fdffc-3198-45a9-a3bd-b00964869067",
+          "passed": 1,
+          "checks": [
+            {
+              "evidence": {
+                "file": "art_5a58d613-47e2-4554-bffd-a558d5108f08.json"
+              },
+              "passed": true,
+              "type": "file_exists"
+            },
+            {
+              "evidence": {
+                "actual": "implemented",
+                "expected": "implemented"
+              },
+              "passed": true,
+              "type": "json_field"
+            },
+            {
+              "evidence": {
+                "actual": "goal_proof",
+                "expected": "goal_proof"
+              },
+              "passed": true,
+              "type": "json_field"
+            }
+          ],
+          "created_at": "2026-11-05T03:29:27.176Z"
+        }
+      }
+    },
+    {
+      "name": "release candidate is published locally with a receipt",
+      "passed": true,
+      "evidence": {
+        "releaseId": "rel_4143088d-c9f3-4000-ad48-4c768bc46b7a",
+        "receipt": {
+          "artifactId": "art_5a58d613-47e2-4554-bffd-a558d5108f08",
+          "candidate": true,
+          "hash": "51b7c541a8369c604c3039d4ed32bfe0f9ab020a1d412f2923d4f5590a751d8e",
+          "path": ".until\\releases\\rel_4143088d-c9f3-4000-ad48-4c768bc46b7a.json",
+          "provider": "until.local",
+          "releaseId": "rel_4143088d-c9f3-4000-ad48-4c768bc46b7a"
+        }
+      }
+    },
+    {
+      "name": "post-release observation closes the declared outcome",
+      "passed": true,
+      "evidence": {
+        "completed": 1,
+        "goal": {
+          "id": "goal_proof",
+          "title": "Reduce a real observed activation failure",
+          "outcome": "Increase activation ratio",
+          "baseline": 0.4,
+          "target": 0.55,
+          "unit": "ratio",
+          "status": "achieved",
+          "policy": {
+            "autonomy": "sandbox",
+            "maxAttempts": 3
+          },
+          "created_at": "2026-11-05T03:29:27.139Z",
+          "updated_at": "2026-11-05T03:29:27.201Z"
+        }
+      }
+    },
+    {
+      "name": "real-cycle event hash chain is intact",
+      "passed": true,
+      "evidence": {
+        "valid": true,
+        "count": 42,
+        "head": "d1e39445499621f7bdec99d47ed2c99d6454f818595047b8fac4c6f80cd2176f"
+      }
+    },
+    {
+      "name": "synthetic persona produces research but cannot unlock delivery",
+      "passed": true,
+      "evidence": {
+        "completed": 1,
+        "goal": {
+          "id": "goal_proof",
+          "title": "Reduce a real observed activation failure",
+          "outcome": "Increase activation ratio",
+          "baseline": 0.4,
+          "target": 0.55,
+          "unit": "ratio",
+          "status": "waiting_evidence",
+          "policy": {
+            "autonomy": "sandbox",
+            "maxAttempts": 3
+          },
+          "created_at": "2026-11-05T03:29:27.249Z",
+          "updated_at": "2026-11-05T03:29:27.258Z"
+        },
+        "taskKinds": [
+          "research.synthesize"
+        ]
+      }
+    },
+    {
+      "name": "late completion after stop is rejected",
+      "passed": true,
+      "evidence": {
+        "accepted": false,
+        "reason": "epoch_changed"
+      }
+    },
+    {
+      "name": "late completion cannot release dependent work",
+      "passed": true,
+      "evidence": {
+        "ready": 0,
+        "outbox": 0
+      }
+    },
+    {
+      "name": "expired lease recovers and rejects old writer",
+      "passed": true,
+      "evidence": {
+        "recovered": {
+          "expired": 1,
+          "recovered": 1,
+          "canceled": 0,
+          "dead": 0
+        },
+        "rejectedOld": {
+          "accepted": false,
+          "reason": "invalid_lease"
+        }
+      }
+    },
+    {
+      "name": "evolver promotes only selection and held-out improvement",
+      "passed": true,
+      "evidence": {
+        "baselineSelection": 1,
+        "candidateSelection": 1,
+        "baselineHeldout": 0,
+        "candidateHeldout": 1
+      }
+    }
+  ],
+  "metrics": {
+    "realCycleTasks": 6,
+    "syntheticTasks": 1,
+    "realEventCount": 42,
+    "heldoutBaselineCorrect": "0/3",
+    "heldoutCandidateCorrect": "3/3"
+  }
+}
