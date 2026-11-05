@@ -14,7 +14,7 @@ UNTIL is an open control plane for continuous product cycles. It connects real c
 
 **Signal → hypothesis → contract → execution → independent proof → release candidate → observed outcome → next work.**
 
-> **Engineering MVP 0.1.** It proves the control-plane mechanisms, not universal team replacement, arbitrary LLM quality, production safety or business ROI. Start with low-risk, authoritatively verifiable digital-product tasks.
+> **Engineering MVP 0.2.** It proves the control-plane mechanisms and a measured improvement on bounded JSON deliverables, not universal team replacement, arbitrary LLM quality, production safety or business ROI. Start with low-risk, authoritatively verifiable digital-product tasks.
 
 ## Why another agent framework?
 
@@ -107,7 +107,21 @@ Copy `until.config.example.json` to `until.config.json` and configure models tha
 
 For a hosted provider add `apiKeyEnv` and an optional price card. The **name** of the environment variable is stored in config; the secret is read only from the environment and is never written to SQLite, traces or proof bundles. Unknown cost is `null`, not a fake zero.
 
-Model output is JSON validated against role contracts and existing evidence IDs. External text, tool output and repository content are untrusted data, never authorization. Roles without a configured model use the explicit deterministic fixture implementation.
+Model output is validated against strict role-specific JSON Schemas and existing evidence IDs. Compatible providers receive `response_format: json_schema`; set `structuredOutputs: false` globally or on one model if the endpoint does not support it. External text, tool output and repository content are untrusted data, never authorization. Roles without a configured model use the explicit deterministic fixture implementation.
+
+For a live model delivery, supply authoritative acceptance in the goal. The owner agent may add constraints but cannot discard them; without these checks a live contract stops instead of inventing its own definition of done:
+
+```json
+{
+  "policy": {
+    "acceptance": [
+      { "type": "json_field", "field": "implementation.feature", "equals": "preview-import-errors" }
+    ]
+  }
+}
+```
+
+`traceResponses: true` opts into storing raw model content for export. Treat it as sensitive: review traces before sharing them. Export a proof bundle with `node bin/until.mjs export --output proof.json`; it includes tasks, verdicts, receipts, events, available model responses and integrity hashes. No secrets are intentionally exported.
 
 ## Execution boundary
 
@@ -131,24 +145,47 @@ See [SECURITY.md](SECURITY.md).
 
 ## What the current proof says
 
-- **43 / 43** unit and integration tests pass.
-- **10 / 10** independent proof checks pass.
+- **50 / 50** unit, integration and published-evidence integrity tests pass.
+- **10 / 10** independent deterministic proof checks pass.
 - One real-signal fixture cycle completes **6** role-separated tasks and a later outcome observation.
 - Late completion after stop is rejected; expired leases recover; duplicate actions are deduplicated.
 - The evolver example moves from **0/3 to 3/3 correct held-out fixture rankings**, with no synthetic selection. This is a fixture mechanism check, not real-world improvement.
 
-Raw files: [tests](app/public/tests.json), [proof](app/public/proof.json), [real trace](app/public/fixtures/real-run.json), [synthetic trace](app/public/fixtures/synthetic-run.json), [benchmarks](app/public/benchmarks.json).
+### Real model comparison
 
-Regenerate everything:
+A frozen protocol ran `qwen3:8b` locally on two selection tasks and two held-out tasks, three times per task and arm. Both arms received the same observation, required feature and acceptance checks. Every run is included.
+
+| Held-out, 6 runs per arm | Accepted | Median wall time | Model calls |
+|---|---:|---:|---:|
+| UNTIL 0.1 | 0/6 | 9.589 s | 1.5 |
+| UNTIL 0.2 | 6/6 | 14.105 s | 3 |
+| Direct 0.1 | 1/6 | 3.910 s | 1 |
+| Direct 0.2 | 6/6 | 4.299 s | 1 |
+
+The current direct arm is **3.281× faster** than UNTIL and also accepts 6/6. Both current arms received strict JSON Schemas, so the improvement is not attributable to the outer loop alone. UNTIL's added value is durable state, role separation, owner-locked acceptance, independent verification, receipts and the outer outcome loop—not faster one-shot JSON generation.
+
+These are bounded structured-deliverable fixtures, not production code, new customer interviews, a competitor ranking, a business outcome or a team-replacement study. Local provider charges exclude hardware and electricity.
+
+Raw files: [comparison](app/public/comparison.json), [protocol](benchmarks/live-protocol.json), [tasks](benchmarks/live-tasks.json), [48 raw traces](app/public/live/), [raw bundle](app/public/until-proof.zip), [tests](app/public/tests.json), [proof](app/public/proof.json), [benchmarks](app/public/benchmarks.json). Capability sources and comparison limits are in the [market analysis](docs/market-research.md).
+
+Regenerate deterministic checks and package the recorded comparison:
 
 ```sh
 npm run check
 node scripts/test-report.mjs
 npm run proof
 npm run bench
+npm run proof:package
 ```
 
-Benchmark results are local intrinsic observations, not competitor rankings, agent-quality scores or business outcomes. See [BENCHMARKS.md](BENCHMARKS.md).
+To run a new live comparison, use a fresh label and the same local Ollama model; do not overwrite the published historical baseline:
+
+```sh
+npm run compare -- --label my-run --system until --suite heldout --repeat 3
+npm run compare -- --label my-run --system direct --suite heldout --repeat 3
+```
+
+`npm run compare:report` regenerates the published report from the two historical labels. Intrinsic queue/startup measurements are local observations, not competitor rankings or business outcomes. See [BENCHMARKS.md](BENCHMARKS.md).
 
 ## Multilingual manifesto
 
@@ -166,7 +203,7 @@ Production browser verification (Chrome or Edge):
 npm run validate:site
 ```
 
-It checks both replay outcomes, all six languages, RTL, downloads, clipboard, FAQ, 375/768/1024/1440 layouts, console errors and failed requests, then stops its temporary server. `CHROME_BIN` can point to a custom browser executable.
+It selects real held-out traces, checks raw trace/bundle downloads, the sourced comparison, scenario calculator, clipboard, all six languages, RTL and 375/768/1024/1440 layouts, console errors and failed requests, then stops its temporary server. `CHROME_BIN` can point to a custom browser executable. Repackaging the raw ZIP uses Python 3 through `npm run proof:package`; the core and deterministic tests need only Node.js.
 
 ## Repository map
 

@@ -1,0 +1,134 @@
+{
+  "system": "until",
+  "accepted": false,
+  "rejectionReasons": [
+    "evidence_mismatch",
+    "acceptance_failed",
+    "verdict_failed",
+    "verification_not_independent",
+    "candidate_not_published"
+  ],
+  "wallMs": 6790.5963,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 385,
+  "outputTokens": 669,
+  "providerCharges": 0,
+  "run": {
+    "cycles": 2,
+    "completed": 0,
+    "failed": 1,
+    "stale": 0,
+    "idleRounds": 1,
+    "blockedBudget": false,
+    "elapsedMs": 6783.969,
+    "status": {
+      "epoch": {
+        "epoch": 0,
+        "stopped": false
+      },
+      "goals": [
+        {
+          "id": "bench-activation",
+          "status": "open"
+        }
+      ],
+      "tasks": {
+        "queued": 1
+      },
+      "signals": {
+        "interview": 1
+      },
+      "models": [
+        {
+          "model": "qwen3:8b",
+          "role": "researcher",
+          "calls": 1,
+          "input_tokens": 385,
+          "output_tokens": 669,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 6780
+        }
+      ],
+      "audit": {
+        "valid": true,
+        "count": 5,
+        "head": "06bd4230143797a27d4418bef860ecd9a746136d0604f5c6aaff201554324859"
+      }
+    }
+  },
+  "verdict": null,
+  "tasks": [
+    {
+      "id": "task_5b6717fb-3c29-44cc-9475-7c9e3b960cfc",
+      "goal_id": "bench-activation",
+      "opportunity_id": null,
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-activation"
+      },
+      "state": "queued",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_6752a1ba-f8f8-44b9-bb08-ad215ef8b059",
+      "epoch": 0,
+      "depends_on": [],
+      "idempotency_key": "3cacc0601f691537cb887e635883379c7eda5259218b6a3137ae02cd92fb185d",
+      "last_error": "statement must contain 5–4000 characters",
+      "available_at": 1793903577187,
+      "created_at": "2026-11-05T18:32:50.305Z",
+      "updated_at": "2026-11-05T18:32:57.087Z"
+    }
+  ],
+  "events": [
+    {
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": "{\"goalId\":\"bench-activation\",\"title\":\"Reduce repeated data entry during activation\"}"
+    },
+    {
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": "{\"goalId\":\"bench-activation\",\"hash\":\"211a9d05c8daff70e6bed314f4731904c3cebe1b9e6867eefc80241b9a4d48f4\",\"kind\":\"interview\",\"signalId\":\"sig_activation\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"research.synthesize\",\"taskId\":\"task_5b6717fb-3c29-44cc-9475-7c9e3b960cfc\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_6752a1ba-f8f8-44b9-bb08-ad215ef8b059",
+      "payload": "{\"attempt\":1,\"kind\":\"research.synthesize\",\"taskId\":\"task_5b6717fb-3c29-44cc-9475-7c9e3b960cfc\"}"
+    },
+    {
+      "type": "task.retry",
+      "actor": "researcher",
+      "payload": "{\"attempt\":1,\"error\":\"statement must contain 5–4000 characters\",\"taskId\":\"task_5b6717fb-3c29-44cc-9475-7c9e3b960cfc\"}"
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 5,
+    "head": "06bd4230143797a27d4418bef860ecd9a746136d0604f5c6aaff201554324859"
+  },
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "artifact",
+        "passed": false,
+        "evidence": {
+          "error": "not_created"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

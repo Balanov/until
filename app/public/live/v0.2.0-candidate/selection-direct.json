@@ -1,0 +1,166 @@
+{
+  "format": "until-live-run/v1",
+  "label": "v0.2.0-candidate",
+  "system": "direct",
+  "suite": "selection",
+  "generatedAt": "2026-11-05T18:50:28.794Z",
+  "commit": "d9f3eba820a439a1c1369c3d81ae5c6993156c68",
+  "sourceHash": "fde0598202faa7bdb0a75ff1624f3a78554811138e29161de0f85c7b2b179c90",
+  "model": {
+    "type": "openai-compatible",
+    "baseURL": "http://127.0.0.1:11434/v1",
+    "allowedOrigins": [
+      "http://127.0.0.1:11434"
+    ],
+    "model": "qwen3:8b",
+    "timeoutMs": 180000,
+    "pricing": {
+      "inputPerMillion": 0,
+      "outputPerMillion": 0
+    }
+  },
+  "environment": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpu": "AMD Ryzen 9 5950X 16-Core Processor            "
+  },
+  "protocol": {
+    "format": "until-live-protocol/v1",
+    "frozenAt": "2026-11-05T18:30:00.000Z",
+    "baselineCommit": "d9f3eba820a439a1c1369c3d81ae5c6993156c68",
+    "model": "qwen3:8b",
+    "provider": "local Ollama OpenAI-compatible API",
+    "repeats": 3,
+    "arms": [
+      "direct",
+      "until"
+    ],
+    "suites": [
+      "selection",
+      "heldout"
+    ],
+    "selectionPurpose": "Diagnose failures and improve software. Never report selection as final quality.",
+    "heldoutRule": "Do not change prompts, fixtures or acceptance rules after inspecting heldout outputs. Report every failure.",
+    "equalInputs": "Both arms receive the same goal, real observation fixture, required feature and fixed acceptance checks. No repository editing or production deployment is claimed.",
+    "acceptance": [
+      "The selected evidence ID must exactly match the supplied observation.",
+      "The delivered JSON artifact must pass fixed goal.policy.acceptance checks.",
+      "For UNTIL, an independent verifier must pass, a local candidate must publish and the audit chain must validate.",
+      "For direct, the same artifact checks are run after the response; a model claim of done has no effect."
+    ],
+    "metrics": [
+      "accepted deliverables",
+      "attempts",
+      "wall time",
+      "model calls",
+      "tokens",
+      "provider charges"
+    ],
+    "limitations": [
+      "Small structured digital-deliverable fixtures, not software engineering or business-outcome benchmarks.",
+      "Recorded real-observation fixtures are not new customer interviews.",
+      "Direct is a same-model single-response baseline, not a competitor product.",
+      "No claim about hosted model quality, team replacement, ROI or production safety.",
+      "Local provider charges are zero; hardware and electricity costs are not measured."
+    ]
+  },
+  "trials": [
+    {
+      "label": "v0.2.0-candidate",
+      "suite": "selection",
+      "case": "activation",
+      "iteration": 1,
+      "system": "direct",
+      "accepted": true,
+      "rejectionReasons": [],
+      "wallMs": 4573.352199999999,
+      "modelCalls": 1,
+      "attempts": 1,
+      "inputTokens": 299,
+      "outputTokens": 435,
+      "providerCharges": 0,
+      "trace": "live/v0.2.0-candidate/selection/activation/direct-1"
+    },
+    {
+      "label": "v0.2.0-candidate",
+      "suite": "selection",
+      "case": "activation",
+      "iteration": 2,
+      "system": "direct",
+      "accepted": true,
+      "rejectionReasons": [],
+      "wallMs": 4608.4625,
+      "modelCalls": 1,
+      "attempts": 1,
+      "inputTokens": 299,
+      "outputTokens": 445,
+      "providerCharges": 0,
+      "trace": "live/v0.2.0-candidate/selection/activation/direct-2"
+    },
+    {
+      "label": "v0.2.0-candidate",
+      "suite": "selection",
+      "case": "activation",
+      "iteration": 3,
+      "system": "direct",
+      "accepted": true,
+      "rejectionReasons": [],
+      "wallMs": 4464.084499999999,
+      "modelCalls": 1,
+      "attempts": 1,
+      "inputTokens": 299,
+      "outputTokens": 433,
+      "providerCharges": 0,
+      "trace": "live/v0.2.0-candidate/selection/activation/direct-3"
+    },
+    {
+      "label": "v0.2.0-candidate",
+      "suite": "selection",
+      "case": "permissions",
+      "iteration": 1,
+      "system": "direct",
+      "accepted": true,
+      "rejectionReasons": [],
+      "wallMs": 3743.6435999999994,
+      "modelCalls": 1,
+      "attempts": 1,
+      "inputTokens": 286,
+      "outputTokens": 358,
+      "providerCharges": 0,
+      "trace": "live/v0.2.0-candidate/selection/permissions/direct-1"
+    },
+    {
+      "label": "v0.2.0-candidate",
+      "suite": "selection",
+      "case": "permissions",
+      "iteration": 2,
+      "system": "direct",
+      "accepted": true,
+      "rejectionReasons": [],
+      "wallMs": 5258.4699,
+      "modelCalls": 1,
+      "attempts": 1,
+      "inputTokens": 286,
+      "outputTokens": 509,
+      "providerCharges": 0,
+      "trace": "live/v0.2.0-candidate/selection/permissions/direct-2"
+    },
+    {
+      "label": "v0.2.0-candidate",
+      "suite": "selection",
+      "case": "permissions",
+      "iteration": 3,
+      "system": "direct",
+      "accepted": true,
+      "rejectionReasons": [],
+      "wallMs": 4718.317199999998,
+      "modelCalls": 1,
+      "attempts": 1,
+      "inputTokens": 286,
+      "outputTokens": 457,
+      "providerCharges": 0,
+      "trace": "live/v0.2.0-candidate/selection/permissions/direct-3"
+    }
+  ]
+}

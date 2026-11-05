@@ -1,0 +1,148 @@
+{
+  "format": "until-live-tasks/v1",
+  "suites": {
+    "selection": [
+      {
+        "id": "activation",
+        "goal": {
+          "id": "bench-activation",
+          "title": "Reduce repeated data entry during activation",
+          "outcome": "Deliver a bounded experiment whose implementation.feature is exactly reuse-existing-data.",
+          "baseline": 0.4,
+          "target": 0.55,
+          "unit": "ratio",
+          "policy": {
+            "acceptance": [
+              {
+                "type": "json_field",
+                "field": "goalId",
+                "equals": "bench-activation"
+              },
+              {
+                "type": "json_field",
+                "field": "status",
+                "equals": "implemented"
+              },
+              {
+                "type": "json_field",
+                "field": "implementation.feature",
+                "equals": "reuse-existing-data"
+              }
+            ]
+          }
+        },
+        "signal": {
+          "kind": "interview",
+          "source": "benchmark://recorded-interview/activation",
+          "content": "A consenting participant abandoned activation after entering the same company data three times.",
+          "consent": true,
+          "observedAt": "2026-11-01T10:00:00.000Z"
+        }
+      },
+      {
+        "id": "permissions",
+        "goal": {
+          "id": "bench-permissions",
+          "title": "Remove surprise before a device permission request",
+          "outcome": "Deliver a bounded experiment whose implementation.feature is exactly show-permission-context.",
+          "policy": {
+            "acceptance": [
+              {
+                "type": "json_field",
+                "field": "goalId",
+                "equals": "bench-permissions"
+              },
+              {
+                "type": "json_field",
+                "field": "status",
+                "equals": "implemented"
+              },
+              {
+                "type": "json_field",
+                "field": "implementation.feature",
+                "equals": "show-permission-context"
+              }
+            ]
+          }
+        },
+        "signal": {
+          "kind": "support",
+          "source": "benchmark://recorded-support/permissions",
+          "content": "A consenting customer declined camera access because the product did not explain why it was needed.",
+          "consent": true,
+          "observedAt": "2026-11-01T11:00:00.000Z"
+        }
+      }
+    ],
+    "heldout": [
+      {
+        "id": "returning",
+        "goal": {
+          "id": "bench-returning",
+          "title": "Preserve unfinished onboarding for returning customers",
+          "outcome": "Deliver a bounded experiment whose implementation.feature is exactly save-progress.",
+          "policy": {
+            "acceptance": [
+              {
+                "type": "json_field",
+                "field": "goalId",
+                "equals": "bench-returning"
+              },
+              {
+                "type": "json_field",
+                "field": "status",
+                "equals": "implemented"
+              },
+              {
+                "type": "json_field",
+                "field": "implementation.feature",
+                "equals": "save-progress"
+              }
+            ]
+          }
+        },
+        "signal": {
+          "kind": "interview",
+          "source": "benchmark://recorded-interview/returning",
+          "content": "A consenting participant left onboarding to find a document and later had to restart every step.",
+          "consent": true,
+          "observedAt": "2026-11-02T10:00:00.000Z"
+        }
+      },
+      {
+        "id": "import",
+        "goal": {
+          "id": "bench-import",
+          "title": "Let customers correct spreadsheet import mistakes",
+          "outcome": "Deliver a bounded experiment whose implementation.feature is exactly preview-import-errors.",
+          "policy": {
+            "acceptance": [
+              {
+                "type": "json_field",
+                "field": "goalId",
+                "equals": "bench-import"
+              },
+              {
+                "type": "json_field",
+                "field": "status",
+                "equals": "implemented"
+              },
+              {
+                "type": "json_field",
+                "field": "implementation.feature",
+                "equals": "preview-import-errors"
+              }
+            ]
+          }
+        },
+        "signal": {
+          "kind": "incident",
+          "source": "benchmark://recorded-incident/import",
+          "content": "A consenting user's import failed without identifying the invalid rows, so they retyped the spreadsheet manually.",
+          "consent": true,
+          "observedAt": "2026-11-02T11:00:00.000Z"
+        }
+      }
+    ]
+  }
+}

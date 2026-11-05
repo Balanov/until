@@ -15,6 +15,9 @@
       "timeoutMs": 120000
     }
   },
+  "structuredOutputs": true,
+  "traceResponses": false,
+  "traceResponsesWarning": "Opt-in raw model content can contain sensitive data. Review before exporting or publishing.",
   "sandboxConfirmed": false,
   "leaseMs": 30000
 }

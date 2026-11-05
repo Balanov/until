@@ -1,0 +1,43 @@
+{
+  "system": "direct",
+  "accepted": false,
+  "rejectionReasons": [
+    "evidence_mismatch",
+    "acceptance_failed"
+  ],
+  "wallMs": 2907.7340000000004,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 283,
+  "outputTokens": 308,
+  "providerCharges": 0,
+  "artifact": {},
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "bench-import"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "preview-import-errors"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

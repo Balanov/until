@@ -1,0 +1,579 @@
+{
+  "system": "until",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 17163.7735,
+  "modelCalls": 3,
+  "attempts": 6,
+  "inputTokens": 1587,
+  "outputTokens": 1624,
+  "providerCharges": 0,
+  "run": {
+    "cycles": 2,
+    "completed": 6,
+    "failed": 0,
+    "stale": 0,
+    "idleRounds": 1,
+    "blockedBudget": false,
+    "elapsedMs": 17156.686,
+    "status": {
+      "epoch": {
+        "epoch": 0,
+        "stopped": false
+      },
+      "goals": [
+        {
+          "id": "bench-permissions",
+          "status": "observing"
+        }
+      ],
+      "tasks": {
+        "done": 6
+      },
+      "signals": {
+        "support": 1
+      },
+      "models": [
+        {
+          "model": "qwen3:8b",
+          "role": "builder",
+          "calls": 1,
+          "input_tokens": 552,
+          "output_tokens": 602,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 6332
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "owner",
+          "calls": 1,
+          "input_tokens": 651,
+          "output_tokens": 415,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 4415
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "researcher",
+          "calls": 1,
+          "input_tokens": 384,
+          "output_tokens": 607,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 6348
+        }
+      ],
+      "economics": {
+        "modelCalls": 3,
+        "inputTokens": 1587,
+        "outputTokens": 1624,
+        "providerCharges": 0,
+        "unknownCostCalls": 0,
+        "publishedCandidates": 1,
+        "achievedGoals": 0,
+        "costPerPublishedCandidate": 0,
+        "costScope": "Provider charges only. Hardware, electricity and human work are excluded."
+      },
+      "audit": {
+        "valid": true,
+        "count": 36,
+        "head": "b9abdd2756c3cbab8e4da896af3decbd79da319771ffd2bb9f8175ca2f95fe3f"
+      }
+    }
+  },
+  "opportunity": {
+    "id": "opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d",
+    "goal_id": "bench-permissions",
+    "statement": "Customers decline camera access when the product fails to explain the necessity of the permission.",
+    "mechanism": "Show a clear, contextual explanation for requesting camera access before prompting the user.",
+    "evidence_ids": [
+      "sig_permissions"
+    ],
+    "status": "release_candidate",
+    "score": 0.8,
+    "generation": 1,
+    "created_at": "2026-11-05T18:49:11.775Z",
+    "updated_at": "2026-11-05T18:49:22.555Z"
+  },
+  "artifact": {
+    "id": "art_de422253-fd14-41ec-8557-7fd62167fade",
+    "goal_id": "bench-permissions",
+    "task_id": "task_4be42f31-bbc8-46f7-9a81-f8b900cd10b1",
+    "kind": "product.experiment",
+    "path": ".until\\artifacts\\art_de422253-fd14-41ec-8557-7fd62167fade.json",
+    "content": "{\n  \"goalId\": \"bench-permissions\",\n  \"opportunityId\": \"opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d\",\n  \"status\": \"implemented\",\n  \"evidenceIds\": [\n    \"sig_permissions\"\n  ],\n  \"implementation\": {\n    \"feature\": \"show-permission-context\"\n  }\n}",
+    "hash": "ea41c8d296e6f4d5bada72eff2af1fe49dacf796bb5d5980500a0269a618f688",
+    "status": "verified",
+    "created_at": "2026-11-05T18:49:22.545Z"
+  },
+  "verdict": {
+    "id": "verdict_598f34e0-fadb-4ae0-ad22-865227f492b0",
+    "artifact_id": "art_de422253-fd14-41ec-8557-7fd62167fade",
+    "task_id": "task_897454a3-cc6b-49ba-825f-95521141eda1",
+    "passed": 1,
+    "checks": [
+      {
+        "evidence": {
+          "actual": "bench-permissions",
+          "expected": "bench-permissions"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "show-permission-context",
+          "expected": "show-permission-context"
+        },
+        "passed": true,
+        "type": "json_field"
+      }
+    ],
+    "created_at": "2026-11-05T18:49:22.551Z"
+  },
+  "release": {
+    "id": "rel_cbd7cdf1-ba26-42e5-8633-e55ef4371c7e",
+    "artifact_id": "art_de422253-fd14-41ec-8557-7fd62167fade",
+    "goal_id": "bench-permissions",
+    "status": "published_candidate",
+    "receipt": {
+      "artifactId": "art_de422253-fd14-41ec-8557-7fd62167fade",
+      "candidate": true,
+      "hash": "ea41c8d296e6f4d5bada72eff2af1fe49dacf796bb5d5980500a0269a618f688",
+      "path": ".until\\releases\\rel_cbd7cdf1-ba26-42e5-8633-e55ef4371c7e.json",
+      "provider": "until.local",
+      "releaseId": "rel_cbd7cdf1-ba26-42e5-8633-e55ef4371c7e"
+    },
+    "idempotency_key": "050bca801f89206dc9d28ad1b0bc003d2a3c845bd06f33165c2260fccd32f9e0",
+    "created_at": "2026-11-05T18:49:22.553Z"
+  },
+  "tasks": [
+    {
+      "id": "task_ba9d0a9a-35c3-4903-ac9d-d0bfbcf6aad7",
+      "goal_id": "bench-permissions",
+      "opportunity_id": null,
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-permissions"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "epoch": 0,
+      "depends_on": [],
+      "idempotency_key": "afe81bd885c35fb1696a2c494c7e18120cbfa54c7ef9180b03ff89e0464e15a5",
+      "last_error": null,
+      "available_at": 1793904545425,
+      "created_at": "2026-11-05T18:49:05.425Z",
+      "updated_at": "2026-11-05T18:49:11.786Z"
+    },
+    {
+      "id": "task_f8c66279-ddd6-4812-bbe6-ce52373eedb6",
+      "goal_id": "bench-permissions",
+      "opportunity_id": "opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d",
+      "role": "owner",
+      "kind": "product.contract",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-permissions"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "epoch": 0,
+      "depends_on": [
+        "task_ba9d0a9a-35c3-4903-ac9d-d0bfbcf6aad7"
+      ],
+      "idempotency_key": "b148b8637b6f52d7f6a0fbfc5648f3b70a8d2b6b0f0fb4bd57671de831d1b88a",
+      "last_error": null,
+      "available_at": 1793904551785,
+      "created_at": "2026-11-05T18:49:11.785Z",
+      "updated_at": "2026-11-05T18:49:16.203Z"
+    },
+    {
+      "id": "task_4be42f31-bbc8-46f7-9a81-f8b900cd10b1",
+      "goal_id": "bench-permissions",
+      "opportunity_id": "opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d",
+      "role": "builder",
+      "kind": "delivery.build",
+      "contract": {
+        "evidenceIds": [
+          "sig_permissions"
+        ],
+        "generation": 1,
+        "goalId": "bench-permissions",
+        "spec": {
+          "checks": [
+            {
+              "equals": "bench-permissions",
+              "field": "goalId",
+              "type": "json_field"
+            },
+            {
+              "equals": "implemented",
+              "field": "status",
+              "type": "json_field"
+            },
+            {
+              "equals": "show-permission-context",
+              "field": "implementation.feature",
+              "type": "json_field"
+            }
+          ],
+          "risk": "low",
+          "summary": "Bounded experiment to implement show-permission-context feature for camera access, aligned with goal bench-permissions",
+          "title": "Remove Surprise Before Camera Permission Request"
+        }
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "epoch": 0,
+      "depends_on": [
+        "task_f8c66279-ddd6-4812-bbe6-ce52373eedb6"
+      ],
+      "idempotency_key": "d08c45616a54f01bd81eee3ee6f7249b8f03be5fd5a484b664abfa387959b55d",
+      "last_error": null,
+      "available_at": 1793904556203,
+      "created_at": "2026-11-05T18:49:16.203Z",
+      "updated_at": "2026-11-05T18:49:22.546Z"
+    },
+    {
+      "id": "task_897454a3-cc6b-49ba-825f-95521141eda1",
+      "goal_id": "bench-permissions",
+      "opportunity_id": "opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d",
+      "role": "verifier",
+      "kind": "quality.verify",
+      "contract": {
+        "artifactId": "art_de422253-fd14-41ec-8557-7fd62167fade",
+        "checks": [
+          {
+            "equals": "bench-permissions",
+            "field": "goalId",
+            "type": "json_field"
+          },
+          {
+            "equals": "implemented",
+            "field": "status",
+            "type": "json_field"
+          },
+          {
+            "equals": "show-permission-context",
+            "field": "implementation.feature",
+            "type": "json_field"
+          }
+        ],
+        "generation": 1,
+        "goalId": "bench-permissions"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "epoch": 0,
+      "depends_on": [
+        "task_4be42f31-bbc8-46f7-9a81-f8b900cd10b1"
+      ],
+      "idempotency_key": "b888fe98b5d52000edd2332cd1461b03ba7684550f1e022ba9214e99c72a16e1",
+      "last_error": null,
+      "available_at": 1793904562546,
+      "created_at": "2026-11-05T18:49:22.546Z",
+      "updated_at": "2026-11-05T18:49:22.552Z"
+    },
+    {
+      "id": "task_0e717f61-659e-4996-a71c-c1219cd95e74",
+      "goal_id": "bench-permissions",
+      "opportunity_id": "opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d",
+      "role": "release",
+      "kind": "release.prepare",
+      "contract": {
+        "artifactId": "art_de422253-fd14-41ec-8557-7fd62167fade",
+        "generation": 1,
+        "goalId": "bench-permissions"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "epoch": 0,
+      "depends_on": [
+        "task_897454a3-cc6b-49ba-825f-95521141eda1"
+      ],
+      "idempotency_key": "72120ddaafe3c7825a63376872074c4098b93e97f84d185a0c64afc696fea840",
+      "last_error": null,
+      "available_at": 1793904562552,
+      "created_at": "2026-11-05T18:49:22.551Z",
+      "updated_at": "2026-11-05T18:49:22.556Z"
+    },
+    {
+      "id": "task_718583cc-0885-427e-a0d6-7b3ae3c28051",
+      "goal_id": "bench-permissions",
+      "opportunity_id": "opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-permissions",
+        "releaseId": "rel_cbd7cdf1-ba26-42e5-8633-e55ef4371c7e"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "epoch": 0,
+      "depends_on": [
+        "task_0e717f61-659e-4996-a71c-c1219cd95e74"
+      ],
+      "idempotency_key": "52571ad9fd0171f4546c51138edb0fb68cdaf3e0579b1039513649d65a983817",
+      "last_error": null,
+      "available_at": 1793904562555,
+      "created_at": "2026-11-05T18:49:22.555Z",
+      "updated_at": "2026-11-05T18:49:22.579Z"
+    }
+  ],
+  "events": [
+    {
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": "{\"goalId\":\"bench-permissions\",\"title\":\"Remove surprise before a device permission request\"}"
+    },
+    {
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": "{\"goalId\":\"bench-permissions\",\"hash\":\"5c977a6d0ab6f1c64370b564ab71fcb19fb7a25ddbcac506c121403d57a4616f\",\"kind\":\"support\",\"signalId\":\"sig_permissions\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-permissions\",\"kind\":\"research.synthesize\",\"taskId\":\"task_ba9d0a9a-35c3-4903-ac9d-d0bfbcf6aad7\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "payload": "{\"attempt\":1,\"kind\":\"research.synthesize\",\"taskId\":\"task_ba9d0a9a-35c3-4903-ac9d-d0bfbcf6aad7\"}"
+    },
+    {
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": "{\"generation\":1,\"goalId\":\"bench-permissions\",\"opportunityId\":\"opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": "{\"artifactId\":\"art_fd336731-4d10-47f4-8bae-34fa0d064bba\",\"hash\":\"0d69118b1336a263d8730e099fa968540f01737bd480981c7f9b35ce17c01725\",\"kind\":\"research.opportunity\",\"taskId\":\"task_ba9d0a9a-35c3-4903-ac9d-d0bfbcf6aad7\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"open\"},\"goalId\":\"bench-permissions\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-permissions\",\"kind\":\"product.contract\",\"taskId\":\"task_f8c66279-ddd6-4812-bbe6-ce52373eedb6\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": "{\"kind\":\"research.synthesize\",\"result\":{\"nextTaskId\":\"task_f8c66279-ddd6-4812-bbe6-ce52373eedb6\",\"opportunityId\":\"opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d\",\"outcome\":\"opportunity_ready\"},\"taskId\":\"task_ba9d0a9a-35c3-4903-ac9d-d0bfbcf6aad7\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "payload": "{\"attempt\":1,\"kind\":\"product.contract\",\"taskId\":\"task_f8c66279-ddd6-4812-bbe6-ce52373eedb6\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d\",\"status\":\"contracted\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-permissions\",\"kind\":\"delivery.build\",\"taskId\":\"task_4be42f31-bbc8-46f7-9a81-f8b900cd10b1\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "owner",
+      "payload": "{\"kind\":\"product.contract\",\"result\":{\"checks\":3,\"nextTaskId\":\"task_4be42f31-bbc8-46f7-9a81-f8b900cd10b1\",\"outcome\":\"contract_created\"},\"taskId\":\"task_f8c66279-ddd6-4812-bbe6-ce52373eedb6\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "payload": "{\"attempt\":1,\"kind\":\"delivery.build\",\"taskId\":\"task_4be42f31-bbc8-46f7-9a81-f8b900cd10b1\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "builder",
+      "payload": "{\"artifactId\":\"art_de422253-fd14-41ec-8557-7fd62167fade\",\"hash\":\"ea41c8d296e6f4d5bada72eff2af1fe49dacf796bb5d5980500a0269a618f688\",\"kind\":\"product.experiment\",\"taskId\":\"task_4be42f31-bbc8-46f7-9a81-f8b900cd10b1\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-permissions\",\"kind\":\"quality.verify\",\"taskId\":\"task_897454a3-cc6b-49ba-825f-95521141eda1\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "builder",
+      "payload": "{\"kind\":\"delivery.build\",\"result\":{\"artifactId\":\"art_de422253-fd14-41ec-8557-7fd62167fade\",\"nextTaskId\":\"task_897454a3-cc6b-49ba-825f-95521141eda1\",\"outcome\":\"artifact_built\"},\"taskId\":\"task_4be42f31-bbc8-46f7-9a81-f8b900cd10b1\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "payload": "{\"attempt\":1,\"kind\":\"quality.verify\",\"taskId\":\"task_897454a3-cc6b-49ba-825f-95521141eda1\"}"
+    },
+    {
+      "type": "verdict.created",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_de422253-fd14-41ec-8557-7fd62167fade\",\"passed\":true,\"verdictId\":\"verdict_598f34e0-fadb-4ae0-ad22-865227f492b0\"}"
+    },
+    {
+      "type": "artifact.status",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_de422253-fd14-41ec-8557-7fd62167fade\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-permissions\",\"kind\":\"release.prepare\",\"taskId\":\"task_0e717f61-659e-4996-a71c-c1219cd95e74\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "verifier",
+      "payload": "{\"kind\":\"quality.verify\",\"result\":{\"artifactId\":\"art_de422253-fd14-41ec-8557-7fd62167fade\",\"nextTaskId\":\"task_0e717f61-659e-4996-a71c-c1219cd95e74\",\"outcome\":\"verified\"},\"taskId\":\"task_897454a3-cc6b-49ba-825f-95521141eda1\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "payload": "{\"attempt\":1,\"kind\":\"release.prepare\",\"taskId\":\"task_0e717f61-659e-4996-a71c-c1219cd95e74\"}"
+    },
+    {
+      "type": "release.candidate",
+      "actor": "release",
+      "payload": "{\"artifactId\":\"art_de422253-fd14-41ec-8557-7fd62167fade\",\"releaseId\":\"rel_cbd7cdf1-ba26-42e5-8633-e55ef4371c7e\"}"
+    },
+    {
+      "type": "outbox.pending",
+      "actor": "release",
+      "payload": "{\"action\":\"artifact.publish\",\"digest\":\"34c48bc30b83e2e97b0265f31a954c69d630f62c5a27aad9f042dd42a91303de\",\"outboxId\":\"out_820b4b9c-e03b-41c9-8b94-e65ba990b13f\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_5f292ea9-d31d-4f0f-a5d5-68c593e8cb4d\",\"status\":\"release_candidate\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-permissions\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-permissions\",\"kind\":\"outcome.observe\",\"taskId\":\"task_718583cc-0885-427e-a0d6-7b3ae3c28051\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "release",
+      "payload": "{\"kind\":\"release.prepare\",\"result\":{\"nextTaskId\":\"task_718583cc-0885-427e-a0d6-7b3ae3c28051\",\"outboxId\":\"out_820b4b9c-e03b-41c9-8b94-e65ba990b13f\",\"outcome\":\"release_candidate\",\"releaseCreated\":true,\"releaseId\":\"rel_cbd7cdf1-ba26-42e5-8633-e55ef4371c7e\"},\"taskId\":\"task_0e717f61-659e-4996-a71c-c1219cd95e74\"}"
+    },
+    {
+      "type": "release.updated",
+      "actor": "release",
+      "payload": "{\"releaseId\":\"rel_cbd7cdf1-ba26-42e5-8633-e55ef4371c7e\",\"status\":\"published_candidate\"}"
+    },
+    {
+      "type": "outbox.sent",
+      "actor": "release",
+      "payload": "{\"outboxId\":\"out_820b4b9c-e03b-41c9-8b94-e65ba990b13f\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_8b03d635-1713-45a6-a087-1d53450cb5fd",
+      "payload": "{\"attempt\":1,\"kind\":\"outcome.observe\",\"taskId\":\"task_718583cc-0885-427e-a0d6-7b3ae3c28051\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "analyst",
+      "payload": "{\"artifactId\":\"art_ae4bd31b-aca0-4108-82eb-5451369f9a45\",\"hash\":\"c6d0dcbd0af72b6d4b9aa7a66b765dc0277ba10a739674551db6b8fd0d41237f\",\"kind\":\"outcome.request\",\"taskId\":\"task_718583cc-0885-427e-a0d6-7b3ae3c28051\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-permissions\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "analyst",
+      "payload": "{\"kind\":\"outcome.observe\",\"result\":{\"artifactId\":\"art_ae4bd31b-aca0-4108-82eb-5451369f9a45\",\"outcome\":\"unknown\"},\"taskId\":\"task_718583cc-0885-427e-a0d6-7b3ae3c28051\"}"
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 36,
+    "head": "b9abdd2756c3cbab8e4da896af3decbd79da319771ffd2bb9f8175ca2f95fe3f"
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-permissions",
+          "expected": "bench-permissions"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "show-permission-context",
+          "expected": "show-permission-context"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

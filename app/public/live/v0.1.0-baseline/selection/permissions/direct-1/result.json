@@ -1,0 +1,57 @@
+{
+  "system": "direct",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 4379.459200000001,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 286,
+  "outputTokens": 460,
+  "providerCharges": 0,
+  "artifact": {
+    "statement": "Displaying the reason for requesting camera access reduces user surprise and increases consent.",
+    "mechanism": "Show permission context before requesting camera access.",
+    "evidenceIds": [
+      "sig_permissions"
+    ],
+    "title": "Camera Permission Context Display Experiment",
+    "summary": "This experiment tests whether explaining the need for camera access reduces user surprise and improves consent rates by providing clear context before requesting the permission.",
+    "risk": "low",
+    "goalId": "bench-permissions",
+    "status": "implemented",
+    "implementation": {
+      "feature": "show-permission-context"
+    }
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-permissions",
+          "expected": "bench-permissions"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "show-permission-context",
+          "expected": "show-permission-context"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

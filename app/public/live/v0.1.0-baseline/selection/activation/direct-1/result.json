@@ -1,0 +1,57 @@
+{
+  "system": "direct",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 3747.3204,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 299,
+  "outputTokens": 394,
+  "providerCharges": 0,
+  "artifact": {
+    "statement": "Automate company data population to eliminate redundant entry during activation",
+    "mechanism": "Populate company data field using existing user profile information during activation flow",
+    "evidenceIds": [
+      "sig_activation"
+    ],
+    "title": "Reuse Existing Company Data During Activation",
+    "summary": "Participants abandoned activation due to repetitive data entry. Implementing data reuse will reduce friction and improve completion rates.",
+    "risk": "low",
+    "goalId": "bench-activation",
+    "status": "implemented",
+    "implementation": {
+      "feature": "reuse-existing-data"
+    }
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-activation",
+          "expected": "bench-activation"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "reuse-existing-data",
+          "expected": "reuse-existing-data"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

@@ -4,7 +4,7 @@
 
 [Манифест и интерактивное доказательство](https://balanov.pro/until/) · [English README](README.md) · [Архитектура](docs/architecture.md) · [Анализ рынка](docs/market-research.md)
 
-> **Engineering MVP 0.1.** Доказана механика control plane, а не универсальная замена команды, качество любой LLM, production-безопасность или ROI. Начинайте с низкорисковых цифровых задач, результат которых проверяется авторитетно.
+> **Engineering MVP 0.2.** Доказана механика control plane и измеренное улучшение на ограниченных JSON-артефактах, а не универсальная замена команды, качество любой LLM, production-безопасность или ROI. Начинайте с низкорисковых цифровых задач, результат которых проверяется авторитетно.
 
 ## Почему это не ещё один чат с ролями
 
@@ -63,26 +63,46 @@ node bin/until.mjs reset
 
 Скопируйте `until.config.example.json` в `until.config.json`. Поддерживаются Ollama, LM Studio, llama.cpp и hosted OpenAI-compatible API. Секрет передаётся только через env-переменную; в БД и proof он не сохраняется. Неизвестная стоимость — `null`, а не ноль.
 
+Совместимые провайдеры получают строгие JSON Schema для ролей. Если endpoint их не поддерживает, задайте `structuredOutputs: false` глобально или для конкретной модели. Для live delivery владелец цели обязан задать `goal.policy.acceptance`: модель может добавить ограничения, но не отбросить внешние критерии. Без них контракт останавливается fail-closed, а не придумывает собственное «готово».
+
+`traceResponses: true` включает сохранение сырых ответов модели. Они могут содержать чувствительные данные и по умолчанию выключены. Команда `node bin/until.mjs export --output proof.json` экспортирует задачи, вердикты, квитанции, события, доступные ответы и SHA-256-хэши. Проверяйте следы перед публикацией.
+
 Встроенный executor создаёт только ограниченные артефакты в `.until/artifacts/`. Внешний coding-agent запускается как заранее зарегистрированный argv-профиль без shell interpolation и только при `sandboxConfirmed: true` в отдельной OS/VM/container sandbox. High-risk контракты по умолчанию останавливаются. Production, платежи, outreach и IAM не входят в стандартный release path. Подробнее: [SECURITY.md](SECURITY.md).
 
 ## Проверяемые результаты
 
-- **43 / 43** unit/integration теста.
-- **10 / 10** независимых proof-проверок.
+- **50 / 50** unit/integration и integrity-тестов опубликованных данных.
+- **10 / 10** независимых детерминированных proof-проверок.
 - **6** ролевых задач в real-signal цикле и последующее наблюдение.
 - Late completion отклонён, lease восстановлен, дубликаты действий дедуплицированы.
 - Evolver: **0/3 → 3/3** правильных held-out fixture rankings. Это проверка механизма, не реальный продуктовый рост.
 
-Исходники: [tests](app/public/tests.json), [proof](app/public/proof.json), [real trace](app/public/fixtures/real-run.json), [synthetic trace](app/public/fixtures/synthetic-run.json), [benchmarks](app/public/benchmarks.json).
+### Замер на настоящей локальной модели
+
+Замороженный протокол: `qwen3:8b` через Ollama, две selection- и две отдельные held-out-задачи, три повтора. У обоих подходов одинаковые наблюдение, требуемая функция и критерии приёмки. Включены все запуски и ошибки.
+
+| Held-out, 6 запусков на подход | Принято | Медиана времени | Вызовов модели |
+|---|---:|---:|---:|
+| UNTIL 0.1 | 0/6 | 9,589 с | 1,5 |
+| UNTIL 0.2 | 6/6 | 14,105 с | 3 |
+| Direct 0.1 | 1/6 | 3,910 с | 1 |
+| Direct 0.2 | 6/6 | 4,299 с | 1 |
+
+Новый direct быстрее нового UNTIL в **3,281 раза** и тоже получил 6/6. Оба новых подхода используют strict JSON Schema, поэтому весь прирост нельзя приписывать outer loop. UNTIL добавляет durable state, разделение ролей, независимую приёмку, квитанции и следующий цикл по исходу, а не ускоряет одноразовую генерацию JSON.
+
+Это ограниченные структурированные артефакты, не production-код, не новые интервью, не рейтинг конкурентов, не бизнес-результат и не исследование замены команды. Стоимость локального API не включает железо и электричество.
+
+Исходники: [сравнение](app/public/comparison.json), [протокол](benchmarks/live-protocol.json), [задачи](benchmarks/live-tasks.json), [48 сырых traces](app/public/live/), [архив](app/public/until-proof.zip), [tests](app/public/tests.json), [proof](app/public/proof.json), [benchmarks](app/public/benchmarks.json). Первоисточники и границы матрицы — в [анализе рынка](docs/market-research.md).
 
 ```sh
 npm run check
 node scripts/test-report.mjs
 npm run proof
 npm run bench
+npm run proof:package
 ```
 
-Benchmark — локальное измерение механики, не рейтинг и не обещание производительности агентов.
+Новый live-замер запускается через `npm run compare -- --label my-run --system until --suite heldout --repeat 3`; для direct замените систему на `direct`. Используйте новый label, не перезаписывая исторический baseline. `npm run compare:report` собирает опубликованный отчёт из двух зафиксированных наборов. Intrinsic benchmark измеряет локальную механику, а не качество агентов или бизнес-результат.
 
 ## Манифест на шести языках
 

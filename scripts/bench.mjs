@@ -48,7 +48,7 @@ function stats(samples) {
   const sum = samples.reduce((total, value) => total + value, 0);
   return {
     count: samples.length,
-    medianMs: sorted[Math.floor(sorted.length * 0.5)],
+    medianMs: sorted.length % 2 ? sorted[Math.floor(sorted.length / 2)] : (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2,
     p95Ms: sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * 0.95))],
     meanMs: sum / samples.length,
     minMs: sorted[0],
@@ -64,7 +64,7 @@ async function startupSample() {
     child.stdout.on("data", (chunk) => { output += chunk; });
     child.on("error", reject);
     child.on("close", (code) => {
-      if (code !== 0 || output.trim() !== "0.1.0") return reject(new Error(`Invalid CLI startup result: ${code} ${output}`));
+      if (code !== 0 || output.trim() !== "0.2.0") return reject(new Error(`Invalid CLI startup result: ${code} ${output}`));
       resolve();
     });
   });
@@ -86,7 +86,7 @@ async function sourceBytes(directory) {
 
 const result = {
   format: "until-benchmark/v1",
-  version: "0.1.0",
+  version: "0.2.0",
   generatedAt: new Date().toISOString(),
   environment: { node: process.version, platform: process.platform, arch: process.arch },
   scenario: {

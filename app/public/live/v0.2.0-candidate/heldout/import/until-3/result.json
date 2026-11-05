@@ -1,0 +1,579 @@
+{
+  "system": "until",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 13058.217500000002,
+  "modelCalls": 3,
+  "attempts": 6,
+  "inputTokens": 1575,
+  "outputTokens": 1147,
+  "providerCharges": 0,
+  "run": {
+    "cycles": 2,
+    "completed": 6,
+    "failed": 0,
+    "stale": 0,
+    "idleRounds": 1,
+    "blockedBudget": false,
+    "elapsedMs": 13057.247,
+    "status": {
+      "epoch": {
+        "epoch": 0,
+        "stopped": false
+      },
+      "goals": [
+        {
+          "id": "bench-import",
+          "status": "observing"
+        }
+      ],
+      "tasks": {
+        "done": 6
+      },
+      "signals": {
+        "incident": 1
+      },
+      "models": [
+        {
+          "model": "qwen3:8b",
+          "role": "builder",
+          "calls": 1,
+          "input_tokens": 544,
+          "output_tokens": 246,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 2838
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "owner",
+          "calls": 1,
+          "input_tokens": 649,
+          "output_tokens": 411,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 4688
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "researcher",
+          "calls": 1,
+          "input_tokens": 382,
+          "output_tokens": 490,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 5477
+        }
+      ],
+      "economics": {
+        "modelCalls": 3,
+        "inputTokens": 1575,
+        "outputTokens": 1147,
+        "providerCharges": 0,
+        "unknownCostCalls": 0,
+        "publishedCandidates": 1,
+        "achievedGoals": 0,
+        "costPerPublishedCandidate": 0,
+        "costScope": "Provider charges only. Hardware, electricity and human work are excluded."
+      },
+      "audit": {
+        "valid": true,
+        "count": 36,
+        "head": "88cdee671af2f4df70c80cb974abb3d032b59329c8e32e17e43c2f8f123d9e91"
+      }
+    }
+  },
+  "opportunity": {
+    "id": "opp_46ae1ffe-64fc-44a7-8670-1681993fb694",
+    "goal_id": "bench-import",
+    "statement": "Customers cannot identify invalid rows during spreadsheet imports, leading to manual re-entry of data.",
+    "mechanism": "Implement a preview-import-errors feature that highlights invalid rows in spreadsheets before finalizing the import.",
+    "evidence_ids": [
+      "sig_import"
+    ],
+    "status": "release_candidate",
+    "score": 0.9,
+    "generation": 1,
+    "created_at": "2026-11-05T18:52:00.338Z",
+    "updated_at": "2026-11-05T18:52:07.891Z"
+  },
+  "artifact": {
+    "id": "art_9b43e496-35c2-4f54-8977-4fdd99e33a1b",
+    "goal_id": "bench-import",
+    "task_id": "task_815da85c-ef0e-4e7a-b0b4-4146a3f7be0f",
+    "kind": "product.experiment",
+    "path": ".until\\artifacts\\art_9b43e496-35c2-4f54-8977-4fdd99e33a1b.json",
+    "content": "{\n  \"goalId\": \"bench-import\",\n  \"opportunityId\": \"opp_46ae1ffe-64fc-44a7-8670-1681993fb694\",\n  \"status\": \"implemented\",\n  \"evidenceIds\": [\n    \"sig_import\"\n  ],\n  \"implementation\": {\n    \"feature\": \"preview-import-errors\"\n  }\n}",
+    "hash": "4e59210542a01aa329575cbaac498c9e8b60cd23d84275861ad78a6456daf340",
+    "status": "verified",
+    "created_at": "2026-11-05T18:52:07.885Z"
+  },
+  "verdict": {
+    "id": "verdict_81e024a2-034d-4c4c-b13d-e5c5b73878a3",
+    "artifact_id": "art_9b43e496-35c2-4f54-8977-4fdd99e33a1b",
+    "task_id": "task_122d4976-0ce9-4828-99de-255093632643",
+    "passed": 1,
+    "checks": [
+      {
+        "evidence": {
+          "actual": "bench-import",
+          "expected": "bench-import"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "preview-import-errors",
+          "expected": "preview-import-errors"
+        },
+        "passed": true,
+        "type": "json_field"
+      }
+    ],
+    "created_at": "2026-11-05T18:52:07.888Z"
+  },
+  "release": {
+    "id": "rel_19bb34c3-392b-42b1-a307-726998563917",
+    "artifact_id": "art_9b43e496-35c2-4f54-8977-4fdd99e33a1b",
+    "goal_id": "bench-import",
+    "status": "published_candidate",
+    "receipt": {
+      "artifactId": "art_9b43e496-35c2-4f54-8977-4fdd99e33a1b",
+      "candidate": true,
+      "hash": "4e59210542a01aa329575cbaac498c9e8b60cd23d84275861ad78a6456daf340",
+      "path": ".until\\releases\\rel_19bb34c3-392b-42b1-a307-726998563917.json",
+      "provider": "until.local",
+      "releaseId": "rel_19bb34c3-392b-42b1-a307-726998563917"
+    },
+    "idempotency_key": "f0a5adea1fdefc14a826b4bd2ff3c3c084dfbd156b911e337bda731eb9133551",
+    "created_at": "2026-11-05T18:52:07.890Z"
+  },
+  "tasks": [
+    {
+      "id": "task_5039c698-ba97-489c-954d-0812eb3463ce",
+      "goal_id": "bench-import",
+      "opportunity_id": null,
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-import"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "epoch": 0,
+      "depends_on": [],
+      "idempotency_key": "24ff7c5c9486af976ba62a7eaebba5211838f8db68404a922fb53ebc6126de54",
+      "last_error": null,
+      "available_at": 1793904714860,
+      "created_at": "2026-11-05T18:51:54.860Z",
+      "updated_at": "2026-11-05T18:52:00.348Z"
+    },
+    {
+      "id": "task_7e24328b-31dd-482f-9c25-cb80ce1888a0",
+      "goal_id": "bench-import",
+      "opportunity_id": "opp_46ae1ffe-64fc-44a7-8670-1681993fb694",
+      "role": "owner",
+      "kind": "product.contract",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-import"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "epoch": 0,
+      "depends_on": [
+        "task_5039c698-ba97-489c-954d-0812eb3463ce"
+      ],
+      "idempotency_key": "a2e598f2d0fb2e768c665b11a337b7d045f7e11782bf017e0a3691f053b1f38e",
+      "last_error": null,
+      "available_at": 1793904720347,
+      "created_at": "2026-11-05T18:52:00.347Z",
+      "updated_at": "2026-11-05T18:52:05.038Z"
+    },
+    {
+      "id": "task_815da85c-ef0e-4e7a-b0b4-4146a3f7be0f",
+      "goal_id": "bench-import",
+      "opportunity_id": "opp_46ae1ffe-64fc-44a7-8670-1681993fb694",
+      "role": "builder",
+      "kind": "delivery.build",
+      "contract": {
+        "evidenceIds": [
+          "sig_import"
+        ],
+        "generation": 1,
+        "goalId": "bench-import",
+        "spec": {
+          "checks": [
+            {
+              "equals": "bench-import",
+              "field": "goalId",
+              "type": "json_field"
+            },
+            {
+              "equals": "implemented",
+              "field": "status",
+              "type": "json_field"
+            },
+            {
+              "equals": "preview-import-errors",
+              "field": "implementation.feature",
+              "type": "json_field"
+            }
+          ],
+          "risk": "low",
+          "summary": "Bounded experiment to implement preview-import-errors feature for identifying invalid rows during spreadsheet imports.",
+          "title": "Let customers correct spreadsheet import mistakes"
+        }
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "epoch": 0,
+      "depends_on": [
+        "task_7e24328b-31dd-482f-9c25-cb80ce1888a0"
+      ],
+      "idempotency_key": "17c2b16c592ca888436ba19a7ee7a935554d45e58d767f41962faf89185af4ff",
+      "last_error": null,
+      "available_at": 1793904725038,
+      "created_at": "2026-11-05T18:52:05.038Z",
+      "updated_at": "2026-11-05T18:52:07.886Z"
+    },
+    {
+      "id": "task_122d4976-0ce9-4828-99de-255093632643",
+      "goal_id": "bench-import",
+      "opportunity_id": "opp_46ae1ffe-64fc-44a7-8670-1681993fb694",
+      "role": "verifier",
+      "kind": "quality.verify",
+      "contract": {
+        "artifactId": "art_9b43e496-35c2-4f54-8977-4fdd99e33a1b",
+        "checks": [
+          {
+            "equals": "bench-import",
+            "field": "goalId",
+            "type": "json_field"
+          },
+          {
+            "equals": "implemented",
+            "field": "status",
+            "type": "json_field"
+          },
+          {
+            "equals": "preview-import-errors",
+            "field": "implementation.feature",
+            "type": "json_field"
+          }
+        ],
+        "generation": 1,
+        "goalId": "bench-import"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "epoch": 0,
+      "depends_on": [
+        "task_815da85c-ef0e-4e7a-b0b4-4146a3f7be0f"
+      ],
+      "idempotency_key": "da6869af56142883b11079dfd03fce05b764818546168750a22482353804c201",
+      "last_error": null,
+      "available_at": 1793904727886,
+      "created_at": "2026-11-05T18:52:07.886Z",
+      "updated_at": "2026-11-05T18:52:07.889Z"
+    },
+    {
+      "id": "task_a905629c-f42f-40ab-93ca-672db806c7fc",
+      "goal_id": "bench-import",
+      "opportunity_id": "opp_46ae1ffe-64fc-44a7-8670-1681993fb694",
+      "role": "release",
+      "kind": "release.prepare",
+      "contract": {
+        "artifactId": "art_9b43e496-35c2-4f54-8977-4fdd99e33a1b",
+        "generation": 1,
+        "goalId": "bench-import"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "epoch": 0,
+      "depends_on": [
+        "task_122d4976-0ce9-4828-99de-255093632643"
+      ],
+      "idempotency_key": "5ae010a41959ce4145fe4d3f5a5a5483c7f22fdcb27b5afe6880bc42bce7c890",
+      "last_error": null,
+      "available_at": 1793904727889,
+      "created_at": "2026-11-05T18:52:07.889Z",
+      "updated_at": "2026-11-05T18:52:07.891Z"
+    },
+    {
+      "id": "task_85aa1a53-027f-4d46-b5f2-377a6b4bd8d9",
+      "goal_id": "bench-import",
+      "opportunity_id": "opp_46ae1ffe-64fc-44a7-8670-1681993fb694",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-import",
+        "releaseId": "rel_19bb34c3-392b-42b1-a307-726998563917"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "epoch": 0,
+      "depends_on": [
+        "task_a905629c-f42f-40ab-93ca-672db806c7fc"
+      ],
+      "idempotency_key": "3e734dd877a2d61b6e7feac1a051a02a1385c66f33f9550aa980653898e5287a",
+      "last_error": null,
+      "available_at": 1793904727891,
+      "created_at": "2026-11-05T18:52:07.891Z",
+      "updated_at": "2026-11-05T18:52:07.916Z"
+    }
+  ],
+  "events": [
+    {
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": "{\"goalId\":\"bench-import\",\"title\":\"Let customers correct spreadsheet import mistakes\"}"
+    },
+    {
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": "{\"goalId\":\"bench-import\",\"hash\":\"7eb977bfd9871cc77a109040a12cd8d7d3b1e4631bce95b8b8e2879bddfe0411\",\"kind\":\"incident\",\"signalId\":\"sig_import\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-import\",\"kind\":\"research.synthesize\",\"taskId\":\"task_5039c698-ba97-489c-954d-0812eb3463ce\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "payload": "{\"attempt\":1,\"kind\":\"research.synthesize\",\"taskId\":\"task_5039c698-ba97-489c-954d-0812eb3463ce\"}"
+    },
+    {
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": "{\"generation\":1,\"goalId\":\"bench-import\",\"opportunityId\":\"opp_46ae1ffe-64fc-44a7-8670-1681993fb694\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": "{\"artifactId\":\"art_3e85a543-dbac-461a-9038-2e6a91592055\",\"hash\":\"a5b364f2affcae321ef60618caf85caf1fbb724f057ff5a60437fa15ca8a2ae1\",\"kind\":\"research.opportunity\",\"taskId\":\"task_5039c698-ba97-489c-954d-0812eb3463ce\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"open\"},\"goalId\":\"bench-import\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-import\",\"kind\":\"product.contract\",\"taskId\":\"task_7e24328b-31dd-482f-9c25-cb80ce1888a0\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": "{\"kind\":\"research.synthesize\",\"result\":{\"nextTaskId\":\"task_7e24328b-31dd-482f-9c25-cb80ce1888a0\",\"opportunityId\":\"opp_46ae1ffe-64fc-44a7-8670-1681993fb694\",\"outcome\":\"opportunity_ready\"},\"taskId\":\"task_5039c698-ba97-489c-954d-0812eb3463ce\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "payload": "{\"attempt\":1,\"kind\":\"product.contract\",\"taskId\":\"task_7e24328b-31dd-482f-9c25-cb80ce1888a0\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_46ae1ffe-64fc-44a7-8670-1681993fb694\",\"status\":\"contracted\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-import\",\"kind\":\"delivery.build\",\"taskId\":\"task_815da85c-ef0e-4e7a-b0b4-4146a3f7be0f\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "owner",
+      "payload": "{\"kind\":\"product.contract\",\"result\":{\"checks\":3,\"nextTaskId\":\"task_815da85c-ef0e-4e7a-b0b4-4146a3f7be0f\",\"outcome\":\"contract_created\"},\"taskId\":\"task_7e24328b-31dd-482f-9c25-cb80ce1888a0\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "payload": "{\"attempt\":1,\"kind\":\"delivery.build\",\"taskId\":\"task_815da85c-ef0e-4e7a-b0b4-4146a3f7be0f\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "builder",
+      "payload": "{\"artifactId\":\"art_9b43e496-35c2-4f54-8977-4fdd99e33a1b\",\"hash\":\"4e59210542a01aa329575cbaac498c9e8b60cd23d84275861ad78a6456daf340\",\"kind\":\"product.experiment\",\"taskId\":\"task_815da85c-ef0e-4e7a-b0b4-4146a3f7be0f\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-import\",\"kind\":\"quality.verify\",\"taskId\":\"task_122d4976-0ce9-4828-99de-255093632643\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "builder",
+      "payload": "{\"kind\":\"delivery.build\",\"result\":{\"artifactId\":\"art_9b43e496-35c2-4f54-8977-4fdd99e33a1b\",\"nextTaskId\":\"task_122d4976-0ce9-4828-99de-255093632643\",\"outcome\":\"artifact_built\"},\"taskId\":\"task_815da85c-ef0e-4e7a-b0b4-4146a3f7be0f\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "payload": "{\"attempt\":1,\"kind\":\"quality.verify\",\"taskId\":\"task_122d4976-0ce9-4828-99de-255093632643\"}"
+    },
+    {
+      "type": "verdict.created",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_9b43e496-35c2-4f54-8977-4fdd99e33a1b\",\"passed\":true,\"verdictId\":\"verdict_81e024a2-034d-4c4c-b13d-e5c5b73878a3\"}"
+    },
+    {
+      "type": "artifact.status",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_9b43e496-35c2-4f54-8977-4fdd99e33a1b\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_46ae1ffe-64fc-44a7-8670-1681993fb694\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-import\",\"kind\":\"release.prepare\",\"taskId\":\"task_a905629c-f42f-40ab-93ca-672db806c7fc\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "verifier",
+      "payload": "{\"kind\":\"quality.verify\",\"result\":{\"artifactId\":\"art_9b43e496-35c2-4f54-8977-4fdd99e33a1b\",\"nextTaskId\":\"task_a905629c-f42f-40ab-93ca-672db806c7fc\",\"outcome\":\"verified\"},\"taskId\":\"task_122d4976-0ce9-4828-99de-255093632643\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "payload": "{\"attempt\":1,\"kind\":\"release.prepare\",\"taskId\":\"task_a905629c-f42f-40ab-93ca-672db806c7fc\"}"
+    },
+    {
+      "type": "release.candidate",
+      "actor": "release",
+      "payload": "{\"artifactId\":\"art_9b43e496-35c2-4f54-8977-4fdd99e33a1b\",\"releaseId\":\"rel_19bb34c3-392b-42b1-a307-726998563917\"}"
+    },
+    {
+      "type": "outbox.pending",
+      "actor": "release",
+      "payload": "{\"action\":\"artifact.publish\",\"digest\":\"131a375b200bfb337dd41f0bcdd2033b4031405b011470b04e9f8f89692d1b26\",\"outboxId\":\"out_fb18e634-5ca0-442f-a834-43e49a1abc38\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_46ae1ffe-64fc-44a7-8670-1681993fb694\",\"status\":\"release_candidate\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-import\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-import\",\"kind\":\"outcome.observe\",\"taskId\":\"task_85aa1a53-027f-4d46-b5f2-377a6b4bd8d9\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "release",
+      "payload": "{\"kind\":\"release.prepare\",\"result\":{\"nextTaskId\":\"task_85aa1a53-027f-4d46-b5f2-377a6b4bd8d9\",\"outboxId\":\"out_fb18e634-5ca0-442f-a834-43e49a1abc38\",\"outcome\":\"release_candidate\",\"releaseCreated\":true,\"releaseId\":\"rel_19bb34c3-392b-42b1-a307-726998563917\"},\"taskId\":\"task_a905629c-f42f-40ab-93ca-672db806c7fc\"}"
+    },
+    {
+      "type": "release.updated",
+      "actor": "release",
+      "payload": "{\"releaseId\":\"rel_19bb34c3-392b-42b1-a307-726998563917\",\"status\":\"published_candidate\"}"
+    },
+    {
+      "type": "outbox.sent",
+      "actor": "release",
+      "payload": "{\"outboxId\":\"out_fb18e634-5ca0-442f-a834-43e49a1abc38\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_90b74789-afd5-43b1-b2e6-5f7568378500",
+      "payload": "{\"attempt\":1,\"kind\":\"outcome.observe\",\"taskId\":\"task_85aa1a53-027f-4d46-b5f2-377a6b4bd8d9\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "analyst",
+      "payload": "{\"artifactId\":\"art_6ccf284a-1e16-434f-b68e-945372064c99\",\"hash\":\"f312b0d5e25e8cb78ce32c6feecf8d380aa4aacdf7abea27a2eeecd65f270ab4\",\"kind\":\"outcome.request\",\"taskId\":\"task_85aa1a53-027f-4d46-b5f2-377a6b4bd8d9\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-import\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "analyst",
+      "payload": "{\"kind\":\"outcome.observe\",\"result\":{\"artifactId\":\"art_6ccf284a-1e16-434f-b68e-945372064c99\",\"outcome\":\"unknown\"},\"taskId\":\"task_85aa1a53-027f-4d46-b5f2-377a6b4bd8d9\"}"
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 36,
+    "head": "88cdee671af2f4df70c80cb974abb3d032b59329c8e32e17e43c2f8f123d9e91"
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-import",
+          "expected": "bench-import"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "preview-import-errors",
+          "expected": "preview-import-errors"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

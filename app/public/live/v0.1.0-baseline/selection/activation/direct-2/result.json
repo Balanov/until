@@ -1,0 +1,57 @@
+{
+  "system": "direct",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 4413.2596,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 299,
+  "outputTokens": 471,
+  "providerCharges": 0,
+  "artifact": {
+    "statement": "Reducing repeated data entry by reusing existing company data during activation",
+    "mechanism": "Automatically populate company data fields using pre-existing user data to eliminate redundant entry",
+    "evidenceIds": [
+      "sig_activation"
+    ],
+    "title": "Reuse Existing Data in Activation Flow",
+    "summary": "Implement a feature to automatically populate company data fields during activation, preventing users from entering the same information multiple times",
+    "risk": "low",
+    "goalId": "bench-activation",
+    "status": "implemented",
+    "implementation": {
+      "feature": "reuse-existing-data"
+    }
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-activation",
+          "expected": "bench-activation"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "reuse-existing-data",
+          "expected": "reuse-existing-data"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

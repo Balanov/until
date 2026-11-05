@@ -17,7 +17,7 @@ test("high-risk contracts stop before builder and never auto-retry", async (t) =
     },
   };
   const { store, kernel } = await runtime(t, { models });
-  goal(store);
+  goal(store, { policy: { acceptance: [{ type: "file_exists" }] } });
   signal(store);
   await kernel.run({ maxCycles: 8, maxTasks: 20 });
   assert.equal(store.getGoal("goal_test").status, "blocked_risk");

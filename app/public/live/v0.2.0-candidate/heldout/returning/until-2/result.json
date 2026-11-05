@@ -1,0 +1,579 @@
+{
+  "system": "until",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 12442.287600000001,
+  "modelCalls": 3,
+  "attempts": 6,
+  "inputTokens": 1558,
+  "outputTokens": 1166,
+  "providerCharges": 0,
+  "run": {
+    "cycles": 2,
+    "completed": 6,
+    "failed": 0,
+    "stale": 0,
+    "idleRounds": 1,
+    "blockedBudget": false,
+    "elapsedMs": 12441.287,
+    "status": {
+      "epoch": {
+        "epoch": 0,
+        "stopped": false
+      },
+      "goals": [
+        {
+          "id": "bench-returning",
+          "status": "observing"
+        }
+      ],
+      "tasks": {
+        "done": 6
+      },
+      "signals": {
+        "interview": 1
+      },
+      "models": [
+        {
+          "model": "qwen3:8b",
+          "role": "builder",
+          "calls": 1,
+          "input_tokens": 532,
+          "output_tokens": 339,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 3611
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "owner",
+          "calls": 1,
+          "input_tokens": 640,
+          "output_tokens": 536,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 5724
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "researcher",
+          "calls": 1,
+          "input_tokens": 386,
+          "output_tokens": 291,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 3050
+        }
+      ],
+      "economics": {
+        "modelCalls": 3,
+        "inputTokens": 1558,
+        "outputTokens": 1166,
+        "providerCharges": 0,
+        "unknownCostCalls": 0,
+        "publishedCandidates": 1,
+        "achievedGoals": 0,
+        "costPerPublishedCandidate": 0,
+        "costScope": "Provider charges only. Hardware, electricity and human work are excluded."
+      },
+      "audit": {
+        "valid": true,
+        "count": 36,
+        "head": "08431ed2986757895ef7e4245985d549be6457464f36c9fdb0dd50ba4a1d0a1d"
+      }
+    }
+  },
+  "opportunity": {
+    "id": "opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1",
+    "goal_id": "bench-returning",
+    "statement": "Returning customers lose progress when interrupting onboarding, requiring restarts.",
+    "mechanism": "Implement save-progress feature to persist onboarding state.",
+    "evidence_ids": [
+      "sig_returning"
+    ],
+    "status": "release_candidate",
+    "score": 0.9,
+    "generation": 1,
+    "created_at": "2026-11-05T18:50:58.605Z",
+    "updated_at": "2026-11-05T18:51:07.970Z"
+  },
+  "artifact": {
+    "id": "art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8",
+    "goal_id": "bench-returning",
+    "task_id": "task_b991b341-eb23-4212-8395-d9390057603c",
+    "kind": "product.experiment",
+    "path": ".until\\artifacts\\art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8.json",
+    "content": "{\n  \"goalId\": \"bench-returning\",\n  \"opportunityId\": \"opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1\",\n  \"status\": \"implemented\",\n  \"evidenceIds\": [\n    \"sig_returning\"\n  ],\n  \"implementation\": {\n    \"feature\": \"save-progress\"\n  }\n}",
+    "hash": "d658d20dc8021b02acc41fc58722099cde770c61a7e4443be36ba8b8131d3515",
+    "status": "verified",
+    "created_at": "2026-11-05T18:51:07.965Z"
+  },
+  "verdict": {
+    "id": "verdict_8543c3c6-b7e2-409f-90a4-cf55ac8e2571",
+    "artifact_id": "art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8",
+    "task_id": "task_ccd31a89-ae6b-4ac0-8016-5e58e3db77ee",
+    "passed": 1,
+    "checks": [
+      {
+        "evidence": {
+          "actual": "bench-returning",
+          "expected": "bench-returning"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "save-progress",
+          "expected": "save-progress"
+        },
+        "passed": true,
+        "type": "json_field"
+      }
+    ],
+    "created_at": "2026-11-05T18:51:07.968Z"
+  },
+  "release": {
+    "id": "rel_661a962a-4620-4177-86cf-a8fa3a041125",
+    "artifact_id": "art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8",
+    "goal_id": "bench-returning",
+    "status": "published_candidate",
+    "receipt": {
+      "artifactId": "art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8",
+      "candidate": true,
+      "hash": "d658d20dc8021b02acc41fc58722099cde770c61a7e4443be36ba8b8131d3515",
+      "path": ".until\\releases\\rel_661a962a-4620-4177-86cf-a8fa3a041125.json",
+      "provider": "until.local",
+      "releaseId": "rel_661a962a-4620-4177-86cf-a8fa3a041125"
+    },
+    "idempotency_key": "b5b8c7f4217d42b78a078389d90f5749584ee3225991638f690baabf4ed55a55",
+    "created_at": "2026-11-05T18:51:07.970Z"
+  },
+  "tasks": [
+    {
+      "id": "task_3f5f563e-ef9a-4463-a56e-a8268c353054",
+      "goal_id": "bench-returning",
+      "opportunity_id": null,
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-returning"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "epoch": 0,
+      "depends_on": [],
+      "idempotency_key": "ef6d7c96da31a86280f06c3273a56357fb1d43b192851073be046b06733d8d9b",
+      "last_error": null,
+      "available_at": 1793904655554,
+      "created_at": "2026-11-05T18:50:55.554Z",
+      "updated_at": "2026-11-05T18:50:58.615Z"
+    },
+    {
+      "id": "task_aca902b6-ce1e-4d81-a21b-04514d1db162",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1",
+      "role": "owner",
+      "kind": "product.contract",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-returning"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "epoch": 0,
+      "depends_on": [
+        "task_3f5f563e-ef9a-4463-a56e-a8268c353054"
+      ],
+      "idempotency_key": "8630958d0b2315e45bba7eccfb5e712edbe11b56cf68c2e2b4cfd992399f0284",
+      "last_error": null,
+      "available_at": 1793904658615,
+      "created_at": "2026-11-05T18:50:58.615Z",
+      "updated_at": "2026-11-05T18:51:04.341Z"
+    },
+    {
+      "id": "task_b991b341-eb23-4212-8395-d9390057603c",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1",
+      "role": "builder",
+      "kind": "delivery.build",
+      "contract": {
+        "evidenceIds": [
+          "sig_returning"
+        ],
+        "generation": 1,
+        "goalId": "bench-returning",
+        "spec": {
+          "checks": [
+            {
+              "equals": "bench-returning",
+              "field": "goalId",
+              "type": "json_field"
+            },
+            {
+              "equals": "implemented",
+              "field": "status",
+              "type": "json_field"
+            },
+            {
+              "equals": "save-progress",
+              "field": "implementation.feature",
+              "type": "json_field"
+            }
+          ],
+          "risk": "low",
+          "summary": "Bounded experiment to implement save-progress feature for returning customers",
+          "title": "Preserve unfinished onboarding for returning customers"
+        }
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "epoch": 0,
+      "depends_on": [
+        "task_aca902b6-ce1e-4d81-a21b-04514d1db162"
+      ],
+      "idempotency_key": "7d1d2bdcca5a42f0adec27185218d5b3bc526c7b4578cdfb4182ad120557c6c2",
+      "last_error": null,
+      "available_at": 1793904664341,
+      "created_at": "2026-11-05T18:51:04.341Z",
+      "updated_at": "2026-11-05T18:51:07.965Z"
+    },
+    {
+      "id": "task_ccd31a89-ae6b-4ac0-8016-5e58e3db77ee",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1",
+      "role": "verifier",
+      "kind": "quality.verify",
+      "contract": {
+        "artifactId": "art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8",
+        "checks": [
+          {
+            "equals": "bench-returning",
+            "field": "goalId",
+            "type": "json_field"
+          },
+          {
+            "equals": "implemented",
+            "field": "status",
+            "type": "json_field"
+          },
+          {
+            "equals": "save-progress",
+            "field": "implementation.feature",
+            "type": "json_field"
+          }
+        ],
+        "generation": 1,
+        "goalId": "bench-returning"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "epoch": 0,
+      "depends_on": [
+        "task_b991b341-eb23-4212-8395-d9390057603c"
+      ],
+      "idempotency_key": "c49517f3e7632c21fddbebd0150d3146bcf390f2d94a8397f73a51604e6a015a",
+      "last_error": null,
+      "available_at": 1793904667965,
+      "created_at": "2026-11-05T18:51:07.965Z",
+      "updated_at": "2026-11-05T18:51:07.969Z"
+    },
+    {
+      "id": "task_69002215-0b58-42df-a6cd-76b7d015f04e",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1",
+      "role": "release",
+      "kind": "release.prepare",
+      "contract": {
+        "artifactId": "art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8",
+        "generation": 1,
+        "goalId": "bench-returning"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "epoch": 0,
+      "depends_on": [
+        "task_ccd31a89-ae6b-4ac0-8016-5e58e3db77ee"
+      ],
+      "idempotency_key": "60d807649a5193c1f04dc63052da97219d5a621ddb5420777c06fecd9b165a10",
+      "last_error": null,
+      "available_at": 1793904667969,
+      "created_at": "2026-11-05T18:51:07.969Z",
+      "updated_at": "2026-11-05T18:51:07.971Z"
+    },
+    {
+      "id": "task_18379f37-7873-410c-941d-dad3f0fd9887",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-returning",
+        "releaseId": "rel_661a962a-4620-4177-86cf-a8fa3a041125"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "epoch": 0,
+      "depends_on": [
+        "task_69002215-0b58-42df-a6cd-76b7d015f04e"
+      ],
+      "idempotency_key": "7f39d4b9d6d45a2c0b85959be0f368b7cebc590c1af2779376723e0e01de90e9",
+      "last_error": null,
+      "available_at": 1793904667970,
+      "created_at": "2026-11-05T18:51:07.970Z",
+      "updated_at": "2026-11-05T18:51:07.994Z"
+    }
+  ],
+  "events": [
+    {
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": "{\"goalId\":\"bench-returning\",\"title\":\"Preserve unfinished onboarding for returning customers\"}"
+    },
+    {
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": "{\"goalId\":\"bench-returning\",\"hash\":\"869be84d4da125b9881a1cde95f709fa11bb87bee0744065673ca7d75af66eca\",\"kind\":\"interview\",\"signalId\":\"sig_returning\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"research.synthesize\",\"taskId\":\"task_3f5f563e-ef9a-4463-a56e-a8268c353054\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "payload": "{\"attempt\":1,\"kind\":\"research.synthesize\",\"taskId\":\"task_3f5f563e-ef9a-4463-a56e-a8268c353054\"}"
+    },
+    {
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": "{\"generation\":1,\"goalId\":\"bench-returning\",\"opportunityId\":\"opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": "{\"artifactId\":\"art_4d21ce31-c0c3-4902-8d3f-5b0166003527\",\"hash\":\"0ff26c937773f4df2cfd53cd91d46452b7e03579816b54ce6d078b307109fe9b\",\"kind\":\"research.opportunity\",\"taskId\":\"task_3f5f563e-ef9a-4463-a56e-a8268c353054\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"open\"},\"goalId\":\"bench-returning\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"product.contract\",\"taskId\":\"task_aca902b6-ce1e-4d81-a21b-04514d1db162\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": "{\"kind\":\"research.synthesize\",\"result\":{\"nextTaskId\":\"task_aca902b6-ce1e-4d81-a21b-04514d1db162\",\"opportunityId\":\"opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1\",\"outcome\":\"opportunity_ready\"},\"taskId\":\"task_3f5f563e-ef9a-4463-a56e-a8268c353054\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "payload": "{\"attempt\":1,\"kind\":\"product.contract\",\"taskId\":\"task_aca902b6-ce1e-4d81-a21b-04514d1db162\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1\",\"status\":\"contracted\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"delivery.build\",\"taskId\":\"task_b991b341-eb23-4212-8395-d9390057603c\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "owner",
+      "payload": "{\"kind\":\"product.contract\",\"result\":{\"checks\":3,\"nextTaskId\":\"task_b991b341-eb23-4212-8395-d9390057603c\",\"outcome\":\"contract_created\"},\"taskId\":\"task_aca902b6-ce1e-4d81-a21b-04514d1db162\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "payload": "{\"attempt\":1,\"kind\":\"delivery.build\",\"taskId\":\"task_b991b341-eb23-4212-8395-d9390057603c\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "builder",
+      "payload": "{\"artifactId\":\"art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8\",\"hash\":\"d658d20dc8021b02acc41fc58722099cde770c61a7e4443be36ba8b8131d3515\",\"kind\":\"product.experiment\",\"taskId\":\"task_b991b341-eb23-4212-8395-d9390057603c\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"quality.verify\",\"taskId\":\"task_ccd31a89-ae6b-4ac0-8016-5e58e3db77ee\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "builder",
+      "payload": "{\"kind\":\"delivery.build\",\"result\":{\"artifactId\":\"art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8\",\"nextTaskId\":\"task_ccd31a89-ae6b-4ac0-8016-5e58e3db77ee\",\"outcome\":\"artifact_built\"},\"taskId\":\"task_b991b341-eb23-4212-8395-d9390057603c\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "payload": "{\"attempt\":1,\"kind\":\"quality.verify\",\"taskId\":\"task_ccd31a89-ae6b-4ac0-8016-5e58e3db77ee\"}"
+    },
+    {
+      "type": "verdict.created",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8\",\"passed\":true,\"verdictId\":\"verdict_8543c3c6-b7e2-409f-90a4-cf55ac8e2571\"}"
+    },
+    {
+      "type": "artifact.status",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"release.prepare\",\"taskId\":\"task_69002215-0b58-42df-a6cd-76b7d015f04e\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "verifier",
+      "payload": "{\"kind\":\"quality.verify\",\"result\":{\"artifactId\":\"art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8\",\"nextTaskId\":\"task_69002215-0b58-42df-a6cd-76b7d015f04e\",\"outcome\":\"verified\"},\"taskId\":\"task_ccd31a89-ae6b-4ac0-8016-5e58e3db77ee\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "payload": "{\"attempt\":1,\"kind\":\"release.prepare\",\"taskId\":\"task_69002215-0b58-42df-a6cd-76b7d015f04e\"}"
+    },
+    {
+      "type": "release.candidate",
+      "actor": "release",
+      "payload": "{\"artifactId\":\"art_e7561cb6-bf8c-4af0-ba2b-666cf0faa0c8\",\"releaseId\":\"rel_661a962a-4620-4177-86cf-a8fa3a041125\"}"
+    },
+    {
+      "type": "outbox.pending",
+      "actor": "release",
+      "payload": "{\"action\":\"artifact.publish\",\"digest\":\"7b85a0a2fe2e30de0e16eeac931b7f818cfbb39b5e4858649bfa9384f907f4c2\",\"outboxId\":\"out_14fd4263-d634-4f67-a5a2-a1b1ceea5fd2\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_7cd5151e-2ab5-43f0-a497-f66e0bf7fee1\",\"status\":\"release_candidate\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-returning\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"outcome.observe\",\"taskId\":\"task_18379f37-7873-410c-941d-dad3f0fd9887\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "release",
+      "payload": "{\"kind\":\"release.prepare\",\"result\":{\"nextTaskId\":\"task_18379f37-7873-410c-941d-dad3f0fd9887\",\"outboxId\":\"out_14fd4263-d634-4f67-a5a2-a1b1ceea5fd2\",\"outcome\":\"release_candidate\",\"releaseCreated\":true,\"releaseId\":\"rel_661a962a-4620-4177-86cf-a8fa3a041125\"},\"taskId\":\"task_69002215-0b58-42df-a6cd-76b7d015f04e\"}"
+    },
+    {
+      "type": "release.updated",
+      "actor": "release",
+      "payload": "{\"releaseId\":\"rel_661a962a-4620-4177-86cf-a8fa3a041125\",\"status\":\"published_candidate\"}"
+    },
+    {
+      "type": "outbox.sent",
+      "actor": "release",
+      "payload": "{\"outboxId\":\"out_14fd4263-d634-4f67-a5a2-a1b1ceea5fd2\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_eedf3888-ddbc-45e8-91c0-4119678530c7",
+      "payload": "{\"attempt\":1,\"kind\":\"outcome.observe\",\"taskId\":\"task_18379f37-7873-410c-941d-dad3f0fd9887\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "analyst",
+      "payload": "{\"artifactId\":\"art_6b97ff6d-354f-48ca-9375-feef06a709ab\",\"hash\":\"61047b096c2c50e17cdaaa3ccc82cc053024ab29ae05cf1840b91b1bebdb7e10\",\"kind\":\"outcome.request\",\"taskId\":\"task_18379f37-7873-410c-941d-dad3f0fd9887\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-returning\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "analyst",
+      "payload": "{\"kind\":\"outcome.observe\",\"result\":{\"artifactId\":\"art_6b97ff6d-354f-48ca-9375-feef06a709ab\",\"outcome\":\"unknown\"},\"taskId\":\"task_18379f37-7873-410c-941d-dad3f0fd9887\"}"
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 36,
+    "head": "08431ed2986757895ef7e4245985d549be6457464f36c9fdb0dd50ba4a1d0a1d"
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-returning",
+          "expected": "bench-returning"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "save-progress",
+          "expected": "save-progress"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

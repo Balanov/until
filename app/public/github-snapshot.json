@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-11-05T18:56:58.982Z",
+  "repositories": [
+    {
+      "repo": "Balanov/until",
+      "stars": 0,
+      "forks": 0,
+      "license": "MIT",
+      "url": "https://github.com/Balanov/until"
+    },
+    {
+      "repo": "fabro-sh/fabro",
+      "stars": 1811,
+      "forks": 198,
+      "license": "MIT",
+      "url": "https://github.com/fabro-sh/fabro"
+    },
+    {
+      "repo": "owainlewis/machinist",
+      "stars": 529,
+      "forks": 102,
+      "license": "MIT",
+      "url": "https://github.com/owainlewis/machinist"
+    }
+  ]
+}

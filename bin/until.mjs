@@ -7,8 +7,10 @@ import { Kernel } from "../src/kernel.js";
 import { Agents } from "../src/agents.js";
 import { ModelRouter } from "../src/model.js";
 import { Evolver, EVIDENCE_FOCUSED_GENOME } from "../src/evolve.js";
+import { exportProof } from "../src/export.js";
+import { atomicWrite, resolveInside } from "../src/util.js";
 
-const VERSION = "0.1.0";
+const VERSION = "0.2.0";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const HELP = `UNTIL ${VERSION} — done means proven.
@@ -26,6 +28,7 @@ Commands:
   status                   Show goals, queue, model usage and audit state
   tasks                    Show task states and attempts
   audit                    Verify the event hash chain
+  export --output FILE     Export tasks, verdicts, receipts and model traces
   evolve                   Evaluate a strategy on selection and held-out fixtures
   demo                     Run the complete local fixture cycle
   help                     Show this help
@@ -82,7 +85,12 @@ async function makeRuntime(flags, { deterministicOnly = false } = {}) {
   await mkdir(workspace, { recursive: true });
   const store = new Store(state);
   const config = deterministicOnly ? {} : await optionalJson(path.resolve(workspace, flags.config ?? "until.config.json"));
-  const models = new ModelRouter({ store, roles: config.models ?? {} });
+  if (!deterministicOnly && typeof config.structuredOutputs === "boolean") {
+    for (const model of Object.values(config.models ?? {})) {
+      if (model.type === "openai-compatible" && model.structuredOutputs === undefined) model.structuredOutputs = config.structuredOutputs;
+    }
+  }
+  const models = new ModelRouter({ store, roles: config.models ?? {}, traceResponses: config.traceResponses === true });
   const agents = new Agents({
     store,
     models,
@@ -197,7 +205,7 @@ async function main() {
     return;
   }
 
-  if (["run", "start", "status", "tasks", "stop", "reset", "audit", "evolve"].includes(command)) {
+  if (["run", "start", "status", "tasks", "stop", "reset", "audit", "export", "evolve"].includes(command)) {
     const runtime = await makeRuntime(flags);
     try {
       if (command === "run" || command === "start") {
@@ -215,7 +223,12 @@ async function main() {
       else if (command === "stop") print(runtime.store.stop(flags.reason ?? "manual CLI stop"), flags);
       else if (command === "reset") print(runtime.store.reset(), flags);
       else if (command === "audit") print(runtime.store.verifyEvents(), flags);
-      else if (command === "evolve") {
+      else if (command === "export") {
+        const output = resolveInside(runtime.workspace, flags.output ?? ".until/proof-export.json");
+        const bundle = await exportProof(runtime.store, { workspace: runtime.workspace });
+        await atomicWrite(output, JSON.stringify(bundle, null, 2), { fsync: true });
+        print({ output, integrity: bundle.integrity.valid, audit: bundle.audit.valid, economics: bundle.economics }, flags);
+      } else if (command === "evolve") {
         const benchmark = await readJson(path.resolve(flags.benchmark ?? path.join(ROOT, "benchmarks", "strategy.json")), "benchmark");
         print(new Evolver(runtime.store).run({ ...benchmark, generations: Number(flags.generations ?? 8), candidates: flags.fixture ? [EVIDENCE_FOCUSED_GENOME] : null }), flags);
       }

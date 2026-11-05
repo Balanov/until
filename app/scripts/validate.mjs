@@ -11,61 +11,35 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const externalOrigin = process.env.UNTIL_SITE_ORIGIN?.replace(/\/+$/, '')
 const out = path.join(root, '..', '.until', externalOrigin ? 'site-check-public' : 'site-check')
 await mkdir(out, { recursive: true })
-const port = 7100
-const origin = externalOrigin || `http://127.0.0.1:${port}`
-const server = externalOrigin ? null : spawn(actualNodeBinary(), [path.join(root, 'node_modules', 'vite', 'bin', 'vite.js'), 'preview', '--host', '127.0.0.1', '--port', String(port)], {
-  cwd: root,
-  shell: false,
-  stdio: ['ignore', 'pipe', 'pipe'],
-})
+const origin = externalOrigin || 'http://127.0.0.1:7100'
+const server = externalOrigin ? null : spawn(actualNodeBinary(), [path.join(root, 'node_modules', 'vite', 'bin', 'vite.js'), 'preview', '--host', '127.0.0.1', '--port', '7100'], { cwd: root, shell: false, stdio: ['ignore', 'pipe', 'pipe'] })
 let serverOutput = ''
 if (server) {
   server.stdout.on('data', (chunk) => { serverOutput += chunk })
   server.stderr.on('data', (chunk) => { serverOutput += chunk })
 }
-
 async function stopServer() {
   if (!server || server.killed) return
   if (process.platform === 'win32') {
-    await new Promise((resolve) => {
-      const killer = spawn('taskkill', ['/pid', String(server.pid), '/T', '/F'], { shell: false })
-      killer.on('close', resolve)
-      killer.on('error', resolve)
-    })
-  } else {
-    server.kill('SIGTERM')
-  }
+    await new Promise((resolve) => { const killer = spawn('taskkill', ['/pid', String(server.pid), '/T', '/F'], { shell: false }); killer.on('close', resolve); killer.on('error', resolve) })
+  } else server.kill('SIGTERM')
 }
-
 async function waitForServer() {
   let lastError = null
   for (let attempt = 0; attempt < (externalOrigin ? 3 : 100); attempt += 1) {
-    try {
-      const response = await fetch(origin, { signal: AbortSignal.timeout(10_000) })
-      if (response.ok) return
-      lastError = new Error(`HTTP ${response.status}`)
-    } catch (error) {
-      lastError = error
-    }
+    try { const response = await fetch(origin, { signal: AbortSignal.timeout(10_000) }); if (response.ok) return; lastError = new Error(`HTTP ${response.status}`) }
+    catch (error) { lastError = error }
     await new Promise((resolve) => setTimeout(resolve, 200))
   }
-  throw new Error(`${externalOrigin ? 'Public site' : 'Preview'} is unavailable: ${lastError?.message || serverOutput}`)
+  throw new Error(`Site is unavailable: ${lastError?.message || serverOutput}`)
 }
-
 const executablePath = process.env.CHROME_BIN || [
-  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-  'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe', 'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
 ].find((candidate) => existsSync(candidate))
 if (!executablePath) throw new Error('No Chrome/Edge executable found; set CHROME_BIN')
-
-const report = { checks: [], consoleErrors: [], pageErrors: [], networkErrors: [], screenshots: [], metrics: {} }
-const check = (name, condition, evidence = null) => {
-  report.checks.push({ name, passed: Boolean(condition), evidence })
-  assert.ok(condition, `${name}: ${JSON.stringify(evidence)}`)
-}
-
+const report = { checks: [], consoleErrors: [], pageErrors: [], networkErrors: [], externalWarnings: [], screenshots: [], metrics: {} }
+const check = (name, condition, evidence = null) => { report.checks.push({ name, passed: Boolean(condition), evidence }); assert.ok(condition, `${name}: ${JSON.stringify(evidence)}`) }
 let browser
 try {
   await waitForServer()
@@ -77,62 +51,59 @@ try {
   page.setDefaultTimeout(30_000)
   page.on('console', (message) => { if (message.type() === 'error') report.consoleErrors.push(message.text()) })
   page.on('pageerror', (error) => report.pageErrors.push(error.message))
-  page.on('response', (response) => { if (response.status() >= 400) report.networkErrors.push(`${response.status()} ${response.url()}`) })
-  page.on('requestfailed', (request) => report.networkErrors.push(`${request.failure()?.errorText} ${request.url()}`))
-
-  await page.goto(origin, { waitUntil: 'networkidle' })
-  check('production title and hero render', (await page.title()).includes('UNTIL') && await page.locator('h1').isVisible())
-  check('seven proof stages render', await page.locator('.rail-stage').count() === 7)
-  report.metrics = await page.evaluate(() => {
-    const resources = performance.getEntriesByType('resource')
-    return {
-      requests: resources.length,
-      encodedBytes: resources.reduce((sum, item) => sum + (item.encodedBodySize || 0), 0),
-      domContentLoadedMs: performance.getEntriesByType('navigation')[0]?.domContentLoadedEventEnd || 0,
-      loadMs: performance.getEntriesByType('navigation')[0]?.loadEventEnd || 0,
-    }
+  page.on('response', (response) => {
+    if (response.status() >= 400 && response.url().startsWith(origin)) report.networkErrors.push(`${response.status()} ${response.url()}`)
+    else if (response.status() >= 400) report.externalWarnings.push(`${response.status()} ${response.url()}`)
   })
-
-  await page.locator('.console-actions .button-dark').click()
-  await page.getByText('Observed outcome achieved', { exact: true }).waitFor({ timeout: 12_000 })
-  check('real-signal replay reaches observed outcome', await page.locator('.rail-stage.done').count() === 7)
-
-  await page.locator('.scenario-switch button').nth(1).click()
-  await page.locator('.console-actions .button-dark').click()
-  await page.getByText('Delivery blocked by policy', { exact: true }).waitFor({ timeout: 12_000 })
-  check('synthetic replay stops before contract', await page.locator('.rail-stage.blocked').count() === 1)
-  check('synthetic stages after research are skipped', await page.locator('.rail-stage.skipped').count() === 4)
-
-  const downloadPromise = page.waitForEvent('download')
-  await page.locator('.metric').first().click()
-  const download = await downloadPromise
-  check('raw test report downloads', download.suggestedFilename() === 'tests.json')
-
-  await page.locator('select').selectOption('ru')
-  check('Russian localization applies', (await page.locator('h1').textContent()).includes('доказано'))
-  await page.locator('select').selectOption('zh')
-  check('Chinese localization applies', (await page.locator('h1').textContent()).includes('证明'))
-  await page.locator('select').selectOption('hi')
-  check('Hindi localization applies', (await page.locator('h1').textContent()).includes('सिद्ध'))
-  await page.locator('select').selectOption('es')
-  check('Spanish localization applies', (await page.locator('h1').textContent()).includes('probado'))
-  await page.locator('select').selectOption('ar')
-  check('Arabic applies RTL', await page.locator('html').getAttribute('dir') === 'rtl')
-  await page.locator('select').selectOption('en')
-
+  page.on('requestfailed', (request) => { if (request.url().startsWith(origin)) report.networkErrors.push(`${request.failure()?.errorText} ${request.url()}`); else report.externalWarnings.push(`${request.failure()?.errorText} ${request.url()}`) })
+  await page.goto(origin, { waitUntil: 'networkidle' })
+  check('title and CEO-first hero render', (await page.title()).includes('UNTIL') && await page.locator('h1').isVisible())
+  await page.locator('.acceptance-score strong').getByText('6/6', { exact: true }).waitFor()
+  check('live benchmark and three score bars render', await page.locator('.score-row').count() === 3)
+  check('six independently accepted raw trials are selectable', await page.locator('#trial-select option').count() === 6)
+  await page.locator('#trial-select').selectOption('4')
+  await page.locator('.run-readout strong').getByText('preview-import-errors', { exact: true }).waitFor()
+  check('trial switch loads a different actual engine trace', (await page.locator('.run-readout').textContent()).includes('audit events'))
+  const traceDownload = page.waitForEvent('download')
+  await page.locator('.trace-actions a').first().click()
+  check('raw engine trace downloads', (await traceDownload).suggestedFilename() === 'result.json')
+  const bundleDownload = page.waitForEvent('download')
+  await page.locator('.data-links a').last().click()
+  check('complete raw proof bundle downloads', (await bundleDownload).suggestedFilename() === 'until-proof.zip')
+  check('win and measured cost are both visible', (await page.locator('.outcome-grid').textContent()).includes('3.3×'))
+  check('comparison includes five sourced products', await page.locator('.comparison-table thead th').count() === 6)
+  check('comparison includes eight capabilities', await page.locator('.comparison-table tbody tr').count() === 8)
+  check('UNTIL gaps are visible', (await page.locator('.comparison-notes').textContent()).includes('no native Git/PR delivery'))
+  for (const [index, anchor] of ['#results', '#compare', '#economics'].entries()) {
+    await page.locator('.main-nav a').nth(index).click()
+    check(`navigation ${anchor} works`, page.url().endsWith(anchor))
+  }
+  check('initial calculator scenario is computed', (await page.locator('.scenario-delta strong').textContent()).includes('13,700'))
+  await page.locator('.calc-input input').first().fill('20')
+  check('calculator recomputes changed assumptions', (await page.locator('.scenario-delta strong').textContent()).includes('4,100'))
+  check('acceptance rate controls required attempts', (await page.locator('.attempt-readout strong').textContent()) === '10.0')
+  await page.locator('.currency-field select').selectOption('RUB')
+  check('currency selection changes output', (await page.locator('.scenario-delta strong').textContent()).includes('RUB'))
+  await page.locator('.reset-button').click()
+  check('calculator reset restores initial scenario', (await page.locator('.scenario-delta strong').textContent()).includes('13,700'))
   await page.locator('.quick-copy button').click()
   await page.getByText('Copied', { exact: true }).waitFor()
   const clipboard = await page.evaluate(() => navigator.clipboard.readText())
-  check('quick-start copy writes actual commands', clipboard.includes('npm test') && clipboard.includes('npm run proof'))
-  await page.locator('.faq-list details').nth(1).locator('summary').click()
-  check('FAQ opens on click', await page.locator('.faq-list details').nth(1).getAttribute('open') !== null)
-  await page.locator('.main-nav a').first().click()
-  check('proof navigation updates the anchor', page.url().endsWith('#proof'))
-
+  check('quick start copies real commands', clipboard.includes('npm run check') && clipboard.includes('npm run proof'))
+  for (const [id, text] of [['ru', 'почти'], ['zh', '差不多'], ['hi', 'लगभग'], ['es', 'terminado'], ['ar', 'تقريباً']]) {
+    await page.locator('.language-picker select').selectOption(id)
+    check(`${id} localization renders`, (await page.locator('h1').textContent()).includes(text))
+    if (id === 'ar') check('Arabic uses RTL', await page.locator('html').getAttribute('dir') === 'rtl')
+  }
+  await page.locator('.language-picker select').selectOption('en')
+  check('live GitHub star counter links to stargazers', await page.locator('.repo-counter').getAttribute('href') === 'https://github.com/Balanov/until/stargazers')
+  check('all in-page anchors resolve', await page.evaluate(() => [...document.querySelectorAll('a[href^="#"]')].every((anchor) => document.getElementById(anchor.getAttribute('href').slice(1)))))
+  report.metrics = await page.evaluate(() => {
+    const resources = performance.getEntriesByType('resource')
+    return { requests: resources.length, encodedBytes: resources.reduce((sum, item) => sum + (item.encodedBodySize || 0), 0), domContentLoadedMs: performance.getEntriesByType('navigation')[0]?.domContentLoadedEventEnd || 0, loadMs: performance.getEntriesByType('navigation')[0]?.loadEventEnd || 0 }
+  })
+  check('initial page stays below 1.5 MB', report.metrics.encodedBytes < 1_500_000, report.metrics)
   await page.evaluate(() => window.scrollTo(0, 0))
-  await page.locator('.scenario-switch button').nth(0).click()
-  await page.locator('.console-actions .button-dark').click()
-  await page.getByText('Observed outcome achieved', { exact: true }).waitFor({ timeout: 12_000 })
   for (const width of [1440, 1024, 768, 375]) {
     await page.setViewportSize({ width, height: width === 375 ? 812 : 1000 })
     await page.waitForTimeout(250)
@@ -142,34 +113,24 @@ try {
     await page.screenshot({ path: file, type: 'jpeg', quality: 82, fullPage: true })
     report.screenshots.push(file)
   }
-  await page.locator('.scenario-switch button').nth(1).click()
-  await page.locator('.console-actions .button-dark').click()
-  await page.getByText('Delivery blocked by policy', { exact: true }).waitFor({ timeout: 12_000 })
-  report.focusBeforeBlocked = await page.evaluate(() => ({
-    tag: document.activeElement?.tagName,
-    className: document.activeElement?.className,
-    text: document.activeElement?.textContent,
-    focusVisible: document.activeElement?.matches(':focus-visible'),
-  }))
-  await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur() })
-  const blockedFile = path.join(out, 'until-375-blocked.jpg')
-  await page.screenshot({ path: blockedFile, type: 'jpeg', quality: 82, fullPage: true })
-  report.screenshots.push(blockedFile)
-  await page.locator('select').selectOption('ar')
+  await page.locator('.language-picker select').selectOption('ar')
   const rtlDimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: window.innerWidth }))
   check('no horizontal overflow in mobile RTL', rtlDimensions.scroll <= rtlDimensions.viewport + 1, rtlDimensions)
   const rtlFile = path.join(out, 'until-375-ar.jpg')
   await page.screenshot({ path: rtlFile, type: 'jpeg', quality: 82, fullPage: true })
   report.screenshots.push(rtlFile)
-
+  await page.locator('.language-picker select').selectOption('ru')
+  const russianDimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: window.innerWidth }))
+  check('no horizontal overflow in mobile Russian', russianDimensions.scroll <= russianDimensions.viewport + 1, russianDimensions)
+  const russianFile = path.join(out, 'until-375-ru.jpg')
+  await page.screenshot({ path: russianFile, type: 'jpeg', quality: 82, fullPage: true })
+  report.screenshots.push(russianFile)
   check('zero browser console errors', report.consoleErrors.length === 0, report.consoleErrors)
   check('zero page runtime errors', report.pageErrors.length === 0, report.pageErrors)
-  check('zero failed or 404 network requests', report.networkErrors.length === 0, report.networkErrors)
+  check('zero failed first-party requests', report.networkErrors.length === 0, report.networkErrors)
   await context.close()
-} catch (error) {
-  report.failure = error.stack
-  process.exitCode = 1
-} finally {
+} catch (error) { report.failure = error.stack; process.exitCode = 1 }
+finally {
   if (browser) await browser.close()
   await stopServer()
   await writeFile(path.join(out, 'report.json'), JSON.stringify(report, null, 2))

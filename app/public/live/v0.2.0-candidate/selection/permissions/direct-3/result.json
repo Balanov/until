@@ -1,0 +1,57 @@
+{
+  "system": "direct",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 4718.317199999998,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 286,
+  "outputTokens": 457,
+  "providerCharges": 0,
+  "artifact": {
+    "statement": "Users decline permissions when the necessity of the request is unclear, necessitating explicit context explanation.",
+    "mechanism": "Display a clear, contextual rationale for requesting camera access prior to prompting the user.",
+    "evidenceIds": [
+      "sig_permissions"
+    ],
+    "title": "Permission Context Clarification",
+    "summary": "This experiment tests whether explicitly stating the purpose of camera access reduces user decline rates by eliminating unexpected permission requests.",
+    "risk": "low",
+    "goalId": "bench-permissions",
+    "status": "implemented",
+    "implementation": {
+      "feature": "show-permission-context"
+    }
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-permissions",
+          "expected": "bench-permissions"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "show-permission-context",
+          "expected": "show-permission-context"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

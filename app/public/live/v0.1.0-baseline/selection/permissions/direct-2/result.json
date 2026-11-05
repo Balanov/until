@@ -1,0 +1,59 @@
+{
+  "system": "direct",
+  "accepted": false,
+  "rejectionReasons": [
+    "evidence_mismatch",
+    "acceptance_failed"
+  ],
+  "wallMs": 4387.766599999999,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 286,
+  "outputTokens": 468,
+  "providerCharges": 0,
+  "artifact": {
+    "required": {
+      "statement": "Display a clear permission context message before requesting camera access to explain the purpose.",
+      "mechanism": "Show a contextual message to the user prior to initiating the camera permission request, explaining the need for the permission.",
+      "evidenceIds": [
+        "sig_permissions"
+      ],
+      "title": "Show Permission Context to Reduce Surprise",
+      "summary": "Users declined camera access due to lack of explanation. Implementing permission context messaging aims to reduce unexpected permission requests by informing users of the purpose.",
+      "risk": "low",
+      "goalId": "bench-permissions",
+      "status": "implemented",
+      "implementation": {
+        "feature": "show-permission-context"
+      }
+    }
+  },
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "bench-permissions"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "show-permission-context"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

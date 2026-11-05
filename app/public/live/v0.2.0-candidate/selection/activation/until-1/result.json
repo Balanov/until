@@ -1,0 +1,579 @@
+{
+  "system": "until",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 18932.4846,
+  "modelCalls": 3,
+  "attempts": 6,
+  "inputTokens": 1578,
+  "outputTokens": 1582,
+  "providerCharges": 0,
+  "run": {
+    "cycles": 2,
+    "completed": 6,
+    "failed": 0,
+    "stale": 0,
+    "idleRounds": 1,
+    "blockedBudget": false,
+    "elapsedMs": 18922.677,
+    "status": {
+      "epoch": {
+        "epoch": 0,
+        "stopped": false
+      },
+      "goals": [
+        {
+          "id": "bench-activation",
+          "status": "observing"
+        }
+      ],
+      "tasks": {
+        "done": 6
+      },
+      "signals": {
+        "interview": 1
+      },
+      "models": [
+        {
+          "model": "qwen3:8b",
+          "role": "builder",
+          "calls": 1,
+          "input_tokens": 549,
+          "output_tokens": 600,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 6297
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "owner",
+          "calls": 1,
+          "input_tokens": 644,
+          "output_tokens": 432,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 4567
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "researcher",
+          "calls": 1,
+          "input_tokens": 385,
+          "output_tokens": 550,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 8001
+        }
+      ],
+      "economics": {
+        "modelCalls": 3,
+        "inputTokens": 1578,
+        "outputTokens": 1582,
+        "providerCharges": 0,
+        "unknownCostCalls": 0,
+        "publishedCandidates": 1,
+        "achievedGoals": 0,
+        "costPerPublishedCandidate": 0,
+        "costScope": "Provider charges only. Hardware, electricity and human work are excluded."
+      },
+      "audit": {
+        "valid": true,
+        "count": 36,
+        "head": "847562ec57d277e76c298c31effeff70e2e2ec0f43b5f7e6836cf7bfd73d60f2"
+      }
+    }
+  },
+  "opportunity": {
+    "id": "opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2",
+    "goal_id": "bench-activation",
+    "statement": "Participants abandon activation due to redundant data entry.",
+    "mechanism": "Implement a feature to automatically populate company data from existing records during activation.",
+    "evidence_ids": [
+      "sig_activation"
+    ],
+    "status": "release_candidate",
+    "score": 0.8,
+    "generation": 1,
+    "created_at": "2026-11-05T18:48:15.979Z",
+    "updated_at": "2026-11-05T18:48:26.874Z"
+  },
+  "artifact": {
+    "id": "art_fd43093e-822d-46e6-9e99-8377971b5493",
+    "goal_id": "bench-activation",
+    "task_id": "task_592305c0-0d11-4fa1-8599-e3e0695cc7a6",
+    "kind": "product.experiment",
+    "path": ".until\\artifacts\\art_fd43093e-822d-46e6-9e99-8377971b5493.json",
+    "content": "{\n  \"goalId\": \"bench-activation\",\n  \"opportunityId\": \"opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2\",\n  \"status\": \"implemented\",\n  \"evidenceIds\": [\n    \"sig_activation\"\n  ],\n  \"implementation\": {\n    \"feature\": \"reuse-existing-data\"\n  }\n}",
+    "hash": "a12711aa7962daa43d9940078996eda856935567ea1661da74b0226ece0615c0",
+    "status": "verified",
+    "created_at": "2026-11-05T18:48:26.866Z"
+  },
+  "verdict": {
+    "id": "verdict_4a8f658a-e153-418c-9948-fdb7728d2e51",
+    "artifact_id": "art_fd43093e-822d-46e6-9e99-8377971b5493",
+    "task_id": "task_bfd02577-cc30-4bed-8373-a18717d0d56c",
+    "passed": 1,
+    "checks": [
+      {
+        "evidence": {
+          "actual": "bench-activation",
+          "expected": "bench-activation"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "reuse-existing-data",
+          "expected": "reuse-existing-data"
+        },
+        "passed": true,
+        "type": "json_field"
+      }
+    ],
+    "created_at": "2026-11-05T18:48:26.871Z"
+  },
+  "release": {
+    "id": "rel_6b90cfe8-72bd-497c-bead-f90b2b5d1ea4",
+    "artifact_id": "art_fd43093e-822d-46e6-9e99-8377971b5493",
+    "goal_id": "bench-activation",
+    "status": "published_candidate",
+    "receipt": {
+      "artifactId": "art_fd43093e-822d-46e6-9e99-8377971b5493",
+      "candidate": true,
+      "hash": "a12711aa7962daa43d9940078996eda856935567ea1661da74b0226ece0615c0",
+      "path": ".until\\releases\\rel_6b90cfe8-72bd-497c-bead-f90b2b5d1ea4.json",
+      "provider": "until.local",
+      "releaseId": "rel_6b90cfe8-72bd-497c-bead-f90b2b5d1ea4"
+    },
+    "idempotency_key": "3bfb910c0d79c6e2e817e099662b72652180a66ab376e173031b1f8dc7958e34",
+    "created_at": "2026-11-05T18:48:26.873Z"
+  },
+  "tasks": [
+    {
+      "id": "task_414d8880-a2d4-4f06-ade1-576af16097b2",
+      "goal_id": "bench-activation",
+      "opportunity_id": null,
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-activation"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "epoch": 0,
+      "depends_on": [],
+      "idempotency_key": "3cacc0601f691537cb887e635883379c7eda5259218b6a3137ae02cd92fb185d",
+      "last_error": null,
+      "available_at": 1793904487977,
+      "created_at": "2026-11-05T18:48:07.977Z",
+      "updated_at": "2026-11-05T18:48:15.990Z"
+    },
+    {
+      "id": "task_f0eadc6c-9731-493d-9da4-42ab7d5cc3bd",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2",
+      "role": "owner",
+      "kind": "product.contract",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-activation"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "epoch": 0,
+      "depends_on": [
+        "task_414d8880-a2d4-4f06-ade1-576af16097b2"
+      ],
+      "idempotency_key": "b5ee8eff76e391ddb4f677cebe23170292a89d09c707b63a6ce170b1bdc98423",
+      "last_error": null,
+      "available_at": 1793904495989,
+      "created_at": "2026-11-05T18:48:15.989Z",
+      "updated_at": "2026-11-05T18:48:20.559Z"
+    },
+    {
+      "id": "task_592305c0-0d11-4fa1-8599-e3e0695cc7a6",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2",
+      "role": "builder",
+      "kind": "delivery.build",
+      "contract": {
+        "evidenceIds": [
+          "sig_activation"
+        ],
+        "generation": 1,
+        "goalId": "bench-activation",
+        "spec": {
+          "checks": [
+            {
+              "equals": "bench-activation",
+              "field": "goalId",
+              "type": "json_field"
+            },
+            {
+              "equals": "implemented",
+              "field": "status",
+              "type": "json_field"
+            },
+            {
+              "equals": "reuse-existing-data",
+              "field": "implementation.feature",
+              "type": "json_field"
+            }
+          ],
+          "risk": "low",
+          "summary": "Implement a bounded experiment to automatically populate company data during activation using existing records, reducing redundant entry and measuring impact on activation abandonment rates.",
+          "title": "Reuse Existing Data During Activation"
+        }
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "epoch": 0,
+      "depends_on": [
+        "task_f0eadc6c-9731-493d-9da4-42ab7d5cc3bd"
+      ],
+      "idempotency_key": "5f4c1640ccc4c0e985500f9b562954934f31c5044a05cdb014f317051f9d42f5",
+      "last_error": null,
+      "available_at": 1793904500559,
+      "created_at": "2026-11-05T18:48:20.558Z",
+      "updated_at": "2026-11-05T18:48:26.867Z"
+    },
+    {
+      "id": "task_bfd02577-cc30-4bed-8373-a18717d0d56c",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2",
+      "role": "verifier",
+      "kind": "quality.verify",
+      "contract": {
+        "artifactId": "art_fd43093e-822d-46e6-9e99-8377971b5493",
+        "checks": [
+          {
+            "equals": "bench-activation",
+            "field": "goalId",
+            "type": "json_field"
+          },
+          {
+            "equals": "implemented",
+            "field": "status",
+            "type": "json_field"
+          },
+          {
+            "equals": "reuse-existing-data",
+            "field": "implementation.feature",
+            "type": "json_field"
+          }
+        ],
+        "generation": 1,
+        "goalId": "bench-activation"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "epoch": 0,
+      "depends_on": [
+        "task_592305c0-0d11-4fa1-8599-e3e0695cc7a6"
+      ],
+      "idempotency_key": "107cd48ddf934a8b94eb1207833c11621355fb7d24714b5e6d9af898fa80d3d8",
+      "last_error": null,
+      "available_at": 1793904506866,
+      "created_at": "2026-11-05T18:48:26.866Z",
+      "updated_at": "2026-11-05T18:48:26.872Z"
+    },
+    {
+      "id": "task_a15318e4-cb95-467d-baf6-3c36c79beebf",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2",
+      "role": "release",
+      "kind": "release.prepare",
+      "contract": {
+        "artifactId": "art_fd43093e-822d-46e6-9e99-8377971b5493",
+        "generation": 1,
+        "goalId": "bench-activation"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "epoch": 0,
+      "depends_on": [
+        "task_bfd02577-cc30-4bed-8373-a18717d0d56c"
+      ],
+      "idempotency_key": "f37b28cd14bc0a33f45497e99f18e98bd5818d0f72e67b10265ab64718fd0858",
+      "last_error": null,
+      "available_at": 1793904506872,
+      "created_at": "2026-11-05T18:48:26.872Z",
+      "updated_at": "2026-11-05T18:48:26.875Z"
+    },
+    {
+      "id": "task_9f6c8128-48bd-4c63-b84e-ddc58de3ace2",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-activation",
+        "releaseId": "rel_6b90cfe8-72bd-497c-bead-f90b2b5d1ea4"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "epoch": 0,
+      "depends_on": [
+        "task_a15318e4-cb95-467d-baf6-3c36c79beebf"
+      ],
+      "idempotency_key": "f1e4cd09068369e8e54f7f923796e3b9b536a0440b19bf5ab44cfd279e6ded6e",
+      "last_error": null,
+      "available_at": 1793904506875,
+      "created_at": "2026-11-05T18:48:26.875Z",
+      "updated_at": "2026-11-05T18:48:26.897Z"
+    }
+  ],
+  "events": [
+    {
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": "{\"goalId\":\"bench-activation\",\"title\":\"Reduce repeated data entry during activation\"}"
+    },
+    {
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": "{\"goalId\":\"bench-activation\",\"hash\":\"211a9d05c8daff70e6bed314f4731904c3cebe1b9e6867eefc80241b9a4d48f4\",\"kind\":\"interview\",\"signalId\":\"sig_activation\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"research.synthesize\",\"taskId\":\"task_414d8880-a2d4-4f06-ade1-576af16097b2\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "payload": "{\"attempt\":1,\"kind\":\"research.synthesize\",\"taskId\":\"task_414d8880-a2d4-4f06-ade1-576af16097b2\"}"
+    },
+    {
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": "{\"generation\":1,\"goalId\":\"bench-activation\",\"opportunityId\":\"opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": "{\"artifactId\":\"art_9b33a8a1-9d41-4403-b433-39ce889c637f\",\"hash\":\"16b5b77786fde1b7b2e9a176a7e8c0962d844c040c69fafb8e86ff04a033f048\",\"kind\":\"research.opportunity\",\"taskId\":\"task_414d8880-a2d4-4f06-ade1-576af16097b2\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"open\"},\"goalId\":\"bench-activation\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"product.contract\",\"taskId\":\"task_f0eadc6c-9731-493d-9da4-42ab7d5cc3bd\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": "{\"kind\":\"research.synthesize\",\"result\":{\"nextTaskId\":\"task_f0eadc6c-9731-493d-9da4-42ab7d5cc3bd\",\"opportunityId\":\"opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2\",\"outcome\":\"opportunity_ready\"},\"taskId\":\"task_414d8880-a2d4-4f06-ade1-576af16097b2\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "payload": "{\"attempt\":1,\"kind\":\"product.contract\",\"taskId\":\"task_f0eadc6c-9731-493d-9da4-42ab7d5cc3bd\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2\",\"status\":\"contracted\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"delivery.build\",\"taskId\":\"task_592305c0-0d11-4fa1-8599-e3e0695cc7a6\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "owner",
+      "payload": "{\"kind\":\"product.contract\",\"result\":{\"checks\":3,\"nextTaskId\":\"task_592305c0-0d11-4fa1-8599-e3e0695cc7a6\",\"outcome\":\"contract_created\"},\"taskId\":\"task_f0eadc6c-9731-493d-9da4-42ab7d5cc3bd\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "payload": "{\"attempt\":1,\"kind\":\"delivery.build\",\"taskId\":\"task_592305c0-0d11-4fa1-8599-e3e0695cc7a6\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "builder",
+      "payload": "{\"artifactId\":\"art_fd43093e-822d-46e6-9e99-8377971b5493\",\"hash\":\"a12711aa7962daa43d9940078996eda856935567ea1661da74b0226ece0615c0\",\"kind\":\"product.experiment\",\"taskId\":\"task_592305c0-0d11-4fa1-8599-e3e0695cc7a6\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"quality.verify\",\"taskId\":\"task_bfd02577-cc30-4bed-8373-a18717d0d56c\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "builder",
+      "payload": "{\"kind\":\"delivery.build\",\"result\":{\"artifactId\":\"art_fd43093e-822d-46e6-9e99-8377971b5493\",\"nextTaskId\":\"task_bfd02577-cc30-4bed-8373-a18717d0d56c\",\"outcome\":\"artifact_built\"},\"taskId\":\"task_592305c0-0d11-4fa1-8599-e3e0695cc7a6\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "payload": "{\"attempt\":1,\"kind\":\"quality.verify\",\"taskId\":\"task_bfd02577-cc30-4bed-8373-a18717d0d56c\"}"
+    },
+    {
+      "type": "verdict.created",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_fd43093e-822d-46e6-9e99-8377971b5493\",\"passed\":true,\"verdictId\":\"verdict_4a8f658a-e153-418c-9948-fdb7728d2e51\"}"
+    },
+    {
+      "type": "artifact.status",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_fd43093e-822d-46e6-9e99-8377971b5493\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"release.prepare\",\"taskId\":\"task_a15318e4-cb95-467d-baf6-3c36c79beebf\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "verifier",
+      "payload": "{\"kind\":\"quality.verify\",\"result\":{\"artifactId\":\"art_fd43093e-822d-46e6-9e99-8377971b5493\",\"nextTaskId\":\"task_a15318e4-cb95-467d-baf6-3c36c79beebf\",\"outcome\":\"verified\"},\"taskId\":\"task_bfd02577-cc30-4bed-8373-a18717d0d56c\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "payload": "{\"attempt\":1,\"kind\":\"release.prepare\",\"taskId\":\"task_a15318e4-cb95-467d-baf6-3c36c79beebf\"}"
+    },
+    {
+      "type": "release.candidate",
+      "actor": "release",
+      "payload": "{\"artifactId\":\"art_fd43093e-822d-46e6-9e99-8377971b5493\",\"releaseId\":\"rel_6b90cfe8-72bd-497c-bead-f90b2b5d1ea4\"}"
+    },
+    {
+      "type": "outbox.pending",
+      "actor": "release",
+      "payload": "{\"action\":\"artifact.publish\",\"digest\":\"840cdbc46b027b79c019d5c37c434fb91549c3af0c4a02e10ae9b955bb8e503f\",\"outboxId\":\"out_5b50a0e8-f64f-47fc-acaa-171e940c4e49\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_4f76e137-f1b7-4de3-8ed4-9ab43b5179a2\",\"status\":\"release_candidate\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-activation\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"outcome.observe\",\"taskId\":\"task_9f6c8128-48bd-4c63-b84e-ddc58de3ace2\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "release",
+      "payload": "{\"kind\":\"release.prepare\",\"result\":{\"nextTaskId\":\"task_9f6c8128-48bd-4c63-b84e-ddc58de3ace2\",\"outboxId\":\"out_5b50a0e8-f64f-47fc-acaa-171e940c4e49\",\"outcome\":\"release_candidate\",\"releaseCreated\":true,\"releaseId\":\"rel_6b90cfe8-72bd-497c-bead-f90b2b5d1ea4\"},\"taskId\":\"task_a15318e4-cb95-467d-baf6-3c36c79beebf\"}"
+    },
+    {
+      "type": "release.updated",
+      "actor": "release",
+      "payload": "{\"releaseId\":\"rel_6b90cfe8-72bd-497c-bead-f90b2b5d1ea4\",\"status\":\"published_candidate\"}"
+    },
+    {
+      "type": "outbox.sent",
+      "actor": "release",
+      "payload": "{\"outboxId\":\"out_5b50a0e8-f64f-47fc-acaa-171e940c4e49\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_d6610848-6a2f-4da2-afe5-d5086128302d",
+      "payload": "{\"attempt\":1,\"kind\":\"outcome.observe\",\"taskId\":\"task_9f6c8128-48bd-4c63-b84e-ddc58de3ace2\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "analyst",
+      "payload": "{\"artifactId\":\"art_89e7a077-8a6c-41db-9f9c-523f6c6a63da\",\"hash\":\"def8e1b59aa32bbf450bc6b10042860f9f7b303fcb7246c20c45b6f84138fbb2\",\"kind\":\"outcome.request\",\"taskId\":\"task_9f6c8128-48bd-4c63-b84e-ddc58de3ace2\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-activation\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "analyst",
+      "payload": "{\"kind\":\"outcome.observe\",\"result\":{\"artifactId\":\"art_89e7a077-8a6c-41db-9f9c-523f6c6a63da\",\"outcome\":\"unknown\"},\"taskId\":\"task_9f6c8128-48bd-4c63-b84e-ddc58de3ace2\"}"
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 36,
+    "head": "847562ec57d277e76c298c31effeff70e2e2ec0f43b5f7e6836cf7bfd73d60f2"
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-activation",
+          "expected": "bench-activation"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "reuse-existing-data",
+          "expected": "reuse-existing-data"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

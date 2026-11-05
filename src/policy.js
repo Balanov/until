@@ -83,6 +83,9 @@ export function assertCheck(check) {
   if (!CHECK_TYPES.includes(check.type)) throw new Error(`Unknown check type: ${check.type}`);
   if (check.type === "json_field") {
     assertText(check.field, "check.field", { max: 200 });
+    if (check.field.split(".").some((key) => ["__proto__", "prototype", "constructor"].includes(key))) {
+      throw new Error("json_field contains an unsafe path");
+    }
     if (!("equals" in check)) throw new Error("json_field requires equals");
   }
   if (check.type === "contains") assertText(check.text, "check.text", { max: 10_000 });

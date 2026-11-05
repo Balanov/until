@@ -183,7 +183,7 @@ evolutionStore.close();
 
 const summary = {
   format: "until-proof/v1",
-  version: "0.1.0",
+  version: "0.2.0",
   generatedAt: new Date().toISOString(),
   environment: { node: process.version, platform: process.platform, arch: process.arch },
   mode: "deterministic fixtures and adversarial kernel checks; no LLM quality or business ROI claim",

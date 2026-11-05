@@ -1,0 +1,533 @@
+{
+  "system": "until",
+  "accepted": false,
+  "rejectionReasons": [
+    "acceptance_failed"
+  ],
+  "wallMs": 13730.942099999997,
+  "modelCalls": 3,
+  "attempts": 6,
+  "inputTokens": 1544,
+  "outputTokens": 1433,
+  "providerCharges": 0,
+  "run": {
+    "cycles": 2,
+    "completed": 6,
+    "failed": 0,
+    "stale": 0,
+    "idleRounds": 1,
+    "blockedBudget": false,
+    "elapsedMs": 13729.954,
+    "status": {
+      "epoch": {
+        "epoch": 0,
+        "stopped": false
+      },
+      "goals": [
+        {
+          "id": "bench-activation",
+          "status": "observing"
+        }
+      ],
+      "tasks": {
+        "done": 6
+      },
+      "signals": {
+        "interview": 1
+      },
+      "models": [
+        {
+          "model": "qwen3:8b",
+          "role": "builder",
+          "calls": 1,
+          "input_tokens": 512,
+          "output_tokens": 592,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 5614
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "owner",
+          "calls": 1,
+          "input_tokens": 647,
+          "output_tokens": 377,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 3628
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "researcher",
+          "calls": 1,
+          "input_tokens": 385,
+          "output_tokens": 464,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 4432
+        }
+      ],
+      "audit": {
+        "valid": true,
+        "count": 36,
+        "head": "9ef82e6ab679a6d8413ea47888e0cb53e6a32a2645c946fffc9f1d28051fdaf5"
+      }
+    }
+  },
+  "opportunity": {
+    "id": "opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6",
+    "goal_id": "bench-activation",
+    "statement": "Participants abandoned activation due to repeated data entry of company information.",
+    "mechanism": "Implement reuse-existing-data feature to automatically populate pre-filled company data during activation.",
+    "evidence_ids": [
+      "sig_activation"
+    ],
+    "status": "release_candidate",
+    "score": 0.5,
+    "generation": 1,
+    "created_at": "2026-11-05T18:33:16.580Z",
+    "updated_at": "2026-11-05T18:33:25.854Z"
+  },
+  "artifact": {
+    "id": "art_6010694a-fbc6-45fa-9586-edebf5f46084",
+    "goal_id": "bench-activation",
+    "task_id": "task_166eb938-1cf5-443f-bfc6-33d5e6d7e82a",
+    "kind": "product.experiment",
+    "path": ".until\\artifacts\\art_6010694a-fbc6-45fa-9586-edebf5f46084.json",
+    "content": "{\n  \"goalId\": \"bench-activation\",\n  \"opportunityId\": \"opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6\",\n  \"status\": \"implemented\",\n  \"evidenceIds\": [\n    \"sig_activation\"\n  ],\n  \"implementation\": {\n    \"implementation\": {\n      \"feature\": \"reuse-existing-data\",\n      \"description\": \"Automatically populate pre-filled company data during activation to eliminate repeated data entry.\",\n      \"checks\": [\n        {\n          \"equals\": \"implemented\",\n          \"field\": \"status\",\n          \"type\": \"json_field\"\n        }\n      ]\n    }\n  }\n}",
+    "hash": "e53b786477b4e27c9d96f0fd0f5efdefbef8a9534f3d1a31e15112bc58583f2c",
+    "status": "verified",
+    "created_at": "2026-11-05T18:33:25.850Z"
+  },
+  "verdict": {
+    "id": "verdict_9fe845d7-1c5b-411a-b3bd-fb7ef98c8b6e",
+    "artifact_id": "art_6010694a-fbc6-45fa-9586-edebf5f46084",
+    "task_id": "task_a8f9eb48-baef-42ce-8dd0-c687eb9fd697",
+    "passed": 1,
+    "checks": [
+      {
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        },
+        "passed": true,
+        "type": "json_field"
+      }
+    ],
+    "created_at": "2026-11-05T18:33:25.852Z"
+  },
+  "release": {
+    "id": "rel_43e47962-d9e5-49a6-a6bf-56ae1542935a",
+    "artifact_id": "art_6010694a-fbc6-45fa-9586-edebf5f46084",
+    "goal_id": "bench-activation",
+    "status": "published_candidate",
+    "receipt": {
+      "artifactId": "art_6010694a-fbc6-45fa-9586-edebf5f46084",
+      "candidate": true,
+      "hash": "e53b786477b4e27c9d96f0fd0f5efdefbef8a9534f3d1a31e15112bc58583f2c",
+      "path": ".until\\releases\\rel_43e47962-d9e5-49a6-a6bf-56ae1542935a.json",
+      "provider": "until.local",
+      "releaseId": "rel_43e47962-d9e5-49a6-a6bf-56ae1542935a"
+    },
+    "idempotency_key": "539ae80f238fbfeab48dda7bcd7f5d89590cb1973eb30f70ec53e0bc12a488ce",
+    "created_at": "2026-11-05T18:33:25.854Z"
+  },
+  "tasks": [
+    {
+      "id": "task_87569858-8de2-4248-a505-d0724d065b51",
+      "goal_id": "bench-activation",
+      "opportunity_id": null,
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-activation"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "epoch": 0,
+      "depends_on": [],
+      "idempotency_key": "3cacc0601f691537cb887e635883379c7eda5259218b6a3137ae02cd92fb185d",
+      "last_error": null,
+      "available_at": 1793903592147,
+      "created_at": "2026-11-05T18:33:12.147Z",
+      "updated_at": "2026-11-05T18:33:16.596Z"
+    },
+    {
+      "id": "task_6c86168e-1308-4f0d-8af3-34a9125013e6",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6",
+      "role": "owner",
+      "kind": "product.contract",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-activation"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "epoch": 0,
+      "depends_on": [
+        "task_87569858-8de2-4248-a505-d0724d065b51"
+      ],
+      "idempotency_key": "1d0e72c5a347d7bdd1a7b829ffacfeceb5a8d06401cb048eb598d64a38b4a38f",
+      "last_error": null,
+      "available_at": 1793903596595,
+      "created_at": "2026-11-05T18:33:16.595Z",
+      "updated_at": "2026-11-05T18:33:20.226Z"
+    },
+    {
+      "id": "task_166eb938-1cf5-443f-bfc6-33d5e6d7e82a",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6",
+      "role": "builder",
+      "kind": "delivery.build",
+      "contract": {
+        "evidenceIds": [
+          "sig_activation"
+        ],
+        "generation": 1,
+        "goalId": "bench-activation",
+        "spec": {
+          "checks": [
+            {
+              "equals": "implemented",
+              "field": "status",
+              "type": "json_field"
+            }
+          ],
+          "risk": "low",
+          "summary": "Bounded experiment to implement reuse-existing-data feature for pre-filled company data during activation",
+          "title": "Reduce repeated data entry during activation"
+        }
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "epoch": 0,
+      "depends_on": [
+        "task_6c86168e-1308-4f0d-8af3-34a9125013e6"
+      ],
+      "idempotency_key": "fd5749a97beccd4449f080fccb49cfb7b7895aa1c5c8853c1d48b11a2be28e25",
+      "last_error": null,
+      "available_at": 1793903600226,
+      "created_at": "2026-11-05T18:33:20.226Z",
+      "updated_at": "2026-11-05T18:33:25.851Z"
+    },
+    {
+      "id": "task_a8f9eb48-baef-42ce-8dd0-c687eb9fd697",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6",
+      "role": "verifier",
+      "kind": "quality.verify",
+      "contract": {
+        "artifactId": "art_6010694a-fbc6-45fa-9586-edebf5f46084",
+        "checks": [
+          {
+            "equals": "implemented",
+            "field": "status",
+            "type": "json_field"
+          }
+        ],
+        "generation": 1,
+        "goalId": "bench-activation"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "epoch": 0,
+      "depends_on": [
+        "task_166eb938-1cf5-443f-bfc6-33d5e6d7e82a"
+      ],
+      "idempotency_key": "c137b44afaef7c1e663aae0189a21e0bbf4245040884f933db8c54d4a401e6ee",
+      "last_error": null,
+      "available_at": 1793903605850,
+      "created_at": "2026-11-05T18:33:25.850Z",
+      "updated_at": "2026-11-05T18:33:25.853Z"
+    },
+    {
+      "id": "task_28512acd-a32a-42af-80b6-b2373ca546ac",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6",
+      "role": "release",
+      "kind": "release.prepare",
+      "contract": {
+        "artifactId": "art_6010694a-fbc6-45fa-9586-edebf5f46084",
+        "generation": 1,
+        "goalId": "bench-activation"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "epoch": 0,
+      "depends_on": [
+        "task_a8f9eb48-baef-42ce-8dd0-c687eb9fd697"
+      ],
+      "idempotency_key": "b3d78c15030cb640508fb511170a43ff135054950a50441e52bbeaf0abdb689b",
+      "last_error": null,
+      "available_at": 1793903605853,
+      "created_at": "2026-11-05T18:33:25.853Z",
+      "updated_at": "2026-11-05T18:33:25.855Z"
+    },
+    {
+      "id": "task_6f9cd18f-c2b5-40b8-b712-56a6ca85490e",
+      "goal_id": "bench-activation",
+      "opportunity_id": "opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-activation",
+        "releaseId": "rel_43e47962-d9e5-49a6-a6bf-56ae1542935a"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "epoch": 0,
+      "depends_on": [
+        "task_28512acd-a32a-42af-80b6-b2373ca546ac"
+      ],
+      "idempotency_key": "5eedba86cafff52381c756bbd10773bc67de9366c4b52f3445b951ec9d7de162",
+      "last_error": null,
+      "available_at": 1793903605855,
+      "created_at": "2026-11-05T18:33:25.855Z",
+      "updated_at": "2026-11-05T18:33:25.875Z"
+    }
+  ],
+  "events": [
+    {
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": "{\"goalId\":\"bench-activation\",\"title\":\"Reduce repeated data entry during activation\"}"
+    },
+    {
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": "{\"goalId\":\"bench-activation\",\"hash\":\"211a9d05c8daff70e6bed314f4731904c3cebe1b9e6867eefc80241b9a4d48f4\",\"kind\":\"interview\",\"signalId\":\"sig_activation\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"research.synthesize\",\"taskId\":\"task_87569858-8de2-4248-a505-d0724d065b51\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "payload": "{\"attempt\":1,\"kind\":\"research.synthesize\",\"taskId\":\"task_87569858-8de2-4248-a505-d0724d065b51\"}"
+    },
+    {
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": "{\"generation\":1,\"goalId\":\"bench-activation\",\"opportunityId\":\"opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": "{\"artifactId\":\"art_0d3df592-3e96-48b8-a2b0-ff59212be84a\",\"hash\":\"517cafd7f4afce6237427c9325af11ccf717b41038b0f810573ed2bef2705c00\",\"kind\":\"research.opportunity\",\"taskId\":\"task_87569858-8de2-4248-a505-d0724d065b51\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"open\"},\"goalId\":\"bench-activation\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"product.contract\",\"taskId\":\"task_6c86168e-1308-4f0d-8af3-34a9125013e6\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": "{\"kind\":\"research.synthesize\",\"result\":{\"nextTaskId\":\"task_6c86168e-1308-4f0d-8af3-34a9125013e6\",\"opportunityId\":\"opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6\",\"outcome\":\"opportunity_ready\"},\"taskId\":\"task_87569858-8de2-4248-a505-d0724d065b51\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "payload": "{\"attempt\":1,\"kind\":\"product.contract\",\"taskId\":\"task_6c86168e-1308-4f0d-8af3-34a9125013e6\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6\",\"status\":\"contracted\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"delivery.build\",\"taskId\":\"task_166eb938-1cf5-443f-bfc6-33d5e6d7e82a\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "owner",
+      "payload": "{\"kind\":\"product.contract\",\"result\":{\"checks\":1,\"nextTaskId\":\"task_166eb938-1cf5-443f-bfc6-33d5e6d7e82a\",\"outcome\":\"contract_created\"},\"taskId\":\"task_6c86168e-1308-4f0d-8af3-34a9125013e6\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "payload": "{\"attempt\":1,\"kind\":\"delivery.build\",\"taskId\":\"task_166eb938-1cf5-443f-bfc6-33d5e6d7e82a\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "builder",
+      "payload": "{\"artifactId\":\"art_6010694a-fbc6-45fa-9586-edebf5f46084\",\"hash\":\"e53b786477b4e27c9d96f0fd0f5efdefbef8a9534f3d1a31e15112bc58583f2c\",\"kind\":\"product.experiment\",\"taskId\":\"task_166eb938-1cf5-443f-bfc6-33d5e6d7e82a\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"quality.verify\",\"taskId\":\"task_a8f9eb48-baef-42ce-8dd0-c687eb9fd697\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "builder",
+      "payload": "{\"kind\":\"delivery.build\",\"result\":{\"artifactId\":\"art_6010694a-fbc6-45fa-9586-edebf5f46084\",\"nextTaskId\":\"task_a8f9eb48-baef-42ce-8dd0-c687eb9fd697\",\"outcome\":\"artifact_built\"},\"taskId\":\"task_166eb938-1cf5-443f-bfc6-33d5e6d7e82a\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "payload": "{\"attempt\":1,\"kind\":\"quality.verify\",\"taskId\":\"task_a8f9eb48-baef-42ce-8dd0-c687eb9fd697\"}"
+    },
+    {
+      "type": "verdict.created",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_6010694a-fbc6-45fa-9586-edebf5f46084\",\"passed\":true,\"verdictId\":\"verdict_9fe845d7-1c5b-411a-b3bd-fb7ef98c8b6e\"}"
+    },
+    {
+      "type": "artifact.status",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_6010694a-fbc6-45fa-9586-edebf5f46084\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"release.prepare\",\"taskId\":\"task_28512acd-a32a-42af-80b6-b2373ca546ac\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "verifier",
+      "payload": "{\"kind\":\"quality.verify\",\"result\":{\"artifactId\":\"art_6010694a-fbc6-45fa-9586-edebf5f46084\",\"nextTaskId\":\"task_28512acd-a32a-42af-80b6-b2373ca546ac\",\"outcome\":\"verified\"},\"taskId\":\"task_a8f9eb48-baef-42ce-8dd0-c687eb9fd697\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "payload": "{\"attempt\":1,\"kind\":\"release.prepare\",\"taskId\":\"task_28512acd-a32a-42af-80b6-b2373ca546ac\"}"
+    },
+    {
+      "type": "release.candidate",
+      "actor": "release",
+      "payload": "{\"artifactId\":\"art_6010694a-fbc6-45fa-9586-edebf5f46084\",\"releaseId\":\"rel_43e47962-d9e5-49a6-a6bf-56ae1542935a\"}"
+    },
+    {
+      "type": "outbox.pending",
+      "actor": "release",
+      "payload": "{\"action\":\"artifact.publish\",\"digest\":\"bdf48d871f338b96cf23dc69e0d7861b9db278549b5d4cc48b5d05901888ab7e\",\"outboxId\":\"out_3e9eaf7d-ba5a-4b59-82e8-e049f989e575\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_6dd6872b-aa79-4b46-bb78-a8e7432d9ac6\",\"status\":\"release_candidate\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-activation\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-activation\",\"kind\":\"outcome.observe\",\"taskId\":\"task_6f9cd18f-c2b5-40b8-b712-56a6ca85490e\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "release",
+      "payload": "{\"kind\":\"release.prepare\",\"result\":{\"nextTaskId\":\"task_6f9cd18f-c2b5-40b8-b712-56a6ca85490e\",\"outboxId\":\"out_3e9eaf7d-ba5a-4b59-82e8-e049f989e575\",\"outcome\":\"release_candidate\",\"releaseCreated\":true,\"releaseId\":\"rel_43e47962-d9e5-49a6-a6bf-56ae1542935a\"},\"taskId\":\"task_28512acd-a32a-42af-80b6-b2373ca546ac\"}"
+    },
+    {
+      "type": "release.updated",
+      "actor": "release",
+      "payload": "{\"releaseId\":\"rel_43e47962-d9e5-49a6-a6bf-56ae1542935a\",\"status\":\"published_candidate\"}"
+    },
+    {
+      "type": "outbox.sent",
+      "actor": "release",
+      "payload": "{\"outboxId\":\"out_3e9eaf7d-ba5a-4b59-82e8-e049f989e575\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_22d366a1-fcdc-409a-b465-1222729ed1ea",
+      "payload": "{\"attempt\":1,\"kind\":\"outcome.observe\",\"taskId\":\"task_6f9cd18f-c2b5-40b8-b712-56a6ca85490e\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "analyst",
+      "payload": "{\"artifactId\":\"art_8bfffed9-12e9-406d-b6f8-6715b14532bc\",\"hash\":\"952b81eff90543253ef92ee23e8825c276a0e5975345b8e930be8bc87ba9ca36\",\"kind\":\"outcome.request\",\"taskId\":\"task_6f9cd18f-c2b5-40b8-b712-56a6ca85490e\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-activation\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "analyst",
+      "payload": "{\"kind\":\"outcome.observe\",\"result\":{\"artifactId\":\"art_8bfffed9-12e9-406d-b6f8-6715b14532bc\",\"outcome\":\"unknown\"},\"taskId\":\"task_6f9cd18f-c2b5-40b8-b712-56a6ca85490e\"}"
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 36,
+    "head": "9ef82e6ab679a6d8413ea47888e0cb53e6a32a2645c946fffc9f1d28051fdaf5"
+  },
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-activation",
+          "expected": "bench-activation"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "reuse-existing-data"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

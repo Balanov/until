@@ -13,49 +13,49 @@
   },
   "tasks": [
     {
-      "id": "task_1edec89a-8162-475b-94cf-1ad885c95f2f",
+      "id": "task_9140e5ea-df66-47bf-9d73-a052a9fb15f3",
       "role": "researcher",
       "kind": "research.synthesize",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_56a407ac-125b-4780-923e-ad8bc9a9d30f",
+      "id": "task_d9aa5421-ea11-478b-b212-db6c8bc9eefd",
       "role": "owner",
       "kind": "product.contract",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_25fbde7e-3c8e-4cf8-8bf3-1df7322ff45f",
+      "id": "task_f83db47c-3b8b-4e2b-82fa-d7fcbd50568c",
       "role": "builder",
       "kind": "delivery.build",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_ec7fdffc-3198-45a9-a3bd-b00964869067",
+      "id": "task_43baf710-f5a2-430b-9c7c-dc138ffd30fa",
       "role": "verifier",
       "kind": "quality.verify",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_253b9c64-454b-4d22-8ab5-ecdeff515f25",
+      "id": "task_74a51345-449c-41a6-9cc2-894a499e1d4b",
       "role": "release",
       "kind": "release.prepare",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_28df44ca-a2ad-49b3-815d-107eea5f4f97",
+      "id": "task_8aef6399-8964-4060-bedd-fc104b873cc7",
       "role": "analyst",
       "kind": "outcome.observe",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_69b57023-efc9-40ae-b034-b3305c750de2",
+      "id": "task_70da19b2-f3a8-4532-b977-4a772b79d49f",
       "role": "analyst",
       "kind": "outcome.observe",
       "state": "done",
@@ -64,39 +64,39 @@
   ],
   "artifacts": [
     {
-      "id": "art_89154d25-9844-43d8-bafe-3f058ea56cfd",
+      "id": "art_32e17089-eb85-48ec-ad7a-b8919d9121c2",
       "kind": "research.opportunity",
       "status": "working",
-      "hash": "d97b5172a228ed0c8e61f8a40fb5e8bbeb6f47bb939358e98e117fe4c25f0dc0"
+      "hash": "96c63e9a63ebcf09acf5e5037aeab9726b55f083b20e6e1fa05cc2660a04f827"
     },
     {
-      "id": "art_5a58d613-47e2-4554-bffd-a558d5108f08",
+      "id": "art_e48b68e8-0427-4db8-aa2a-62e404dbf5c6",
       "kind": "product.experiment",
       "status": "verified",
-      "hash": "51b7c541a8369c604c3039d4ed32bfe0f9ab020a1d412f2923d4f5590a751d8e"
+      "hash": "623bfef2840e7a90bc2a78e8243918f3c0cbd0a44fed639038125d85e1d21d70"
     },
     {
-      "id": "art_7055df28-da31-425f-8e91-5615efa34cac",
+      "id": "art_b68e8108-0d97-4ba6-b7d6-0d1ee9f776f1",
       "kind": "outcome.request",
       "status": "working",
-      "hash": "5ed87615152b229ac91564c38c5401c4521266b618bc338af579a6798b7601f2"
+      "hash": "00561bd1d70f2721e39af1fd09278c352d34a8e3c5588c699910691ad0dc8cb7"
     }
   ],
   "release": {
-    "id": "rel_4143088d-c9f3-4000-ad48-4c768bc46b7a",
-    "artifact_id": "art_5a58d613-47e2-4554-bffd-a558d5108f08",
+    "id": "rel_8a045a90-8d5b-4c2b-8695-f5142f4f6085",
+    "artifact_id": "art_e48b68e8-0427-4db8-aa2a-62e404dbf5c6",
     "goal_id": "goal_proof",
     "status": "published_candidate",
     "receipt": {
-      "artifactId": "art_5a58d613-47e2-4554-bffd-a558d5108f08",
+      "artifactId": "art_e48b68e8-0427-4db8-aa2a-62e404dbf5c6",
       "candidate": true,
-      "hash": "51b7c541a8369c604c3039d4ed32bfe0f9ab020a1d412f2923d4f5590a751d8e",
-      "path": ".until\\releases\\rel_4143088d-c9f3-4000-ad48-4c768bc46b7a.json",
+      "hash": "623bfef2840e7a90bc2a78e8243918f3c0cbd0a44fed639038125d85e1d21d70",
+      "path": ".until\\releases\\rel_8a045a90-8d5b-4c2b-8695-f5142f4f6085.json",
       "provider": "until.local",
-      "releaseId": "rel_4143088d-c9f3-4000-ad48-4c768bc46b7a"
+      "releaseId": "rel_8a045a90-8d5b-4c2b-8695-f5142f4f6085"
     },
-    "idempotency_key": "95509e97f4c4e4fea393f31daf38e4476ac6f23256924c02342fb85ffcb1e875",
-    "created_at": "2026-11-05T03:29:27.177Z"
+    "idempotency_key": "e64b7ad34238e75887a35fddfffda20dad5421dcc8690c8ade09ff459d84dbb2",
+    "created_at": "2026-11-05T19:29:50.667Z"
   },
   "goal": {
     "id": "goal_proof",
@@ -110,12 +110,12 @@
       "autonomy": "sandbox",
       "maxAttempts": 3
     },
-    "created_at": "2026-11-05T03:29:27.139Z",
-    "updated_at": "2026-11-05T03:29:27.201Z"
+    "created_at": "2026-11-05T19:29:50.633Z",
+    "updated_at": "2026-11-05T19:29:50.702Z"
   },
   "audit": {
     "valid": true,
     "count": 42,
-    "head": "d1e39445499621f7bdec99d47ed2c99d6454f818595047b8fac4c6f80cd2176f"
+    "head": "97737244d8a883b0c9eb6151e61870477a62bdeec2d789b2d133b7e38e42ffec"
   }
 }

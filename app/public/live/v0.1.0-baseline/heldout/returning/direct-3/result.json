@@ -1,0 +1,59 @@
+{
+  "system": "direct",
+  "accepted": false,
+  "rejectionReasons": [
+    "evidence_mismatch",
+    "acceptance_failed"
+  ],
+  "wallMs": 3897.4647999999997,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 289,
+  "outputTokens": 415,
+  "providerCharges": 0,
+  "artifact": {
+    "required": {
+      "statement": "The save-progress feature is implemented to preserve onboarding state for returning customers.",
+      "mechanism": "Use a persistent token in URL parameters to restore onboarding progress upon return.",
+      "evidenceIds": [
+        "sig_returning"
+      ],
+      "title": "Onboarding Progress Persistence for Returning Users",
+      "summary": "Implement save-progress to prevent re-entry of onboarding steps when users return after interruption.",
+      "risk": "low",
+      "goalId": "bench-returning",
+      "status": "implemented",
+      "implementation": {
+        "feature": "save-progress"
+      }
+    }
+  },
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "bench-returning"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "save-progress"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

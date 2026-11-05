@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0 — 2026-11-05
+
+Measured hardening and a proof-first executive/engineering site.
+
+- Owner-supplied `goal.policy.acceptance` is merged into every contract and cannot be discarded by the model. Live model contracts without external acceptance now fail closed.
+- Strict role-specific JSON Schemas are sent to compatible providers; `structuredOutputs: false` remains available per model or globally.
+- Opt-in raw response tracing, role/model economics and `until export --output FILE` expose model calls, verdicts, releases, events and integrity hashes. Raw content can be sensitive and is disabled by default.
+- A frozen same-model protocol published all 48 selection/held-out trials. Held-out UNTIL acceptance moved from **0/6 to 6/6**. The current direct arm also accepted **6/6** and was **3.281× faster**, using one model call instead of three. This is a bounded JSON-deliverable test, not a competitor or business-outcome benchmark.
+- A downloadable raw bundle includes 102 files and a SHA-256 manifest; an integrity test checks all trials, responses and accepted release receipts.
+- The six-language RTL site now leads with real held-out evidence, live GitHub stars/forks, sourced capability comparisons, explicit product gaps and an assumption-based pilot calculator.
+- **50 unit/integration/integrity tests**, 10 deterministic proof checks and production browser validation.
+
+Known boundaries remain: no native Git/PR delivery or managed sandbox, no production deployment, no universal team-replacement claim, no external effect without a configured risk boundary, and no business ROI claim without paired real-task pilots.
+
 ## 0.1.0 — 2026-11-05
 
 Initial engineering MVP.

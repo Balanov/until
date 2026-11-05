@@ -1,0 +1,59 @@
+{
+  "system": "direct",
+  "accepted": false,
+  "rejectionReasons": [
+    "evidence_mismatch",
+    "acceptance_failed"
+  ],
+  "wallMs": 3922.215,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 289,
+  "outputTokens": 400,
+  "providerCharges": 0,
+  "artifact": {
+    "required": {
+      "statement": "Returning customers who exit onboarding should retain their progress to avoid re-doing steps.",
+      "mechanism": "Implement save-progress feature using local storage to persist onboarding state, automatically restoring progress upon return.",
+      "evidenceIds": [
+        "sig_returning"
+      ],
+      "title": "Save Progress for Returning Customers",
+      "summary": "A bounded experiment to save onboarding progress using local storage, enabling returning customers to resume where they left off.",
+      "risk": "low",
+      "goalId": "bench-returning",
+      "status": "implemented",
+      "implementation": {
+        "feature": "save-progress"
+      }
+    }
+  },
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "bench-returning"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "save-progress"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

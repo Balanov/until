@@ -1,0 +1,57 @@
+{
+  "system": "direct",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 4607.3231,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 299,
+  "outputTokens": 491,
+  "providerCharges": 0,
+  "artifact": {
+    "statement": "The participant abandoned activation due to redundant entry of company data three times, indicating a need for data reuse.",
+    "mechanism": "Automatically populate company data fields during activation by reusing existing user or account data from previous interactions.",
+    "evidenceIds": [
+      "sig_activation"
+    ],
+    "title": "Reuse Existing Company Data During Activation",
+    "summary": "Implement a mechanism to automatically populate company data fields during activation, reducing redundant entry and improving user experience.",
+    "risk": "low",
+    "goalId": "bench-activation",
+    "status": "implemented",
+    "implementation": {
+      "feature": "reuse-existing-data"
+    }
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-activation",
+          "expected": "bench-activation"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "reuse-existing-data",
+          "expected": "reuse-existing-data"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

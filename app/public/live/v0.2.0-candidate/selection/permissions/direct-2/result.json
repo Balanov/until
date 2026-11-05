@@ -1,0 +1,57 @@
+{
+  "system": "direct",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 5258.4699,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 286,
+  "outputTokens": 509,
+  "providerCharges": 0,
+  "artifact": {
+    "statement": "Users decline permission requests due to unexpected context, necessitating explicit justification for permission usage.",
+    "mechanism": "Display permission context modal explaining necessity before requesting access.",
+    "evidenceIds": [
+      "sig_permissions"
+    ],
+    "title": "Show Permission Context to Reduce Declines",
+    "summary": "Implement permission context explanation to mitigate unexpected access declines by clarifying necessity.",
+    "risk": "low",
+    "goalId": "bench-permissions",
+    "status": "implemented",
+    "implementation": {
+      "feature": "show-permission-context"
+    }
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-permissions",
+          "expected": "bench-permissions"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "show-permission-context",
+          "expected": "show-permission-context"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

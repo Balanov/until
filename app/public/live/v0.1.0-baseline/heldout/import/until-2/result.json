@@ -1,0 +1,134 @@
+{
+  "system": "until",
+  "accepted": false,
+  "rejectionReasons": [
+    "evidence_mismatch",
+    "acceptance_failed",
+    "verdict_failed",
+    "verification_not_independent",
+    "candidate_not_published"
+  ],
+  "wallMs": 5168.1329000000005,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 382,
+  "outputTokens": 531,
+  "providerCharges": 0,
+  "run": {
+    "cycles": 2,
+    "completed": 0,
+    "failed": 1,
+    "stale": 0,
+    "idleRounds": 1,
+    "blockedBudget": false,
+    "elapsedMs": 5167.53,
+    "status": {
+      "epoch": {
+        "epoch": 0,
+        "stopped": false
+      },
+      "goals": [
+        {
+          "id": "bench-import",
+          "status": "open"
+        }
+      ],
+      "tasks": {
+        "queued": 1
+      },
+      "signals": {
+        "incident": 1
+      },
+      "models": [
+        {
+          "model": "qwen3:8b",
+          "role": "researcher",
+          "calls": 1,
+          "input_tokens": 382,
+          "output_tokens": 531,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 5165
+        }
+      ],
+      "audit": {
+        "valid": true,
+        "count": 5,
+        "head": "15372a4fd4d56cb7a50e677ea1f88170865182540d6e7314e2e0932901d8f5fd"
+      }
+    }
+  },
+  "verdict": null,
+  "tasks": [
+    {
+      "id": "task_e06245d3-d04a-4af8-99ca-f021cef02bff",
+      "goal_id": "bench-import",
+      "opportunity_id": null,
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-import"
+      },
+      "state": "queued",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_cc94f073-ab86-4f1a-8180-0d1cbd927cad",
+      "epoch": 0,
+      "depends_on": [],
+      "idempotency_key": "24ff7c5c9486af976ba62a7eaebba5211838f8db68404a922fb53ebc6126de54",
+      "last_error": "statement must contain 5–4000 characters",
+      "available_at": 1793903704797,
+      "created_at": "2026-11-05T18:34:59.531Z",
+      "updated_at": "2026-11-05T18:35:04.697Z"
+    }
+  ],
+  "events": [
+    {
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": "{\"goalId\":\"bench-import\",\"title\":\"Let customers correct spreadsheet import mistakes\"}"
+    },
+    {
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": "{\"goalId\":\"bench-import\",\"hash\":\"7eb977bfd9871cc77a109040a12cd8d7d3b1e4631bce95b8b8e2879bddfe0411\",\"kind\":\"incident\",\"signalId\":\"sig_import\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-import\",\"kind\":\"research.synthesize\",\"taskId\":\"task_e06245d3-d04a-4af8-99ca-f021cef02bff\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_cc94f073-ab86-4f1a-8180-0d1cbd927cad",
+      "payload": "{\"attempt\":1,\"kind\":\"research.synthesize\",\"taskId\":\"task_e06245d3-d04a-4af8-99ca-f021cef02bff\"}"
+    },
+    {
+      "type": "task.retry",
+      "actor": "researcher",
+      "payload": "{\"attempt\":1,\"error\":\"statement must contain 5–4000 characters\",\"taskId\":\"task_e06245d3-d04a-4af8-99ca-f021cef02bff\"}"
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 5,
+    "head": "15372a4fd4d56cb7a50e677ea1f88170865182540d6e7314e2e0932901d8f5fd"
+  },
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "artifact",
+        "passed": false,
+        "evidence": {
+          "error": "not_created"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

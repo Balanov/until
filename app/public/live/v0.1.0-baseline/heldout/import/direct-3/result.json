@@ -1,0 +1,59 @@
+{
+  "system": "direct",
+  "accepted": false,
+  "rejectionReasons": [
+    "evidence_mismatch",
+    "acceptance_failed"
+  ],
+  "wallMs": 4803.4555,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 283,
+  "outputTokens": 512,
+  "providerCharges": 0,
+  "artifact": {
+    "required": {
+      "statement": "When users import spreadsheets, invalid rows should be identified and previewed so customers can correct mistakes before finalizing the import.",
+      "mechanism": "Implement a bounded experiment that previews import errors in real-time during spreadsheet uploads, highlighting invalid rows with specific error messages.",
+      "evidenceIds": [
+        "sig_import"
+      ],
+      "title": "bench-import",
+      "summary": "Enable real-time error preview during spreadsheet imports to allow users to correct invalid rows before finalizing the import process.",
+      "risk": "low",
+      "goalId": "bench-import",
+      "status": "implemented",
+      "implementation": {
+        "feature": "preview-import-errors"
+      }
+    }
+  },
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "bench-import"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "preview-import-errors"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

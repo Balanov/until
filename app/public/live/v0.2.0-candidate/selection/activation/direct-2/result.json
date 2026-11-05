@@ -1,0 +1,57 @@
+{
+  "system": "direct",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 4608.4625,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 299,
+  "outputTokens": 445,
+  "providerCharges": 0,
+  "artifact": {
+    "statement": "Implement a data reuse mechanism to eliminate redundant company data entry during activation.",
+    "mechanism": "Automatically populate company data fields using existing user profile information during the activation process.",
+    "evidenceIds": [
+      "sig_activation"
+    ],
+    "title": "Reuse Existing Company Data During Activation",
+    "summary": "This experiment reuses pre-existing company data from user profiles to eliminate redundant entry during activation, reducing friction and data entry repetition.",
+    "risk": "low",
+    "goalId": "bench-activation",
+    "status": "implemented",
+    "implementation": {
+      "feature": "reuse-existing-data"
+    }
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-activation",
+          "expected": "bench-activation"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "reuse-existing-data",
+          "expected": "reuse-existing-data"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

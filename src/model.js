@@ -61,7 +61,7 @@ export class OpenAICompatibleModel {
     this.baseURL = assertEndpoint(config.baseURL, config.allowedOrigins);
   }
 
-  async complete({ system, input, maxTokens = 4096 }) {
+  async complete({ system, input, maxTokens = 4096, schema = null }) {
     const controller = new AbortController();
     const timeoutMs = this.config.timeoutMs ?? DEFAULT_TIMEOUT_MS;
     const timer = setTimeout(() => controller.abort(new Error("Model request timeout")), timeoutMs);
@@ -82,7 +82,9 @@ export class OpenAICompatibleModel {
             { role: "system", content: system },
             { role: "user", content: typeof input === "string" ? input : JSON.stringify(input) },
           ],
-          response_format: { type: "json_object" },
+          response_format: schema && this.config.structuredOutputs !== false
+            ? { type: "json_schema", json_schema: { name: "until_contract", strict: true, schema } }
+            : { type: "json_object" },
           max_tokens: maxTokens,
         }),
         signal: controller.signal,
@@ -141,9 +143,10 @@ export class ReplayModel {
 }
 
 export class ModelRouter {
-  constructor({ store = null, roles = {}, fetchImpl = fetch } = {}) {
+  constructor({ store = null, roles = {}, fetchImpl = fetch, traceResponses = false } = {}) {
     this.store = store;
     this.fetch = fetchImpl;
+    this.traceResponses = traceResponses;
     this.roles = new Map();
     for (const [role, config] of Object.entries(roles)) {
       if (!config || config.enabled === false) continue;
@@ -156,12 +159,12 @@ export class ModelRouter {
     return this.roles.has(role);
   }
 
-  async complete({ role, taskId = null, kind, generation = 1, system, input, maxTokens }) {
+  async complete({ role, taskId = null, kind, generation = 1, system, input, maxTokens, schema = null }) {
     const model = this.roles.get(role);
     if (!model) throw new Error(`No model configured for role ${role}`);
-    const result = await model.complete({ kind, generation, system, input, maxTokens });
+    const result = await model.complete({ kind, generation, system, input, maxTokens, schema });
     if (this.store) {
-      this.store.addModelCall({
+      const callId = this.store.addModelCall({
         taskId,
         role,
         model: result.model,
@@ -171,6 +174,7 @@ export class ModelRouter {
         cost: result.cost,
         latencyMs: result.latencyMs,
       });
+      if (this.traceResponses) this.store.addModelResponse({ callId, taskId, content: result.content });
     }
     return { ...result, parsed: parseModelJson(result.content) };
   }

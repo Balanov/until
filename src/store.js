@@ -134,6 +134,13 @@ CREATE TABLE IF NOT EXISTS model_calls (
   latency_ms INTEGER NOT NULL,
   created_at TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS model_responses (
+  call_id TEXT PRIMARY KEY REFERENCES model_calls(id),
+  task_id TEXT REFERENCES tasks(id),
+  content TEXT NOT NULL,
+  hash TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
 CREATE TABLE IF NOT EXISTS strategies (
   id TEXT PRIMARY KEY,
   parent_id TEXT REFERENCES strategies(id),
@@ -630,6 +637,36 @@ export class Store {
     ).all();
   }
 
+  addModelResponse(input) {
+    assertText(input.content, "modelResponse.content", { max: 2_000_000 });
+    this.db.prepare("INSERT INTO model_responses(call_id, task_id, content, hash, created_at) VALUES (?, ?, ?, ?, ?)")
+      .run(input.callId, input.taskId ?? null, input.content, sha256(input.content), this.now());
+    return { callId: input.callId, taskId: input.taskId ?? null, hash: sha256(input.content) };
+  }
+
+  modelResponses({ taskId = null } = {}) {
+    if (taskId) return this.db.prepare("SELECT * FROM model_responses WHERE task_id = ? ORDER BY created_at").all(taskId);
+    return this.db.prepare("SELECT * FROM model_responses ORDER BY created_at").all();
+  }
+
+  economics() {
+    const usage = this.db.prepare("SELECT COUNT(*) calls, SUM(input_tokens) inputTokens, SUM(output_tokens) outputTokens, SUM(cost) knownCost, SUM(CASE WHEN cost IS NULL THEN 1 ELSE 0 END) unknownCostCalls FROM model_calls").get();
+    const candidates = this.db.prepare("SELECT COUNT(*) count FROM releases WHERE status = 'published_candidate'").get().count;
+    const achieved = this.db.prepare("SELECT COUNT(*) count FROM goals WHERE status = 'achieved'").get().count;
+    const knownCost = usage.knownCost ?? 0;
+    return {
+      modelCalls: usage.calls,
+      inputTokens: usage.inputTokens ?? 0,
+      outputTokens: usage.outputTokens ?? 0,
+      providerCharges: usage.unknownCostCalls === 0 ? knownCost : null,
+      unknownCostCalls: usage.unknownCostCalls,
+      publishedCandidates: candidates,
+      achievedGoals: achieved,
+      costPerPublishedCandidate: candidates > 0 && usage.unknownCostCalls === 0 ? knownCost / candidates : null,
+      costScope: "Provider charges only. Hardware, electricity and human work are excluded.",
+    };
+  }
+
   addStrategy(input) {
     const id = input.id ?? newId("strategy");
     this.db.prepare("INSERT INTO strategies(id, parent_id, genome, status, created_at) VALUES (?, ?, ?, ?, ?)")
@@ -672,6 +709,7 @@ export class Store {
       tasks: Object.fromEntries(tasks.map((row) => [row.state, row.count])),
       signals: Object.fromEntries(signals.map((row) => [row.kind, row.count])),
       models: this.modelUsage(),
+      economics: this.economics(),
       audit: this.verifyEvents(),
     };
   }

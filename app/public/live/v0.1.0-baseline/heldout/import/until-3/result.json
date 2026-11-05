@@ -1,0 +1,224 @@
+{
+  "system": "until",
+  "accepted": false,
+  "rejectionReasons": [
+    "acceptance_failed",
+    "verdict_failed",
+    "verification_not_independent",
+    "candidate_not_published"
+  ],
+  "wallMs": 20310.992299999998,
+  "modelCalls": 2,
+  "attempts": 2,
+  "inputTokens": 1052,
+  "outputTokens": 2115,
+  "providerCharges": 0,
+  "run": {
+    "cycles": 2,
+    "completed": 1,
+    "failed": 1,
+    "stale": 0,
+    "idleRounds": 1,
+    "blockedBudget": false,
+    "elapsedMs": 20310.274,
+    "status": {
+      "epoch": {
+        "epoch": 0,
+        "stopped": false
+      },
+      "goals": [
+        {
+          "id": "bench-import",
+          "status": "blocked_risk"
+        }
+      ],
+      "tasks": {
+        "dead": 1,
+        "done": 1
+      },
+      "signals": {
+        "incident": 1
+      },
+      "models": [
+        {
+          "model": "qwen3:8b",
+          "role": "owner",
+          "calls": 1,
+          "input_tokens": 670,
+          "output_tokens": 1793,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 17229
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "researcher",
+          "calls": 1,
+          "input_tokens": 382,
+          "output_tokens": 322,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 3069
+        }
+      ],
+      "audit": {
+        "valid": true,
+        "count": 13,
+        "head": "8f19b03b2afad142f235471fa55cbfd52e731a32629f6e99d315759b3cd4f606"
+      }
+    }
+  },
+  "opportunity": {
+    "id": "opp_4721e2bc-aac9-4949-860e-80403c4dbe88",
+    "goal_id": "bench-import",
+    "statement": "When spreadsheet imports fail, users cannot identify invalid rows, necessitating manual reentry. The preview-import-errors feature will surface invalid rows during import, enabling correction before finalization.",
+    "mechanism": "Implement a real-time validation layer during spreadsheet import that highlights row-specific errors, providing actionable feedback to users.",
+    "evidence_ids": [
+      "sig_import"
+    ],
+    "status": "blocked_risk",
+    "score": 0.95,
+    "generation": 1,
+    "created_at": "2026-11-05T18:35:07.845Z",
+    "updated_at": "2026-11-05T18:35:25.084Z"
+  },
+  "verdict": null,
+  "tasks": [
+    {
+      "id": "task_319b7162-34eb-433d-99a0-65b982c40d6b",
+      "goal_id": "bench-import",
+      "opportunity_id": null,
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-import"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_3ab23ca4-72a0-4a73-bb20-0a10a9eb12a0",
+      "epoch": 0,
+      "depends_on": [],
+      "idempotency_key": "24ff7c5c9486af976ba62a7eaebba5211838f8db68404a922fb53ebc6126de54",
+      "last_error": null,
+      "available_at": 1793903704775,
+      "created_at": "2026-11-05T18:35:04.775Z",
+      "updated_at": "2026-11-05T18:35:07.854Z"
+    },
+    {
+      "id": "task_6d9187ef-196d-450d-a26a-e73cb5a3bdae",
+      "goal_id": "bench-import",
+      "opportunity_id": "opp_4721e2bc-aac9-4949-860e-80403c4dbe88",
+      "role": "owner",
+      "kind": "product.contract",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-import"
+      },
+      "state": "dead",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_3ab23ca4-72a0-4a73-bb20-0a10a9eb12a0",
+      "epoch": 0,
+      "depends_on": [
+        "task_319b7162-34eb-433d-99a0-65b982c40d6b"
+      ],
+      "idempotency_key": "dd039b061908c9925949fe603d62868bb34c9823a1a037c491ce136ac7304297",
+      "last_error": "High-risk contracts require a separately configured risk boundary",
+      "available_at": 1793903707854,
+      "created_at": "2026-11-05T18:35:07.854Z",
+      "updated_at": "2026-11-05T18:35:25.084Z"
+    }
+  ],
+  "events": [
+    {
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": "{\"goalId\":\"bench-import\",\"title\":\"Let customers correct spreadsheet import mistakes\"}"
+    },
+    {
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": "{\"goalId\":\"bench-import\",\"hash\":\"7eb977bfd9871cc77a109040a12cd8d7d3b1e4631bce95b8b8e2879bddfe0411\",\"kind\":\"incident\",\"signalId\":\"sig_import\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-import\",\"kind\":\"research.synthesize\",\"taskId\":\"task_319b7162-34eb-433d-99a0-65b982c40d6b\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_3ab23ca4-72a0-4a73-bb20-0a10a9eb12a0",
+      "payload": "{\"attempt\":1,\"kind\":\"research.synthesize\",\"taskId\":\"task_319b7162-34eb-433d-99a0-65b982c40d6b\"}"
+    },
+    {
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": "{\"generation\":1,\"goalId\":\"bench-import\",\"opportunityId\":\"opp_4721e2bc-aac9-4949-860e-80403c4dbe88\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": "{\"artifactId\":\"art_145dd85b-ba53-464e-af6c-0b5df935e5fa\",\"hash\":\"da5b35de3325b193057d720dda7e19d62608a97b4da08c1855ce28d150cb60fc\",\"kind\":\"research.opportunity\",\"taskId\":\"task_319b7162-34eb-433d-99a0-65b982c40d6b\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"open\"},\"goalId\":\"bench-import\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-import\",\"kind\":\"product.contract\",\"taskId\":\"task_6d9187ef-196d-450d-a26a-e73cb5a3bdae\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": "{\"kind\":\"research.synthesize\",\"result\":{\"nextTaskId\":\"task_6d9187ef-196d-450d-a26a-e73cb5a3bdae\",\"opportunityId\":\"opp_4721e2bc-aac9-4949-860e-80403c4dbe88\",\"outcome\":\"opportunity_ready\"},\"taskId\":\"task_319b7162-34eb-433d-99a0-65b982c40d6b\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_3ab23ca4-72a0-4a73-bb20-0a10a9eb12a0",
+      "payload": "{\"attempt\":1,\"kind\":\"product.contract\",\"taskId\":\"task_6d9187ef-196d-450d-a26a-e73cb5a3bdae\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_4721e2bc-aac9-4949-860e-80403c4dbe88\",\"status\":\"blocked_risk\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"blocked_risk\"},\"goalId\":\"bench-import\"}"
+    },
+    {
+      "type": "task.dead",
+      "actor": "owner",
+      "payload": "{\"attempt\":1,\"error\":\"High-risk contracts require a separately configured risk boundary\",\"taskId\":\"task_6d9187ef-196d-450d-a26a-e73cb5a3bdae\"}"
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 13,
+    "head": "8f19b03b2afad142f235471fa55cbfd52e731a32629f6e99d315759b3cd4f606"
+  },
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "artifact",
+        "passed": false,
+        "evidence": {
+          "error": "not_created"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

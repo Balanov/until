@@ -7,6 +7,13 @@
   "unit": "ratio",
   "policy": {
     "autonomy": "sandbox",
-    "maxAttempts": 3
+    "maxAttempts": 3,
+    "acceptance": [
+      {
+        "type": "json_field",
+        "field": "implementation.evidenceLinked",
+        "equals": true
+      }
+    ]
   }
 }

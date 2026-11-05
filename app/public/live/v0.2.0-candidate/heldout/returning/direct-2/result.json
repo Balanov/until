@@ -1,0 +1,57 @@
+{
+  "system": "direct",
+  "accepted": true,
+  "rejectionReasons": [],
+  "wallMs": 3693.6285,
+  "modelCalls": 1,
+  "attempts": 1,
+  "inputTokens": 289,
+  "outputTokens": 335,
+  "providerCharges": 0,
+  "artifact": {
+    "statement": "Returning customers lose progress when interrupting onboarding, necessitating a solution to preserve state.",
+    "mechanism": "Implement save-progress by storing user onboarding state in local storage or database upon interruption.",
+    "evidenceIds": [
+      "sig_returning"
+    ],
+    "title": "Save Progress for Returning Customers",
+    "summary": "Enable returning customers to resume onboarding from last saved state instead of restarting.",
+    "risk": "low",
+    "goalId": "bench-returning",
+    "status": "implemented",
+    "implementation": {
+      "feature": "save-progress"
+    }
+  },
+  "checks": {
+    "passed": true,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-returning",
+          "expected": "bench-returning"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "save-progress",
+          "expected": "save-progress"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}

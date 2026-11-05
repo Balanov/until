@@ -1,6 +1,6 @@
 {
   "name": "until-product-loop",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Evidence-gated autonomous product operations. Local-first, model-neutral, MIT.",
   "type": "module",
   "private": false,
@@ -21,7 +21,10 @@
     "test": "node --test --test-reporter=spec test/*.test.mjs",
     "test:coverage": "node --test --experimental-test-coverage test/*.test.mjs",
     "proof": "node scripts/proof.mjs",
+    "proof:package": "python scripts/package-proof.py",
     "bench": "node scripts/bench.mjs",
+    "compare": "node scripts/compare.mjs",
+    "compare:report": "node scripts/comparison-report.mjs",
     "demo": "node bin/until.mjs demo",
     "test:report": "node scripts/test-report.mjs",
     "site:dev": "npm --prefix app run dev",

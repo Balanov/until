@@ -1,0 +1,6 @@
+*.jsonl -text
+*.zip binary
+app/public/live/** -text
+app/public/live-*.json -text
+app/public/comparison.json -text
+benchmarks/live-*.json -text

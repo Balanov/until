@@ -1,0 +1,533 @@
+{
+  "system": "until",
+  "accepted": false,
+  "rejectionReasons": [
+    "acceptance_failed"
+  ],
+  "wallMs": 11886.331200000002,
+  "modelCalls": 3,
+  "attempts": 6,
+  "inputTokens": 1596,
+  "outputTokens": 1200,
+  "providerCharges": 0,
+  "run": {
+    "cycles": 2,
+    "completed": 6,
+    "failed": 0,
+    "stale": 0,
+    "idleRounds": 1,
+    "blockedBudget": false,
+    "elapsedMs": 11885.474,
+    "status": {
+      "epoch": {
+        "epoch": 0,
+        "stopped": false
+      },
+      "goals": [
+        {
+          "id": "bench-returning",
+          "status": "observing"
+        }
+      ],
+      "tasks": {
+        "done": 6
+      },
+      "signals": {
+        "interview": 1
+      },
+      "models": [
+        {
+          "model": "qwen3:8b",
+          "role": "builder",
+          "calls": 1,
+          "input_tokens": 549,
+          "output_tokens": 299,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 3118
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "owner",
+          "calls": 1,
+          "input_tokens": 661,
+          "output_tokens": 477,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 4672
+        },
+        {
+          "model": "qwen3:8b",
+          "role": "researcher",
+          "calls": 1,
+          "input_tokens": 386,
+          "output_tokens": 424,
+          "known_cost": 0,
+          "unknown_cost_calls": 0,
+          "mean_latency_ms": 4046
+        }
+      ],
+      "audit": {
+        "valid": true,
+        "count": 36,
+        "head": "aab7ea4870aef178c894035c23f7b3e058f878f2234f6581efb2b5f7a9086613"
+      }
+    }
+  },
+  "opportunity": {
+    "id": "opp_bb634628-de66-41bb-81ce-9c09dc859ec5",
+    "goal_id": "bench-returning",
+    "statement": "The recorded interview evidence demonstrates that returning customers lose onboarding progress, necessitating a save-progress implementation.",
+    "mechanism": "Implement a server-side session storage mechanism to persist onboarding state for returning customers, with a frontend checkpoint system to resume interrupted flows.",
+    "evidence_ids": [
+      "sig_returning"
+    ],
+    "status": "release_candidate",
+    "score": 0.8,
+    "generation": 1,
+    "created_at": "2026-11-05T18:34:34.179Z",
+    "updated_at": "2026-11-05T18:34:41.998Z"
+  },
+  "artifact": {
+    "id": "art_b7436072-8db0-446a-a8e7-10d5ff48526b",
+    "goal_id": "bench-returning",
+    "task_id": "task_f7c048e7-7318-4ae5-90ce-b4827b25c84f",
+    "kind": "product.experiment",
+    "path": ".until\\artifacts\\art_b7436072-8db0-446a-a8e7-10d5ff48526b.json",
+    "content": "{\n  \"goalId\": \"bench-returning\",\n  \"opportunityId\": \"opp_bb634628-de66-41bb-81ce-9c09dc859ec5\",\n  \"status\": \"implemented\",\n  \"evidenceIds\": [\n    \"sig_returning\"\n  ],\n  \"implementation\": {\n    \"implementation\": {\n      \"feature\": \"save-progress\",\n      \"mechanism\": {\n        \"server_side\": {\n          \"storage\": \"session-store\",\n          \"tables\": [\n            {\n              \"name\": \"onboarding_progress\",\n              \"columns\": [\n                \"user_id\",\n                \"flow_id\",\n                \"step\",\n                \"data\",\n                \"timestamp\"\n              ]\n            }\n          ]\n        }\n      },\n      \"frontend\": {\n        \"checkpointing\": {\n          \"strategy\": \"step-based\",\n          \"resumption\": {\n            \"trigger\": \"page_reload\",\n            \"method\": \"resume_flow_from_step\"\n          }\n        }\n      }\n    },\n    \"experiment\": {\n      \"bounded\": true,\n      \"scope\": [\n        \"server_side\",\n        \"frontend\"\n      ],\n      \"verification\": false\n    }\n  }\n}",
+    "hash": "55d60dbff614f87e17a4c072c32a2e2bc528584eb4d9b752fa2bbfe87f228257",
+    "status": "verified",
+    "created_at": "2026-11-05T18:34:41.992Z"
+  },
+  "verdict": {
+    "id": "verdict_f9485a6e-29b3-48f0-8d4a-a8fae9785e72",
+    "artifact_id": "art_b7436072-8db0-446a-a8e7-10d5ff48526b",
+    "task_id": "task_257a2c98-8c9d-4a61-92b5-20928766b42b",
+    "passed": 1,
+    "checks": [
+      {
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        },
+        "passed": true,
+        "type": "json_field"
+      }
+    ],
+    "created_at": "2026-11-05T18:34:41.996Z"
+  },
+  "release": {
+    "id": "rel_39f2cc97-6452-4856-a76d-84d75a53492c",
+    "artifact_id": "art_b7436072-8db0-446a-a8e7-10d5ff48526b",
+    "goal_id": "bench-returning",
+    "status": "published_candidate",
+    "receipt": {
+      "artifactId": "art_b7436072-8db0-446a-a8e7-10d5ff48526b",
+      "candidate": true,
+      "hash": "55d60dbff614f87e17a4c072c32a2e2bc528584eb4d9b752fa2bbfe87f228257",
+      "path": ".until\\releases\\rel_39f2cc97-6452-4856-a76d-84d75a53492c.json",
+      "provider": "until.local",
+      "releaseId": "rel_39f2cc97-6452-4856-a76d-84d75a53492c"
+    },
+    "idempotency_key": "61af4368aeea50fbb55012570d4f60b77ac5c80a55e68eb79213f1a665af1a43",
+    "created_at": "2026-11-05T18:34:41.997Z"
+  },
+  "tasks": [
+    {
+      "id": "task_f896751a-b654-4f4f-8c53-d4c988a0d036",
+      "goal_id": "bench-returning",
+      "opportunity_id": null,
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-returning"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "epoch": 0,
+      "depends_on": [],
+      "idempotency_key": "ef6d7c96da31a86280f06c3273a56357fb1d43b192851073be046b06733d8d9b",
+      "last_error": null,
+      "available_at": 1793903670132,
+      "created_at": "2026-11-05T18:34:30.132Z",
+      "updated_at": "2026-11-05T18:34:34.190Z"
+    },
+    {
+      "id": "task_c47ece86-fe75-4137-b036-8ee271ba1e9d",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_bb634628-de66-41bb-81ce-9c09dc859ec5",
+      "role": "owner",
+      "kind": "product.contract",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-returning"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "epoch": 0,
+      "depends_on": [
+        "task_f896751a-b654-4f4f-8c53-d4c988a0d036"
+      ],
+      "idempotency_key": "29c10d5265a0c0a20506269dfbff0ca6018dc966e0efab4afde4be2fd4f260e9",
+      "last_error": null,
+      "available_at": 1793903674190,
+      "created_at": "2026-11-05T18:34:34.190Z",
+      "updated_at": "2026-11-05T18:34:38.865Z"
+    },
+    {
+      "id": "task_f7c048e7-7318-4ae5-90ce-b4827b25c84f",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_bb634628-de66-41bb-81ce-9c09dc859ec5",
+      "role": "builder",
+      "kind": "delivery.build",
+      "contract": {
+        "evidenceIds": [
+          "sig_returning"
+        ],
+        "generation": 1,
+        "goalId": "bench-returning",
+        "spec": {
+          "checks": [
+            {
+              "equals": "implemented",
+              "field": "status",
+              "type": "json_field"
+            }
+          ],
+          "risk": "low",
+          "summary": "Bounded experiment to implement save-progress mechanism using server-side session storage and frontend checkpoint resumption, informed by evidence of returning customers losing onboarding progress (evidence: sig_returning).",
+          "title": "Preserve Unfinished Onboarding for Returning Customers"
+        }
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "epoch": 0,
+      "depends_on": [
+        "task_c47ece86-fe75-4137-b036-8ee271ba1e9d"
+      ],
+      "idempotency_key": "cf390cfb6ea7ab24b3819bb556760f673a1697b13f2164796c24d485097e0c3d",
+      "last_error": null,
+      "available_at": 1793903678865,
+      "created_at": "2026-11-05T18:34:38.865Z",
+      "updated_at": "2026-11-05T18:34:41.993Z"
+    },
+    {
+      "id": "task_257a2c98-8c9d-4a61-92b5-20928766b42b",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_bb634628-de66-41bb-81ce-9c09dc859ec5",
+      "role": "verifier",
+      "kind": "quality.verify",
+      "contract": {
+        "artifactId": "art_b7436072-8db0-446a-a8e7-10d5ff48526b",
+        "checks": [
+          {
+            "equals": "implemented",
+            "field": "status",
+            "type": "json_field"
+          }
+        ],
+        "generation": 1,
+        "goalId": "bench-returning"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "epoch": 0,
+      "depends_on": [
+        "task_f7c048e7-7318-4ae5-90ce-b4827b25c84f"
+      ],
+      "idempotency_key": "a9aa819bb5dfe5fb715b8a9447cb7a852da17c54935e06c342367060697227e1",
+      "last_error": null,
+      "available_at": 1793903681992,
+      "created_at": "2026-11-05T18:34:41.992Z",
+      "updated_at": "2026-11-05T18:34:41.996Z"
+    },
+    {
+      "id": "task_e7344419-67c7-4dfc-972f-666bb4e9ca46",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_bb634628-de66-41bb-81ce-9c09dc859ec5",
+      "role": "release",
+      "kind": "release.prepare",
+      "contract": {
+        "artifactId": "art_b7436072-8db0-446a-a8e7-10d5ff48526b",
+        "generation": 1,
+        "goalId": "bench-returning"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "epoch": 0,
+      "depends_on": [
+        "task_257a2c98-8c9d-4a61-92b5-20928766b42b"
+      ],
+      "idempotency_key": "9c855416d8e6c5756e98049fbdc2943dbf91905fc134680c878baab3b5eb17d1",
+      "last_error": null,
+      "available_at": 1793903681996,
+      "created_at": "2026-11-05T18:34:41.996Z",
+      "updated_at": "2026-11-05T18:34:41.999Z"
+    },
+    {
+      "id": "task_aa929af8-d55b-4686-bf32-d7c2aa21b72e",
+      "goal_id": "bench-returning",
+      "opportunity_id": "opp_bb634628-de66-41bb-81ce-9c09dc859ec5",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "contract": {
+        "generation": 1,
+        "goalId": "bench-returning",
+        "releaseId": "rel_39f2cc97-6452-4856-a76d-84d75a53492c"
+      },
+      "state": "done",
+      "attempts": 1,
+      "max_attempts": 3,
+      "lease_token": null,
+      "lease_until": null,
+      "worker_id": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "epoch": 0,
+      "depends_on": [
+        "task_e7344419-67c7-4dfc-972f-666bb4e9ca46"
+      ],
+      "idempotency_key": "9838f0625cce3cc2c8ad9c0b2e039db3799c5d6139948d84b01687f8774f1d89",
+      "last_error": null,
+      "available_at": 1793903681999,
+      "created_at": "2026-11-05T18:34:41.999Z",
+      "updated_at": "2026-11-05T18:34:42.016Z"
+    }
+  ],
+  "events": [
+    {
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": "{\"goalId\":\"bench-returning\",\"title\":\"Preserve unfinished onboarding for returning customers\"}"
+    },
+    {
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": "{\"goalId\":\"bench-returning\",\"hash\":\"869be84d4da125b9881a1cde95f709fa11bb87bee0744065673ca7d75af66eca\",\"kind\":\"interview\",\"signalId\":\"sig_returning\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"research.synthesize\",\"taskId\":\"task_f896751a-b654-4f4f-8c53-d4c988a0d036\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "payload": "{\"attempt\":1,\"kind\":\"research.synthesize\",\"taskId\":\"task_f896751a-b654-4f4f-8c53-d4c988a0d036\"}"
+    },
+    {
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": "{\"generation\":1,\"goalId\":\"bench-returning\",\"opportunityId\":\"opp_bb634628-de66-41bb-81ce-9c09dc859ec5\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": "{\"artifactId\":\"art_2bea92c2-110c-4043-a3c8-fd49a5f714e2\",\"hash\":\"c21fee683fc8c74162761429773512ef9098212e4165773de67333fb17089ec9\",\"kind\":\"research.opportunity\",\"taskId\":\"task_f896751a-b654-4f4f-8c53-d4c988a0d036\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"open\"},\"goalId\":\"bench-returning\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"product.contract\",\"taskId\":\"task_c47ece86-fe75-4137-b036-8ee271ba1e9d\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": "{\"kind\":\"research.synthesize\",\"result\":{\"nextTaskId\":\"task_c47ece86-fe75-4137-b036-8ee271ba1e9d\",\"opportunityId\":\"opp_bb634628-de66-41bb-81ce-9c09dc859ec5\",\"outcome\":\"opportunity_ready\"},\"taskId\":\"task_f896751a-b654-4f4f-8c53-d4c988a0d036\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "payload": "{\"attempt\":1,\"kind\":\"product.contract\",\"taskId\":\"task_c47ece86-fe75-4137-b036-8ee271ba1e9d\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_bb634628-de66-41bb-81ce-9c09dc859ec5\",\"status\":\"contracted\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"delivery.build\",\"taskId\":\"task_f7c048e7-7318-4ae5-90ce-b4827b25c84f\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "owner",
+      "payload": "{\"kind\":\"product.contract\",\"result\":{\"checks\":1,\"nextTaskId\":\"task_f7c048e7-7318-4ae5-90ce-b4827b25c84f\",\"outcome\":\"contract_created\"},\"taskId\":\"task_c47ece86-fe75-4137-b036-8ee271ba1e9d\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "payload": "{\"attempt\":1,\"kind\":\"delivery.build\",\"taskId\":\"task_f7c048e7-7318-4ae5-90ce-b4827b25c84f\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "builder",
+      "payload": "{\"artifactId\":\"art_b7436072-8db0-446a-a8e7-10d5ff48526b\",\"hash\":\"55d60dbff614f87e17a4c072c32a2e2bc528584eb4d9b752fa2bbfe87f228257\",\"kind\":\"product.experiment\",\"taskId\":\"task_f7c048e7-7318-4ae5-90ce-b4827b25c84f\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"quality.verify\",\"taskId\":\"task_257a2c98-8c9d-4a61-92b5-20928766b42b\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "builder",
+      "payload": "{\"kind\":\"delivery.build\",\"result\":{\"artifactId\":\"art_b7436072-8db0-446a-a8e7-10d5ff48526b\",\"nextTaskId\":\"task_257a2c98-8c9d-4a61-92b5-20928766b42b\",\"outcome\":\"artifact_built\"},\"taskId\":\"task_f7c048e7-7318-4ae5-90ce-b4827b25c84f\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "payload": "{\"attempt\":1,\"kind\":\"quality.verify\",\"taskId\":\"task_257a2c98-8c9d-4a61-92b5-20928766b42b\"}"
+    },
+    {
+      "type": "verdict.created",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_b7436072-8db0-446a-a8e7-10d5ff48526b\",\"passed\":true,\"verdictId\":\"verdict_f9485a6e-29b3-48f0-8d4a-a8fae9785e72\"}"
+    },
+    {
+      "type": "artifact.status",
+      "actor": "verifier",
+      "payload": "{\"artifactId\":\"art_b7436072-8db0-446a-a8e7-10d5ff48526b\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_bb634628-de66-41bb-81ce-9c09dc859ec5\",\"status\":\"verified\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"release.prepare\",\"taskId\":\"task_e7344419-67c7-4dfc-972f-666bb4e9ca46\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "verifier",
+      "payload": "{\"kind\":\"quality.verify\",\"result\":{\"artifactId\":\"art_b7436072-8db0-446a-a8e7-10d5ff48526b\",\"nextTaskId\":\"task_e7344419-67c7-4dfc-972f-666bb4e9ca46\",\"outcome\":\"verified\"},\"taskId\":\"task_257a2c98-8c9d-4a61-92b5-20928766b42b\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "payload": "{\"attempt\":1,\"kind\":\"release.prepare\",\"taskId\":\"task_e7344419-67c7-4dfc-972f-666bb4e9ca46\"}"
+    },
+    {
+      "type": "release.candidate",
+      "actor": "release",
+      "payload": "{\"artifactId\":\"art_b7436072-8db0-446a-a8e7-10d5ff48526b\",\"releaseId\":\"rel_39f2cc97-6452-4856-a76d-84d75a53492c\"}"
+    },
+    {
+      "type": "outbox.pending",
+      "actor": "release",
+      "payload": "{\"action\":\"artifact.publish\",\"digest\":\"640840a99e53f027f758c7bf8f580a2415ccb6c6d75fce70b0fbe70dfbc58e0b\",\"outboxId\":\"out_5bbde79b-fa89-4985-bb8b-79f8bf780901\"}"
+    },
+    {
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": "{\"opportunityId\":\"opp_bb634628-de66-41bb-81ce-9c09dc859ec5\",\"status\":\"release_candidate\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-returning\"}"
+    },
+    {
+      "type": "task.queued",
+      "actor": "director",
+      "payload": "{\"epoch\":0,\"goalId\":\"bench-returning\",\"kind\":\"outcome.observe\",\"taskId\":\"task_aa929af8-d55b-4686-bf32-d7c2aa21b72e\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "release",
+      "payload": "{\"kind\":\"release.prepare\",\"result\":{\"nextTaskId\":\"task_aa929af8-d55b-4686-bf32-d7c2aa21b72e\",\"outboxId\":\"out_5bbde79b-fa89-4985-bb8b-79f8bf780901\",\"outcome\":\"release_candidate\",\"releaseCreated\":true,\"releaseId\":\"rel_39f2cc97-6452-4856-a76d-84d75a53492c\"},\"taskId\":\"task_e7344419-67c7-4dfc-972f-666bb4e9ca46\"}"
+    },
+    {
+      "type": "release.updated",
+      "actor": "release",
+      "payload": "{\"releaseId\":\"rel_39f2cc97-6452-4856-a76d-84d75a53492c\",\"status\":\"published_candidate\"}"
+    },
+    {
+      "type": "outbox.sent",
+      "actor": "release",
+      "payload": "{\"outboxId\":\"out_5bbde79b-fa89-4985-bb8b-79f8bf780901\"}"
+    },
+    {
+      "type": "task.leased",
+      "actor": "worker_7b58a56e-9f02-4d10-afaf-18505b8fd350",
+      "payload": "{\"attempt\":1,\"kind\":\"outcome.observe\",\"taskId\":\"task_aa929af8-d55b-4686-bf32-d7c2aa21b72e\"}"
+    },
+    {
+      "type": "artifact.created",
+      "actor": "analyst",
+      "payload": "{\"artifactId\":\"art_700e3d5a-490f-4d9f-b446-c40cad3c4668\",\"hash\":\"9e2745c264bd5ee0739d7b55b6a17db7f014b513e9addd980b4549d45b4bead3\",\"kind\":\"outcome.request\",\"taskId\":\"task_aa929af8-d55b-4686-bf32-d7c2aa21b72e\"}"
+    },
+    {
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": "{\"fields\":{\"status\":\"observing\"},\"goalId\":\"bench-returning\"}"
+    },
+    {
+      "type": "task.done",
+      "actor": "analyst",
+      "payload": "{\"kind\":\"outcome.observe\",\"result\":{\"artifactId\":\"art_700e3d5a-490f-4d9f-b446-c40cad3c4668\",\"outcome\":\"unknown\"},\"taskId\":\"task_aa929af8-d55b-4686-bf32-d7c2aa21b72e\"}"
+    }
+  ],
+  "audit": {
+    "valid": true,
+    "count": 36,
+    "head": "aab7ea4870aef178c894035c23f7b3e058f878f2234f6581efb2b5f7a9086613"
+  },
+  "checks": {
+    "passed": false,
+    "results": [
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "bench-returning",
+          "expected": "bench-returning"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": true,
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        }
+      },
+      {
+        "type": "json_field",
+        "passed": false,
+        "evidence": {
+          "expected": "save-progress"
+        }
+      }
+    ]
+  },
+  "error": null,
+  "rawResponses": "responses.jsonl"
+}
