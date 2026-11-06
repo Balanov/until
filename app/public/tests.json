@@ -1,14 +1,14 @@
 {
   "format": "until-test-report/v1",
-  "generatedAt": "2026-11-05T19:29:49.544Z",
+  "generatedAt": "2026-11-06T17:58:33.176Z",
   "environment": {
     "node": "v24.21.0",
     "platform": "win32",
     "arch": "x64"
   },
   "exitCode": 0,
-  "tests": 50,
-  "passed": 50,
+  "tests": 52,
+  "passed": 52,
   "failed": 0,
-  "durationMs": 641.2383
+  "durationMs": 774.6323
 }

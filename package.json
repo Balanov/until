@@ -1,7 +1,7 @@
 {
   "name": "until-product-loop",
   "version": "0.2.0",
-  "description": "Evidence-gated autonomous product operations. Local-first, model-neutral, MIT.",
+  "description": "Autonomous product work without manual team coordination: research, priorities, specs, implementation, independent acceptance and outcome-driven cycles. Local-first, model-neutral, MIT.",
   "type": "module",
   "private": false,
   "license": "MIT",

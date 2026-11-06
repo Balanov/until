@@ -6,7 +6,7 @@ UNTIL — открытый local-first control plane для непрерывны
 
 **Формула:** signal → hypothesis → contract → execution → independent proof → release candidate → observed outcome → next work.
 
-**Позиционирование:** не «первая виртуальная софтверная компания», а нейтральное открытое ядро доказуемой автономии поверх существующих research- и coding-инструментов.
+**Позиционирование:** автономный продуктовый фреймворк для владельца результата. Собственник, CEO или CPO задаёт метрику, бюджет и риск; система ведёт исследование, приоритет, ТЗ, реализацию, независимую приёмку и следующий цикл без ручной координации ролей. В техническом смысле это нейтральное открытое ядро доказуемой автономии поверх существующих research- и coding-инструментов, а не «первая виртуальная софтверная компания».
 
 ## Что именно доказывает версия 0.2
 
@@ -23,6 +23,7 @@ UNTIL — открытый local-first control plane для непрерывны
 9. Воспроизводимый proof bundle: исходные сигналы, конфигурация, события, проверки, артефакты, метрики, сырые замеры и команда повторения.
 10. Owner-locked acceptance: внешние критерии из `goal.policy.acceptance` включаются в контракт и не могут быть отброшены моделью. Live-контракт без таких критериев завершается fail-closed.
 11. Strict JSON Schemas для исследования, контракта, реализации и direct baseline; опциональный экспорт сырых ответов с SHA-256 и экономикой по ролям.
+12. Репозиторный цикл: внешний builder меняет `src/activation.js`, независимый verifier запускает настоящий Node-тест, а `goal.policy.releasePaths` упаковывает два явно разрешённых файла в локальный release candidate. До исправления тест возвращает `exit 1`, после — `exit 0` и `ACTIVATION_TEST_OK`; последующая правка рабочей копии не меняет candidate.
 
 ## Что версия 0.2 сознательно не доказывает
 
@@ -109,6 +110,14 @@ while not stopped and budget remains:
 Встроенный executor создаёт только декларативные artifact files внутри назначенного workspace. Внешний builder — заранее зарегистрированный argv-профиль без shell interpolation, например UNCUT, Shim, OpenHands или CI runner. Контракт передаётся через stdin; модель не формирует имя исполняемого файла или произвольную команду. Для небезопасных задач требуется отдельная sandbox и запрет наследования секретов.
 
 Acceptance checks реестровые: `file_exists`, `sha256`, `json_field`, `contains`, `command_profile`. Command profile заранее определяет argv, cwd, timeout, env и output limit. Зелёный exit code без проверки результата не является verdict.
+
+### Локальный release candidate из рабочего репозитория
+
+`goal.policy.releasePaths` — явный список от 1 до 200 обычных файлов общим размером до 20 МБ, которые разрешено упаковать после независимой приёмки. Ядро разрешает realpath, запрещает выход за workspace и включение `.git` или `.until`, рассчитывает SHA-256 для каждого файла и общего manifest, атомарно и идемпотентно записывает candidate в `.until/releases/<releaseId>/workspace/`.
+
+Release-stage повторно читает manifest перед публикацией: если рабочая копия изменилась между приёмкой и выпуском, публикация останавливается. После записи последующие изменения workspace не затрагивают candidate. Это **локальный проверенный артефакт**, а не Git commit, pull request или production deployment; эти действия принадлежат отдельному контуру с собственными правами.
+
+Сценарий `npm run proof` содержит `repository-cycle`: regression test сначала возвращает `exit 1`, deterministic external builder исправляет `src/activation.js`, затем независимый `command_profile` получает `exit 0` и `ACTIVATION_TEST_OK`. В цикле завершаются 6 ролевых задач, 6 acceptance checks и упаковываются `src/activation.js` и `scripts/verify.mjs`.
 
 ## RSI как эволюция стратегии
 

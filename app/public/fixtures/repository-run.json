@@ -1,0 +1,147 @@
+{
+  "format": "until-repository-proof/v1",
+  "mode": "deterministic_external_builder_and_real_node_test_not_llm_quality",
+  "title": "Observed product issue → code change → independent test → immutable repository candidate",
+  "beforeTest": {
+    "status": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n+ actual - expected\r\n\r\n  [\r\n    'account',\r\n+   'duplicate-entry',\r\n+   'duplicate-entry',\r\n    'profile'\r\n  ]\r\n\r\n    at file:///F:/RSI%20%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82-%D1%84%D1%80%D0%B5%D0%B9%D0%BC/proof-runs/latest/repository-cycle/scripts/verify.mjs:3:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: [ 'account', 'duplicate-entry', 'duplicate-entry', 'profile' ],\r\n  expected: [ 'account', 'profile' ],\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.21.0\r\n"
+  },
+  "afterTest": {
+    "status": 0,
+    "output": "ACTIVATION_TEST_OK"
+  },
+  "initial": {
+    "completed": 6,
+    "failed": 0,
+    "cycles": 2
+  },
+  "tasks": [
+    {
+      "id": "task_c4aa803f-1415-4074-ab2c-dc603cbade84",
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_1ee00a74-eb20-493d-a8cc-035095051258",
+      "role": "owner",
+      "kind": "product.contract",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_4d7cc022-5097-4063-8124-3677a72128c7",
+      "role": "builder",
+      "kind": "delivery.build",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_51f00f75-01f1-4a75-ba71-d40d2d7fa67d",
+      "role": "verifier",
+      "kind": "quality.verify",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_a08a07ec-0bdd-4c75-b0d2-242c56a5f301",
+      "role": "release",
+      "kind": "release.prepare",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_ba685ff8-4245-4b3a-833d-3bb5eb1a2a19",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "state": "done",
+      "attempts": 1
+    }
+  ],
+  "verdict": {
+    "id": "verdict_1b517533-16d0-49c3-882d-152a367cd954",
+    "artifact_id": "art_fdb59391-8459-4287-b57a-82f02f48c007",
+    "task_id": "task_51f00f75-01f1-4a75-ba71-d40d2d7fa67d",
+    "passed": 1,
+    "checks": [
+      {
+        "evidence": {
+          "file": "activation.js"
+        },
+        "passed": true,
+        "type": "file_exists"
+      },
+      {
+        "evidence": {
+          "actual": true,
+          "expected": true
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "expectedSubstring": "ACTIVATION_TEST_OK"
+        },
+        "passed": true,
+        "type": "command_profile"
+      },
+      {
+        "evidence": {
+          "file": "art_fdb59391-8459-4287-b57a-82f02f48c007.json"
+        },
+        "passed": true,
+        "type": "file_exists"
+      },
+      {
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "goal_proof",
+          "expected": "goal_proof"
+        },
+        "passed": true,
+        "type": "json_field"
+      }
+    ],
+    "created_at": "2026-11-06T17:58:34.937Z"
+  },
+  "release": {
+    "id": "rel_cd93b96c-7c2f-4af6-8960-fff2ce4d8e5b",
+    "artifact_id": "art_fdb59391-8459-4287-b57a-82f02f48c007",
+    "goal_id": "goal_proof",
+    "status": "published_candidate",
+    "receipt": {
+      "artifactId": "art_fdb59391-8459-4287-b57a-82f02f48c007",
+      "candidate": true,
+      "hash": "8d7b5e888d73a334e02c22b09e4fd6c15f8494ce5266919f0e48369ee8ce3b9f",
+      "path": ".until\\releases\\rel_cd93b96c-7c2f-4af6-8960-fff2ce4d8e5b.json",
+      "provider": "until.local",
+      "releaseId": "rel_cd93b96c-7c2f-4af6-8960-fff2ce4d8e5b",
+      "workspace": {
+        "bytes": 264,
+        "files": 2,
+        "hash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19",
+        "manifestPath": ".until/releases/rel_cd93b96c-7c2f-4af6-8960-fff2ce4d8e5b/workspace/manifest.json",
+        "path": ".until/releases/rel_cd93b96c-7c2f-4af6-8960-fff2ce4d8e5b/workspace"
+      }
+    },
+    "idempotency_key": "3b9609dcd4d4db2b7e3f4b6aab57a89dcb9ea3daef72bbf373c18949525f86cb",
+    "created_at": "2026-11-06T17:58:34.941Z"
+  },
+  "initialSource": "export function activationSteps() {\n  return [\"account\", \"duplicate-entry\", \"duplicate-entry\", \"profile\"];\n}\n",
+  "acceptedSource": "export function activationSteps() {\n  return [\"account\", \"profile\"];\n}\n",
+  "candidateSource": "export function activationSteps() {\n  return [\"account\", \"profile\"];\n}\n",
+  "audit": {
+    "valid": true,
+    "count": 36,
+    "head": "a20d1010bf56b6da7c9d9f1205bdea3c1926d55a4d71b3d533dba78ce2275516"
+  }
+}

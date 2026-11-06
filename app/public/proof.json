@@ -1,15 +1,15 @@
 {
   "format": "until-proof/v1",
   "version": "0.2.0",
-  "generatedAt": "2026-11-05T19:29:50.882Z",
+  "generatedAt": "2026-11-06T17:58:35.218Z",
   "environment": {
     "node": "v24.21.0",
     "platform": "win32",
     "arch": "x64"
   },
   "mode": "deterministic fixtures and adversarial kernel checks; no LLM quality or business ROI claim",
-  "passed": 10,
-  "total": 10,
+  "passed": 14,
+  "total": 14,
   "checks": [
     {
       "name": "real cycle completes six role-separated tasks",
@@ -23,16 +23,16 @@
       "name": "builder output receives an independent passing verdict",
       "passed": true,
       "evidence": {
-        "artifactId": "art_e48b68e8-0427-4db8-aa2a-62e404dbf5c6",
+        "artifactId": "art_51514427-df38-4225-aff6-5c3875c51de5",
         "verdict": {
-          "id": "verdict_176f7c41-59be-4a14-b5a1-4eb4a9ceabc0",
-          "artifact_id": "art_e48b68e8-0427-4db8-aa2a-62e404dbf5c6",
-          "task_id": "task_43baf710-f5a2-430b-9c7c-dc138ffd30fa",
+          "id": "verdict_562d42c0-c359-4886-96fc-ac13e03d38a1",
+          "artifact_id": "art_51514427-df38-4225-aff6-5c3875c51de5",
+          "task_id": "task_bccb9376-8ba5-4535-8fea-8cfa11bb0a3e",
           "passed": 1,
           "checks": [
             {
               "evidence": {
-                "file": "art_e48b68e8-0427-4db8-aa2a-62e404dbf5c6.json"
+                "file": "art_51514427-df38-4225-aff6-5c3875c51de5.json"
               },
               "passed": true,
               "type": "file_exists"
@@ -54,7 +54,7 @@
               "type": "json_field"
             }
           ],
-          "created_at": "2026-11-05T19:29:50.666Z"
+          "created_at": "2026-11-06T17:58:34.533Z"
         }
       }
     },
@@ -62,14 +62,15 @@
       "name": "release candidate is published locally with a receipt",
       "passed": true,
       "evidence": {
-        "releaseId": "rel_8a045a90-8d5b-4c2b-8695-f5142f4f6085",
+        "releaseId": "rel_9d8d13bf-14af-4ed2-9de8-0d983e48971c",
         "receipt": {
-          "artifactId": "art_e48b68e8-0427-4db8-aa2a-62e404dbf5c6",
+          "artifactId": "art_51514427-df38-4225-aff6-5c3875c51de5",
           "candidate": true,
-          "hash": "623bfef2840e7a90bc2a78e8243918f3c0cbd0a44fed639038125d85e1d21d70",
-          "path": ".until\\releases\\rel_8a045a90-8d5b-4c2b-8695-f5142f4f6085.json",
+          "hash": "abf68cde5da746f698f642ba68d5cb5d36043f1fc2d29b2846c8a2836daed048",
+          "path": ".until\\releases\\rel_9d8d13bf-14af-4ed2-9de8-0d983e48971c.json",
           "provider": "until.local",
-          "releaseId": "rel_8a045a90-8d5b-4c2b-8695-f5142f4f6085"
+          "releaseId": "rel_9d8d13bf-14af-4ed2-9de8-0d983e48971c",
+          "workspace": null
         }
       }
     },
@@ -90,8 +91,8 @@
             "autonomy": "sandbox",
             "maxAttempts": 3
           },
-          "created_at": "2026-11-05T19:29:50.633Z",
-          "updated_at": "2026-11-05T19:29:50.702Z"
+          "created_at": "2026-11-06T17:58:34.497Z",
+          "updated_at": "2026-11-06T17:58:34.564Z"
         }
       }
     },
@@ -101,7 +102,7 @@
       "evidence": {
         "valid": true,
         "count": 42,
-        "head": "97737244d8a883b0c9eb6151e61870477a62bdeec2d789b2d133b7e38e42ffec"
+        "head": "6d31eff220819127ac726ce0f14e29f295778420946f27e7b8b1884f0ad4bff4"
       }
     },
     {
@@ -121,12 +122,107 @@
             "autonomy": "sandbox",
             "maxAttempts": 3
           },
-          "created_at": "2026-11-05T19:29:50.749Z",
-          "updated_at": "2026-11-05T19:29:50.759Z"
+          "created_at": "2026-11-06T17:58:34.620Z",
+          "updated_at": "2026-11-06T17:58:34.630Z"
         },
         "taskKinds": [
           "research.synthesize"
         ]
+      }
+    },
+    {
+      "name": "repository regression fails before the change and passes after it",
+      "passed": true,
+      "evidence": {
+        "before": {
+          "status": 1,
+          "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n+ actual - expected\r\n\r\n  [\r\n    'account',\r\n+   'duplicate-entry',\r\n+   'duplicate-entry',\r\n    'profile'\r\n  ]\r\n\r\n    at file:///F:/RSI%20%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82-%D1%84%D1%80%D0%B5%D0%B9%D0%BC/proof-runs/latest/repository-cycle/scripts/verify.mjs:3:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: [ 'account', 'duplicate-entry', 'duplicate-entry', 'profile' ],\r\n  expected: [ 'account', 'profile' ],\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.21.0\r\n"
+        },
+        "after": {
+          "status": 0,
+          "output": "ACTIVATION_TEST_OK"
+        }
+      }
+    },
+    {
+      "name": "repository change completes the same six-role product cycle",
+      "passed": true,
+      "evidence": {
+        "completed": 6,
+        "failed": 0
+      }
+    },
+    {
+      "name": "independent verifier runs the real repository test",
+      "passed": true,
+      "evidence": {
+        "id": "verdict_1b517533-16d0-49c3-882d-152a367cd954",
+        "artifact_id": "art_fdb59391-8459-4287-b57a-82f02f48c007",
+        "task_id": "task_51f00f75-01f1-4a75-ba71-d40d2d7fa67d",
+        "passed": 1,
+        "checks": [
+          {
+            "evidence": {
+              "file": "activation.js"
+            },
+            "passed": true,
+            "type": "file_exists"
+          },
+          {
+            "evidence": {
+              "actual": true,
+              "expected": true
+            },
+            "passed": true,
+            "type": "json_field"
+          },
+          {
+            "evidence": {
+              "expectedSubstring": "ACTIVATION_TEST_OK"
+            },
+            "passed": true,
+            "type": "command_profile"
+          },
+          {
+            "evidence": {
+              "file": "art_fdb59391-8459-4287-b57a-82f02f48c007.json"
+            },
+            "passed": true,
+            "type": "file_exists"
+          },
+          {
+            "evidence": {
+              "actual": "implemented",
+              "expected": "implemented"
+            },
+            "passed": true,
+            "type": "json_field"
+          },
+          {
+            "evidence": {
+              "actual": "goal_proof",
+              "expected": "goal_proof"
+            },
+            "passed": true,
+            "type": "json_field"
+          }
+        ],
+        "created_at": "2026-11-06T17:58:34.937Z"
+      }
+    },
+    {
+      "name": "release candidate packages actual code and remains immutable",
+      "passed": true,
+      "evidence": {
+        "releaseId": "rel_cd93b96c-7c2f-4af6-8960-fff2ce4d8e5b",
+        "workspace": {
+          "bytes": 264,
+          "files": 2,
+          "hash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19",
+          "manifestPath": ".until/releases/rel_cd93b96c-7c2f-4af6-8960-fff2ce4d8e5b/workspace/manifest.json",
+          "path": ".until/releases/rel_cd93b96c-7c2f-4af6-8960-fff2ce4d8e5b/workspace"
+        },
+        "candidateHash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19"
       }
     },
     {
@@ -175,6 +271,10 @@
   "metrics": {
     "realCycleTasks": 6,
     "syntheticTasks": 1,
+    "repositoryCycleTasks": 6,
+    "repositoryFilesReleased": 2,
+    "repositoryRegressionBefore": 1,
+    "repositoryRegressionAfter": 0,
     "realEventCount": 42,
     "heldoutBaselineCorrect": "0/3",
     "heldoutCandidateCorrect": "3/3"

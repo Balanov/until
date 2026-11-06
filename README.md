@@ -10,11 +10,22 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js 24+](https://img.shields.io/badge/Node.js-24%2B-blue.svg)](package.json)
 
-UNTIL is an open control plane for continuous product cycles. It connects real customer or product signals to research, bounded contracts, execution, independent verification, release candidates and observed outcomes. A finished LLM answer is never accepted as proof of a finished product cycle.
+UNTIL is an open autonomous product framework for owners, CEOs and CPOs who want product work to move without manually coordinating every role. You set the business outcome, metric, budget and risk limits. UNTIL turns real customer or product signals into research, the next priority, a bounded specification, implementation, independent acceptance, a verified local release candidate and the next outcome-driven cycle.
 
-**Signal → hypothesis → contract → execution → independent proof → release candidate → observed outcome → next work.**
+**Owner’s goal → research → priority & spec → implementation → independent test → release candidate → observed outcome → next work.**
 
-> **Engineering MVP 0.2.** It proves the control-plane mechanisms and a measured improvement on bounded JSON deliverables, not universal team replacement, arbitrary LLM quality, production safety or business ROI. Start with low-risk, authoritatively verifiable digital-product tasks.
+A finished LLM answer is never accepted as proof of finished product work. The builder cannot accept its own work, and the system cannot rewrite the owner’s goal, grant itself rights or invent missing evidence.
+
+> **Engineering MVP 0.2.** The published proof now includes an actual repository change with a failing-before/passing-after Node test and an immutable two-file release candidate. It proves the control plane and a measured improvement on bounded JSON deliverables—not universal team replacement, arbitrary LLM quality, production deployment or business ROI. Start with low-risk, authoritatively verifiable digital-product tasks.
+
+## What moves without manual coordination
+
+- **Research:** observed incidents, interviews and product signals stay linked to the opportunity they support.
+- **Priority and specification:** an open outcome creates the next bounded contract with owner-locked acceptance checks.
+- **Implementation:** a deterministic executor or separately sandboxed coding agent receives the contract; nobody needs to chase a status meeting.
+- **Independent acceptance:** another role executes authoritative checks, including a real repository test.
+- **Delivery:** accepted files become a content-hashed local release candidate, not an unexamined production deployment.
+- **Follow-through:** a post-release observation closes the outcome or creates the next cycle.
 
 ## Why another agent framework?
 
@@ -145,9 +156,10 @@ See [SECURITY.md](SECURITY.md).
 
 ## What the current proof says
 
-- **50 / 50** unit, integration and published-evidence integrity tests pass.
-- **10 / 10** independent deterministic proof checks pass.
+- **52 / 52** unit, integration and published-evidence integrity tests pass.
+- **14 / 14** independent deterministic proof checks pass.
 - One real-signal fixture cycle completes **6** role-separated tasks and a later outcome observation.
+- A separate repository cycle completes **6/6** role-separated tasks and **6/6** acceptance checks. Its real Node regression test moves from **exit 1** before the fix to **exit 0 / ACTIVATION_TEST_OK** after it. Two accepted files are preserved in an immutable local release candidate; later workspace edits do not alter them. [Raw repository cycle](app/public/fixtures/repository-run.json).
 - Late completion after stop is rejected; expired leases recover; duplicate actions are deduplicated.
 - The evolver example moves from **0/3 to 3/3 correct held-out fixture rankings**, with no synthetic selection. This is a fixture mechanism check, not real-world improvement.
 

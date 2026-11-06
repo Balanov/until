@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — 2026-11-06
+
+Product-work repositioning and a repository-level proof.
+
+- The site and README now lead with the owner’s outcome and six product-work stages: research, priority/spec, implementation, independent acceptance, release candidate and outcome observation.
+- `goal.policy.releasePaths` packages explicitly allowed workspace files into a local release candidate with a SHA-256 manifest, path-containment checks, size limits and idempotent writes.
+- A recorded repository cycle changes `src/activation.js`, moves the real Node regression test from `exit 1` to `exit 0` / `ACTIVATION_TEST_OK`, completes 6 role-separated tasks and 6 independent acceptance checks, and preserves two immutable candidate files after later workspace edits.
+- The deterministic proof now contains **14/14 checks**; the complete suite contains **52/52 passing tests**.
+- The expanded raw ZIP includes the repository cycle, deterministic proof and test report alongside all 48 real local-model trials.
+- Production deployment remains a separate boundary. The new repository proof is deterministic control-plane evidence, not an LLM-quality or business-ROI benchmark.
+
 ## 0.2.0 — 2026-11-05
 
 Measured hardening and a proof-first executive/engineering site.
