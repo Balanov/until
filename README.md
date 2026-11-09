@@ -1,14 +1,26 @@
 <div align="center">
-  <img src="app/public/logo.svg" alt="UNTIL logo" width="112">
-  <h1>UNTIL</h1>
+  <img src="docs/readme/hero.png" alt="UNTIL — the owner’s goal drives a loop through research, implementation, independent acceptance and observed outcome. Done means proven." width="100%">
   <p><strong>Done means proven.</strong></p>
-  <p>Evidence-gated autonomous product operations.<br>Local-first. Model-neutral. MIT.</p>
-  <p><a href="https://balanov.pro/until/">Manifesto and interactive proof</a> · <a href="README_RU.md">Русское введение</a></p>
+  <p>Evidence-gated autonomous product operations. Local-first. Model-neutral. MIT.</p>
+  <p>
+    <a href="#quick-start">Quick start</a> ·
+    <a href="#what-the-current-proof-says">Proof</a> ·
+    <a href="docs/architecture.md">Architecture</a> ·
+    <a href="BENCHMARKS.md">Benchmarks</a> ·
+    <a href="https://balanov.pro/until/">Interactive proof</a> ·
+    <a href="README_RU.md">Русский</a>
+  </p>
+  <p>
+    <a href="https://github.com/Balanov/until/actions/workflows/ci.yml"><img src="https://github.com/Balanov/until/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT license"></a>
+    <a href="package.json"><img src="https://img.shields.io/badge/Node.js-24%2B-blue.svg" alt="Node.js 24+"></a>
+  </p>
 </div>
 
-[![CI](https://github.com/Balanov/until/actions/workflows/ci.yml/badge.svg)](https://github.com/Balanov/until/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Node.js 24+](https://img.shields.io/badge/Node.js-24%2B-blue.svg)](package.json)
+<div align="center">
+  <img src="docs/readme/demo.gif" alt="Published UNTIL proof: six role-separated tasks, repository regression from exit 1 to ACTIVATION_TEST_OK, independent checks and immutable release files" width="100%">
+  <p><sub>Published deterministic proof from <a href="app/public/proof.json">app/public/proof.json</a> · 14 / 14 checks. Bounded fixtures, not a business-ROI claim.</sub></p>
+</div>
 
 UNTIL is an open autonomous product framework for owners, CEOs and CPOs who want product work to move without manually coordinating every role. You set the business outcome, metric, budget and risk limits. UNTIL turns real customer or product signals into research, the next priority, a bounded specification, implementation, independent acceptance, a verified local release candidate and the next outcome-driven cycle.
 
@@ -17,6 +29,11 @@ UNTIL is an open autonomous product framework for owners, CEOs and CPOs who want
 A finished LLM answer is never accepted as proof of finished product work. The builder cannot accept its own work, and the system cannot rewrite the owner’s goal, grant itself rights or invent missing evidence.
 
 > **Engineering MVP 0.2.** The published proof now includes an actual repository change with a failing-before/passing-after Node test and an immutable two-file release candidate. It proves the control plane and a measured improvement on bounded JSON deliverables—not universal team replacement, arbitrary LLM quality, production deployment or business ROI. Start with low-risk, authoritatively verifiable digital-product tasks.
+
+<div align="center">
+  <img src="docs/readme/proof.png" alt="UNTIL repository proof: the regression changes from exit 1 to exit 0 and ACTIVATION_TEST_OK, followed by an immutable two-file release candidate" width="100%">
+  <p><sub>One real repository change, independent acceptance and a hash-locked local candidate. <a href="app/public/fixtures/repository-run.json">Raw repository cycle</a> · <a href="app/public/proof.json">Proof artifact</a>.</sub></p>
+</div>
 
 ## What moves without manual coordination
 

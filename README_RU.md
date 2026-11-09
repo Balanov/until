@@ -1,4 +1,9 @@
-# UNTIL — Продуктовая работа без ручного управления командой
+<div align="center">
+  <img src="docs/readme/hero.png" alt="UNTIL — цель владельца проходит цикл исследования, реализации, независимой приёмки и наблюдаемого результата" width="100%">
+  <p><strong>Готово означает доказано.</strong></p>
+  <p>Доказательная автономная продуктовая работа. Local-first. Model-neutral. MIT.</p>
+  <p><a href="README.md">English</a> · <a href="#быстрый-старт">Быстрый старт</a> · <a href="#проверяемые-результаты">Proof</a> · <a href="docs/architecture.md">Архитектура</a> · <a href="https://balanov.pro/until/">Интерактивное доказательство</a></p>
+</div>
 
 **Открытый автономный продуктовый фреймворк для собственника, CEO и CPO.** Вы задаёте бизнес-результат, метрику, бюджет и допустимый риск. UNTIL исследует реальные сигналы, выбирает следующий приоритет, формирует ТЗ, организует реализацию и независимую приёмку, упаковывает проверенный release candidate и по наблюдаемому результату запускает следующий цикл.
 
@@ -7,6 +12,16 @@
 [Рабочее доказательство и интерактивный разбор](https://balanov.pro/until/) · [English README](README.md) · [Архитектура](docs/architecture.md) · [Анализ рынка](docs/market-research.md)
 
 > **Engineering MVP 0.2.** Опубликованный прогон включает реальное изменение кода: Node-тест падает до исправления и проходит после, а два принятых файла сохраняются в неизменяемом release candidate. Это доказательство механики control plane, а не универсальная замена команды, качество любой LLM, production-деплой или ROI. Начинайте с низкорисковых цифровых задач с авторитетной проверкой результата.
+
+<div align="center">
+  <img src="docs/readme/demo.gif" alt="Опубликованный proof UNTIL: шесть ролевых задач, переход теста от exit 1 к ACTIVATION_TEST_OK и неизменяемый release candidate" width="100%">
+  <p><sub>Детерминированный proof из <a href="app/public/proof.json">app/public/proof.json</a> · 14 / 14 проверок. Проверка механики, не бизнес-результата.</sub></p>
+</div>
+
+<div align="center">
+  <img src="docs/readme/proof.png" alt="Репозиторный proof UNTIL: exit 1 до изменения и ACTIVATION_TEST_OK после, два неизменяемых файла release candidate" width="100%">
+  <p><sub>Реальное изменение, независимая приёмка и локальный candidate с фиксированным hash. <a href="app/public/fixtures/repository-run.json">Сырой цикл репозитория</a>.</sub></p>
+</div>
 
 ## Что движется без ручной координации
 
