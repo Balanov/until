@@ -45,3 +45,54 @@ jobs:
       - run: npm ci --prefix app --ignore-scripts
       - run: npm run site:build
       - run: npm run validate:site
+
+  # The product is sold on "the proof is real". These checks are part of that proof:
+  # a green badge that a CTO can click has to mean something.
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Audit runtime dependencies
+        run: npm audit --audit-level=high --omit=dev
+      - name: Audit site dependencies
+        run: npm audit --audit-level=high --omit=dev --prefix app
+      - name: Verify the event hash chain and the published proof
+        run: |
+          node scripts/test-report.mjs
+          npm run proof
+      - name: Publish a software bill of materials
+        run: npm sbom --sbom-format cyclonedx > until-sbom.cdx.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: until-sbom
+          path: until-sbom.cdx.json
+
+  sast:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          queries: security-and-quality
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"
+
+  dependency-review:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate

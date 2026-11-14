@@ -112,6 +112,35 @@ test("a model success claim without evidence does not bypass the gate", async (t
   assert.equal(result.failed, 0);
 });
 
+test("a rejected model answer is shown back to the model on the next attempt", async (t) => {
+  const requests = [];
+  const answers = [
+    // The first answer carries a property the contract schema does not allow.
+    { title: "Bounded repair", summary: "Keep binary files byte-identical on rollback", risk: "low", checks: [{ type: "file_exists" }], tasks: [] },
+    // The second answer is the same contract without the extra property.
+    { title: "Bounded repair", summary: "Keep binary files byte-identical on rollback", risk: "low", checks: [{ type: "file_exists" }] },
+  ];
+  const fetchImpl = async (_url, options) => {
+    requests.push(JSON.parse(options.body));
+    const content = JSON.stringify(answers[Math.min(requests.length - 1, answers.length - 1)]);
+    return new Response(JSON.stringify({ choices: [{ message: { content }, finish_reason: "stop" }] }));
+  };
+  const { store, kernel } = await runtime(t, {
+    models: { owner: { type: "openai-compatible", baseURL: "http://model.test/v1", model: "owner-under-test" } },
+    fetchImpl,
+  });
+  goal(store, {
+    policy: { acceptance: [{ type: "file_exists" }], maxRisk: "high", autonomy: "sandbox" },
+  });
+  signal(store);
+  await kernel.run({ maxCycles: 2, maxTasks: 20 });
+  assert.ok(requests.length >= 2, `the model was asked only ${requests.length} time(s)`);
+  const second = JSON.parse(requests[1].messages[1].content);
+  assert.ok(second.feedback, "the second attempt did not carry feedback");
+  assert.match(second.feedback.previousAttemptError, /not an allowed property/);
+  assert.match(second.feedback.instruction, /rejected/i);
+});
+
 test("an external executor cannot run without explicit sandbox confirmation", async (t) => {
   const { store, kernel } = await runtime(t, {
     builder: { command: nodeBinary, args: ["-e", "process.stdin.resume()"] },

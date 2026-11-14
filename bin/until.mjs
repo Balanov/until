@@ -8,6 +8,9 @@ import { Agents } from "../src/agents.js";
 import { ModelRouter } from "../src/model.js";
 import { Evolver, EVIDENCE_FOCUSED_GENOME } from "../src/evolve.js";
 import { exportProof } from "../src/export.js";
+import { doctor } from "../src/doctor.js";
+import { importSignals } from "../src/import.js";
+import { buildGoalTemplate, detectProject } from "../src/onboard.js";
 import { atomicWrite, resolveInside } from "../src/util.js";
 
 const VERSION = "0.3.0";
@@ -19,14 +22,18 @@ Usage: until <command> [options]
 
 Commands:
   init --goal FILE          Create a durable product goal
+  init --from-repo DIR      Detect how a repository proves itself and write a ready goal + check profile
   signal add FILE          Add a typed, sourced signal
   signal list              List signals
+  import --file FILE       Import evidence from a CSV, JSON or JSONL export
   run [--cycles N]         Work through open deficits (default: 8 cycles)
   start                    Keep observing and working until stop
   stop                     Advance epoch and reject late work
   reset                    Clear the stop latch; never reuse an epoch
   status                   Show goals, queue, model usage and audit state
   tasks                    Show task states and attempts
+  doctor [--online]       Check the installation, the queue and the evidence ledger
+  replay TASK_ID           Return a dead or canceled task to the queue
   audit                    Verify the event hash chain
   export --output FILE     Export tasks, verdicts, receipts and model traces
   evolve                   Evaluate a strategy on selection and held-out fixtures
@@ -38,12 +45,31 @@ Common options:
   --state FILE             SQLite state (default: .until/state.db)
   --config FILE            Model/executor JSON (default: until.config.json if present)
 
+Import options:
+  --goal ID                Goal that receives the imported evidence (required)
+  --kind KIND              Signal kind for every record (interview|metric|incident|payment|observed|support|reported|inferred|synthetic)
+  --source TEXT            Source recorded when the file has no source column
+  --consent                Operator assertion that the records carry participant consent
+  --format auto|csv|json|jsonl
+  --dry-run                Parse and report without writing
+
 Signal input:
   {"goalId":"...","kind":"interview|metric|incident|payment|observed|support|reported|inferred|synthetic",
    "source":"...","content":"...","consent":true,"value":0.0,"unit":"...","observedAt":"ISO time"}
 
 Model configuration and external execution are opt-in. The default run is an explicitly marked deterministic fixture.
 `;
+
+// Flags that never take a value. Anything else consumes the next argument.
+const BOOLEAN_FLAGS = new Set([
+  "watch",
+  "json",
+  "help",
+  "consent",
+  "dry-run",
+  "online",
+  "reset-attempts",
+]);
 
 function parseArgs(argv) {
   const positional = [];
@@ -53,7 +79,7 @@ function parseArgs(argv) {
     if (!item.startsWith("--")) { positional.push(item); continue; }
     const equal = item.indexOf("=");
     if (equal > 0) flags[item.slice(2, equal)] = item.slice(equal + 1);
-    else if (["watch", "json", "help"].includes(item)) flags[item.slice(2)] = true;
+    else if (BOOLEAN_FLAGS.has(item.slice(2))) flags[item.slice(2)] = true;
     else flags[item.slice(2)] = argv[++index];
   }
   return { positional, flags };
@@ -182,11 +208,85 @@ async function main() {
   if (command === "demo") { await demo(flags); return; }
 
   if (command === "init") {
+    const { workspace } = makeOptions(flags);
+    if (flags["from-repo"]) {
+      const repo = path.resolve(String(flags["from-repo"]));
+      const project = await detectProject(repo);
+      if (!project.testCommand) {
+        throw new Error(`No test command detected in ${repo}. Author goal.policy.acceptance by hand and use --goal FILE.`);
+      }
+      const template = buildGoalTemplate(project, {
+        id: flags.id ?? null,
+        title: flags.title ?? null,
+        outcome: flags.outcome ?? null,
+        maxAttempts: Number(flags.attempts ?? 3),
+      });
+      const goalFile = path.resolve(workspace, flags.out ?? "until.goal.json");
+      const checksFile = path.resolve(workspace, flags["checks-out"] ?? "until.checks.json");
+      await atomicWrite(goalFile, `${JSON.stringify(template.goal, null, 2)}\n`, { fsync: true });
+      await atomicWrite(checksFile, `${JSON.stringify(template.config, null, 2)}\n`, { fsync: true });
+      print({
+        detected: project,
+        goalFile,
+        checksFile,
+        notes: template.notes,
+        next: [
+          `merge ${path.basename(checksFile)} into until.config.json under "checks"`,
+          `until init --goal ${path.basename(goalFile)}`,
+          "add goal.policy.releasePaths for the files a release candidate may contain",
+          "add goal.policy.build.allowedPaths to restrict which files the builder may change",
+        ],
+      }, flags);
+      return;
+    }
     const runtime = await makeRuntime(flags, { deterministicOnly: true });
     try {
       const input = await loadGoal(flags.goal ?? positional[0] ?? "");
       const existing = runtime.store.getGoal(input.id);
       print({ goal: existing ?? runtime.store.addGoal(input), state: runtime.state }, flags);
+    } finally { runtime.store.close(); }
+    return;
+  }
+
+  if (command === "import") {
+    const runtime = await makeRuntime(flags, { deterministicOnly: true });
+    try {
+      const summary = await importSignals(runtime.store, {
+        file: flags.file ?? positional[0] ?? "",
+        format: flags.format ?? "auto",
+        kind: flags.kind ?? null,
+        source: flags.source ?? null,
+        goalId: flags.goal ?? null,
+        consent: flags.consent === true || flags.consent === "true",
+        dryRun: flags["dry-run"] === true || flags["dry-run"] === "true",
+      });
+      print(summary, flags);
+    } finally { runtime.store.close(); }
+    return;
+  }
+
+  if (command === "doctor") {
+    const runtime = await makeRuntime(flags);
+    try {
+      const report = await doctor(runtime.store, {
+        workspace: runtime.workspace,
+        config: runtime.config,
+        online: flags.online === true || flags.online === "true",
+      });
+      print(report, flags);
+    } finally { runtime.store.close(); }
+    return;
+  }
+
+  if (command === "replay") {
+    const runtime = await makeRuntime(flags, { deterministicOnly: true });
+    try {
+      const taskId = flags.task ?? positional[0] ?? "";
+      if (!taskId) throw new Error("Usage: until replay TASK_ID");
+      const task = runtime.store.requeueDeadTask(taskId, {
+        resetAttempts: flags["reset-attempts"] === true || flags["reset-attempts"] === "true",
+      });
+      print({ replayed: task }, flags);
     } finally { runtime.store.close(); }
     return;
   }

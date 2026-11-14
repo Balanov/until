@@ -90,8 +90,35 @@ export function assertCheck(check) {
   }
   if (check.type === "contains") assertText(check.text, "check.text", { max: 10_000 });
   if (check.type === "sha256") assertText(check.hash, "check.hash", { min: 64, max: 64 });
-  if (check.type === "command_profile") assertText(check.profile, "check.profile", { max: 100 });
+  if (check.type === "command_profile") {
+    assertText(check.profile, "check.profile", { max: 100 });
+    assertExpectation(check.expect);
+  }
   return check;
+}
+
+export function assertExpectation(expect) {
+  if (!expect || typeof expect !== "object" || Array.isArray(expect)) {
+    throw new Error("Command check requires an expectation object");
+  }
+  const known = ["contains", "jsonField", "exitCode"].filter((key) => expect[key] !== undefined);
+  if (!known.length) throw new Error("Command expectation must use contains, jsonField or exitCode");
+  for (const key of Object.keys(expect)) {
+    if (!["contains", "jsonField", "exitCode"].includes(key)) throw new Error(`Unknown command expectation: ${key}`);
+  }
+  if (expect.contains !== undefined) assertText(expect.contains, "expect.contains", { max: 10_000 });
+  if (expect.exitCode !== undefined && !Number.isInteger(expect.exitCode)) {
+    throw new Error("expect.exitCode must be an integer");
+  }
+  if (expect.jsonField !== undefined) {
+    assertObject(expect.jsonField, "expect.jsonField");
+    assertText(expect.jsonField.field, "expect.jsonField.field", { max: 200 });
+    if (expect.jsonField.field.split(".").some((key) => ["__proto__", "prototype", "constructor"].includes(key))) {
+      throw new Error("expect.jsonField contains an unsafe path");
+    }
+    if (!("equals" in expect.jsonField)) throw new Error("expect.jsonField requires equals");
+  }
+  return expect;
 }
 
 export function assertOutboxAction(action) {

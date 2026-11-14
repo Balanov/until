@@ -430,6 +430,19 @@ export class Store {
     return ready;
   }
 
+  /**
+   * How long until the next queued task becomes runnable, in milliseconds.
+   *
+   * A retried task is scheduled a moment into the future. A worker that stops
+   * as soon as nothing is ready right now silently drops that retry, so the
+   * worker asks how long it has to wait instead.
+   */
+  nextScheduledDelay() {
+    const row = this.db.prepare("SELECT MIN(available_at) AS at FROM tasks WHERE state = 'queued'").get();
+    if (!row || row.at == null) return null;
+    return Math.max(0, row.at - Date.now());
+  }
+
   leaseNext(workerId, leaseMs = 30_000) {
     if (!Number.isFinite(leaseMs) || leaseMs < 100 || leaseMs > 3_600_000) throw new Error("Invalid lease duration");
     return this.transaction(() => {
@@ -508,6 +521,36 @@ export class Store {
         this.recordEvent("task.lease_expired", "kernel", { taskId: item.id, state });
       }
       return { expired: expired.length, recovered, canceled, dead };
+    });
+  }
+
+  /**
+   * Returns a dead or canceled task to the queue so an operator can replay it
+   * explicitly. The idempotency key is preserved, so a replayed task still cannot
+   * produce a second logical action.
+   */
+  requeueDeadTask(id, { resetAttempts = false } = {}) {
+    return this.transaction(() => {
+      const current = this.getTask(id);
+      if (!current) throw new Error(`Task not found: ${id}`);
+      if (!["dead", "canceled"].includes(current.state)) {
+        throw new Error(`Only dead or canceled tasks can be replayed: ${current.state}`);
+      }
+      const attempts = resetAttempts ? 0 : current.attempts;
+      const maxAttempts = resetAttempts
+        ? current.max_attempts
+        : Math.max(current.max_attempts, current.attempts + 1);
+      this.db.prepare(
+        "UPDATE tasks SET state = 'queued', attempts = ?, max_attempts = ?, lease_token = NULL, lease_until = NULL, last_error = NULL, available_at = ?, updated_at = ? WHERE id = ?",
+      ).run(attempts, maxAttempts, Date.now(), this.now(), id);
+      this.recordEvent("task.replayed", "operator", {
+        taskId: id,
+        previousState: current.state,
+        kind: current.kind,
+        attempts,
+        maxAttempts,
+      });
+      return this.getTask(id);
     });
   }
 

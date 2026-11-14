@@ -1,4 +1,5 @@
 import { performance } from "node:perf_hooks";
+import { assertValidSchema } from "./schema-validate.js";
 import { sha256 } from "./util.js";
 
 const DEFAULT_TIMEOUT_MS = 120_000;
@@ -176,6 +177,10 @@ export class ModelRouter {
       });
       if (this.traceResponses) this.store.addModelResponse({ callId, taskId, content: result.content });
     }
-    return { ...result, parsed: parseModelJson(result.content) };
+    const parsed = parseModelJson(result.content);
+    // A provider may ignore `response_format` entirely. The contract is validated
+    // locally so an out-of-schema answer can never reach an agent.
+    if (schema) assertValidSchema(parsed, schema, `Model response for ${kind}`);
+    return { ...result, parsed };
   }
 }

@@ -11,7 +11,7 @@ export class Director {
   ensureWork() {
     const created = [];
     for (const goal of this.store.listGoals()) {
-      if (["achieved", "closed"].includes(goal.status)) continue;
+      if (["achieved", "closed", "blocked_rework"].includes(goal.status)) continue;
       const tasks = this.store.listTasks({ goalId: goal.id });
       const active = tasks.some((task) => ["queued", "leased"].includes(task.state));
       if (active) continue;
@@ -52,12 +52,22 @@ export class Director {
         || retryableFailure;
       if (needsResearch) {
         const generation = Math.max(0, ...opportunities.map((item) => item.generation)) + 1;
+        // Rework must be bounded. Without this a goal that can never satisfy its
+        // acceptance checks burns the whole task budget in a silent retry loop.
+        const maxRevisions = Number.isInteger(goal.policy?.maxRevisions) ? goal.policy.maxRevisions : 3;
+        if (generation > maxRevisions) {
+          this.store.updateGoal(goal.id, { status: "blocked_rework" });
+          this.store.recordEvent("goal.blocked_rework", "director", { goalId: goal.id, generation, maxRevisions });
+          continue;
+        }
         const result = this.store.enqueue({
           goalId: goal.id,
           opportunityId: latest?.id ?? null,
           role: "researcher",
           kind: "research.synthesize",
           contract: { goalId: goal.id, generation },
+          // The owner sets the retry budget for this goal's tasks.
+          ...(Number.isInteger(goal.policy?.maxAttempts) ? { maxAttempts: goal.policy.maxAttempts } : {}),
         });
         if (result.created) created.push(result.task);
         continue;
@@ -144,7 +154,15 @@ export class Kernel {
         if (signal?.aborted || this.store.getEpochState().stopped) break;
         if (maxCost != null && this.knownCost() - initialCost >= maxCost) break;
         const task = this.store.leaseNext(this.workerId, this.leaseMs);
-        if (!task) break;
+        if (!task) {
+          // A retry can be scheduled a moment from now. Stopping here would drop
+          // a task the operator explicitly gave a retry budget to.
+          const delay = this.store.nextScheduledDelay();
+          if (delay === null) break;
+          if (delay > 60_000) break;
+          await sleep(Math.min(delay + 5, 1_000));
+          continue;
+        }
         if (!TASK_RULES[task.kind]) {
           await Promise.resolve(this.store.failTask(task.id, task.lease_token, `Unknown task kind: ${task.kind}`, { retry: false }));
           failed += 1;

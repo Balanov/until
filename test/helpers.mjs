@@ -17,7 +17,7 @@ export async function runtime(t, options = {}) {
   await mkdir(base, { recursive: true });
   const workspace = await mkdtemp(path.join(base, "test-"));
   const store = new Store(":memory:");
-  const models = options.models === null ? null : new ModelRouter({ store, roles: options.models ?? {} });
+  const models = options.models === null ? null : new ModelRouter({ store, roles: options.models ?? {}, fetchImpl: options.fetchImpl ?? fetch });
   const agents = new Agents({
     store,
     models,
