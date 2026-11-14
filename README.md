@@ -256,6 +256,14 @@ Next useful work is connector conformance, real interview/metric ingestion, sand
 
 No own foundation model is planned until traces and held-out evidence show that a specialized model is the actual bottleneck.
 
+## Related projects
+
+- [uncut](https://github.com/Balanov/uncut) — the lossless, headless coding-agent harness.
+- [skein](https://github.com/Balanov/skein) — fail-closed swarm orchestration with epoch-fenced work.
+- [held](https://github.com/Balanov/held) — held-out measurement for claimed AI and robot improvements.
+- [priemka](https://github.com/Balanov/priemka) — acceptance gates for AI systems before production.
+
+
 ## License and citation
 
 MIT. Fork it, modify it, ship it. See [LICENSE](LICENSE), [CITATION.cff](CITATION.cff), [CREDITS.md](CREDITS.md) and [CHANGELOG.md](CHANGELOG.md).
