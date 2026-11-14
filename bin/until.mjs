@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { readFileSync } from "node:fs";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -10,14 +11,13 @@ import { Evolver, EVIDENCE_FOCUSED_GENOME } from "../src/evolve.js";
 import { exportProof } from "../src/export.js";
 import { atomicWrite, resolveInside } from "../src/util.js";
 
-const VERSION = "0.2.0";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-
+const VERSION = JSON.parse(readFileSync(path.join(ROOT, "package.json"), "utf8")).version;
 const HELP = `UNTIL ${VERSION} — done means proven.
 
 Usage: until <command> [options]
 
-Commands:
+Commands:f
   init --goal FILE          Create a durable product goal
   signal add FILE          Add a typed, sourced signal
   signal list              List signals
