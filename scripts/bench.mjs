@@ -64,7 +64,7 @@ async function startupSample() {
     child.stdout.on("data", (chunk) => { output += chunk; });
     child.on("error", reject);
     child.on("close", (code) => {
-      if (code !== 0 || output.trim() !== "0.2.0") return reject(new Error(`Invalid CLI startup result: ${code} ${output}`));
+      if (code !== 0 || output.trim() !== "0.3.0") return reject(new Error(`Invalid CLI startup result: ${code} ${output}`));
       resolve();
     });
   });
@@ -86,7 +86,7 @@ async function sourceBytes(directory) {
 
 const result = {
   format: "until-benchmark/v1",
-  version: "0.2.0",
+  version: "0.3.0",
   generatedAt: new Date().toISOString(),
   environment: { node: process.version, platform: process.platform, arch: process.arch },
   scenario: {

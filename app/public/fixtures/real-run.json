@@ -13,49 +13,49 @@
   },
   "tasks": [
     {
-      "id": "task_72f987a8-89de-4f2d-88f8-de3ce0148690",
+      "id": "task_a02c9561-b258-400b-9dfb-22da0d110e5f",
       "role": "researcher",
       "kind": "research.synthesize",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_480e69bd-e08a-472b-bb7d-163526d960da",
+      "id": "task_0a5c211d-f329-4194-b36e-3ab3fcf224d8",
       "role": "owner",
       "kind": "product.contract",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_82ceea4c-efb1-4fd9-b15f-fb594993d837",
+      "id": "task_3ef0fb9d-8f16-4c23-870b-c0b19abbc5a4",
       "role": "builder",
       "kind": "delivery.build",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_bccb9376-8ba5-4535-8fea-8cfa11bb0a3e",
+      "id": "task_b8227ef1-033c-4e2b-b906-afed10b44120",
       "role": "verifier",
       "kind": "quality.verify",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_685863c8-bc66-41f2-8099-929a91595987",
+      "id": "task_e03b3eb5-ca7e-4f99-b185-1666ced18fea",
       "role": "release",
       "kind": "release.prepare",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_bc7febf3-0d7d-49c8-988c-c14c52836626",
+      "id": "task_15f567c4-996c-4811-a9ac-f7cd32278de2",
       "role": "analyst",
       "kind": "outcome.observe",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_45ba24f3-746c-4f8f-980e-61468331a382",
+      "id": "task_0a7617a1-7877-4e6c-9cfd-8ce5642f05d4",
       "role": "analyst",
       "kind": "outcome.observe",
       "state": "done",
@@ -64,40 +64,40 @@
   ],
   "artifacts": [
     {
-      "id": "art_98852574-3781-44d0-83f6-b437eb7c6f79",
+      "id": "art_ecfdceeb-4c9d-4e13-ba9c-b81184393cc0",
       "kind": "research.opportunity",
       "status": "working",
-      "hash": "1eb29e78b547f128043fe9855beeb6aba1bb200c8d24acfb2e41cce93c4b611e"
+      "hash": "c668ac876a57af9bc222e67f261bbd3a2bdb5274b0b7fffb3dbbce60d5f7078a"
     },
     {
-      "id": "art_51514427-df38-4225-aff6-5c3875c51de5",
+      "id": "art_2199b58a-a122-4ad5-99fe-5dd11b9ffb8c",
       "kind": "product.experiment",
       "status": "verified",
-      "hash": "abf68cde5da746f698f642ba68d5cb5d36043f1fc2d29b2846c8a2836daed048"
+      "hash": "1f22c00b7bac3a99c01607551f332348ef1e2dc89acc99f15d757e1ac6457f9b"
     },
     {
-      "id": "art_ccef58f0-c24a-4b74-bbbb-8f3b29752438",
+      "id": "art_947d4ba3-35f2-4f83-bdc2-b7ef16b8b4ff",
       "kind": "outcome.request",
       "status": "working",
-      "hash": "528e8b6cbe6ddccd804f13916ab31691304f32c0eefb108a5cb8689f1f4db93b"
+      "hash": "1ae84389f531195e613063d8fad84f80daf9c71dad1e2f5cc947d1295eb78f57"
     }
   ],
   "release": {
-    "id": "rel_9d8d13bf-14af-4ed2-9de8-0d983e48971c",
-    "artifact_id": "art_51514427-df38-4225-aff6-5c3875c51de5",
+    "id": "rel_12117d43-ee5f-4e76-a0ae-17aa11861b3f",
+    "artifact_id": "art_2199b58a-a122-4ad5-99fe-5dd11b9ffb8c",
     "goal_id": "goal_proof",
     "status": "published_candidate",
     "receipt": {
-      "artifactId": "art_51514427-df38-4225-aff6-5c3875c51de5",
+      "artifactId": "art_2199b58a-a122-4ad5-99fe-5dd11b9ffb8c",
       "candidate": true,
-      "hash": "abf68cde5da746f698f642ba68d5cb5d36043f1fc2d29b2846c8a2836daed048",
-      "path": ".until\\releases\\rel_9d8d13bf-14af-4ed2-9de8-0d983e48971c.json",
+      "hash": "1f22c00b7bac3a99c01607551f332348ef1e2dc89acc99f15d757e1ac6457f9b",
+      "path": ".until\\releases\\rel_12117d43-ee5f-4e76-a0ae-17aa11861b3f.json",
       "provider": "until.local",
-      "releaseId": "rel_9d8d13bf-14af-4ed2-9de8-0d983e48971c",
+      "releaseId": "rel_12117d43-ee5f-4e76-a0ae-17aa11861b3f",
       "workspace": null
     },
-    "idempotency_key": "3e380e6f2da2069a045bedc74242a49c6d024b1949008867c950b3e1b5b84efb",
-    "created_at": "2026-11-06T17:58:34.535Z"
+    "idempotency_key": "9541548538b86aa6c6d38b8dbe838931d42f0e95eeb119cbd7aaab3383b04a6c",
+    "created_at": "2026-11-14T16:52:29.094Z"
   },
   "goal": {
     "id": "goal_proof",
@@ -111,12 +111,12 @@
       "autonomy": "sandbox",
       "maxAttempts": 3
     },
-    "created_at": "2026-11-06T17:58:34.497Z",
-    "updated_at": "2026-11-06T17:58:34.564Z"
+    "created_at": "2026-11-14T16:52:29.047Z",
+    "updated_at": "2026-11-14T16:52:29.121Z"
   },
   "audit": {
     "valid": true,
     "count": 42,
-    "head": "6d31eff220819127ac726ce0f14e29f295778420946f27e7b8b1884f0ad4bff4"
+    "head": "8a0ec4735697c8c0110b7f23cde400ffc9933c140326264654827b39546e4cf5"
   }
 }
