@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { readFileSync } from "node:fs";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -13,8 +14,8 @@ import { importSignals } from "../src/import.js";
 import { buildGoalTemplate, detectProject } from "../src/onboard.js";
 import { atomicWrite, resolveInside } from "../src/util.js";
 
-const VERSION = "0.3.0";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const VERSION = JSON.parse(readFileSync(path.join(ROOT, "package.json"), "utf8")).version;
 
 const HELP = `UNTIL ${VERSION} — done means proven.
 
