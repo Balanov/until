@@ -10,7 +10,7 @@ import { Evolver, EVIDENCE_FOCUSED_GENOME } from "../src/evolve.js";
 import { exportProof } from "../src/export.js";
 import { atomicWrite, resolveInside } from "../src/util.js";
 
-const VERSION = "0.2.0";
+const VERSION = "0.3.0";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const HELP = `UNTIL ${VERSION} — done means proven.
