@@ -1,7 +1,7 @@
 {
   "format": "until-proof/v1",
   "version": "0.3.0",
-  "generatedAt": "2026-11-14T15:22:45.818Z",
+  "generatedAt": "2026-11-14T16:59:18.644Z",
   "environment": {
     "node": "v24.21.0",
     "platform": "win32",
@@ -23,16 +23,16 @@
       "name": "builder output receives an independent passing verdict",
       "passed": true,
       "evidence": {
-        "artifactId": "art_8bcccc13-2eac-4678-a428-a3f796a444fc",
+        "artifactId": "art_7fee1829-327e-48d3-8c59-38909d51a307",
         "verdict": {
-          "id": "verdict_3ad5ac49-998d-40c9-8fb8-0d58fa9a4509",
-          "artifact_id": "art_8bcccc13-2eac-4678-a428-a3f796a444fc",
-          "task_id": "task_3573c826-5d61-49ab-88c9-c0845c622b35",
+          "id": "verdict_874b32ad-bda3-4ccd-b3ea-928cd1f80d7c",
+          "artifact_id": "art_7fee1829-327e-48d3-8c59-38909d51a307",
+          "task_id": "task_2ce2a84c-6c56-42e9-84d3-89aff9bc8d44",
           "passed": 1,
           "checks": [
             {
               "evidence": {
-                "file": "art_8bcccc13-2eac-4678-a428-a3f796a444fc.json"
+                "file": "art_7fee1829-327e-48d3-8c59-38909d51a307.json"
               },
               "passed": true,
               "type": "file_exists"
@@ -54,7 +54,7 @@
               "type": "json_field"
             }
           ],
-          "created_at": "2026-11-14T15:22:42.340Z"
+          "created_at": "2026-11-14T16:59:12.136Z"
         }
       }
     },
@@ -62,14 +62,14 @@
       "name": "release candidate is published locally with a receipt",
       "passed": true,
       "evidence": {
-        "releaseId": "rel_2643935c-cd20-43dc-97a7-99162e3b25ef",
+        "releaseId": "rel_4c2551e8-5ec3-4609-bce8-5c9d1e2b6e5e",
         "receipt": {
-          "artifactId": "art_8bcccc13-2eac-4678-a428-a3f796a444fc",
+          "artifactId": "art_7fee1829-327e-48d3-8c59-38909d51a307",
           "candidate": true,
-          "hash": "ff819683523fe06bd437e03ea538a950ed15ec36128784bc386fed0ef0e28d80",
-          "path": ".until\\releases\\rel_2643935c-cd20-43dc-97a7-99162e3b25ef.json",
+          "hash": "2228b41377e7c983887d8183bd12e35eab0ed38cbc83392abf75a7d3d13c7738",
+          "path": ".until\\releases\\rel_4c2551e8-5ec3-4609-bce8-5c9d1e2b6e5e.json",
           "provider": "until.local",
-          "releaseId": "rel_2643935c-cd20-43dc-97a7-99162e3b25ef",
+          "releaseId": "rel_4c2551e8-5ec3-4609-bce8-5c9d1e2b6e5e",
           "workspace": null
         }
       }
@@ -91,8 +91,8 @@
             "autonomy": "sandbox",
             "maxAttempts": 3
           },
-          "created_at": "2026-11-14T15:22:42.295Z",
-          "updated_at": "2026-11-14T15:22:42.389Z"
+          "created_at": "2026-11-14T16:59:12.078Z",
+          "updated_at": "2026-11-14T16:59:12.178Z"
         }
       }
     },
@@ -102,7 +102,7 @@
       "evidence": {
         "valid": true,
         "count": 42,
-        "head": "324f1293182203de70105e117125d0cfc63c643b2ad31c8e2ec6937ddf907fa2"
+        "head": "1d9b957bcb0e7f875dc06a312539d0de3e028bb87db3b89fae6ac3dabbd4cea5"
       }
     },
     {
@@ -122,8 +122,8 @@
             "autonomy": "sandbox",
             "maxAttempts": 3
           },
-          "created_at": "2026-11-14T15:22:42.455Z",
-          "updated_at": "2026-11-14T15:22:42.468Z"
+          "created_at": "2026-11-14T16:59:12.259Z",
+          "updated_at": "2026-11-14T16:59:12.275Z"
         },
         "taskKinds": [
           "research.synthesize"
@@ -156,9 +156,9 @@
       "name": "independent verifier runs the real repository test",
       "passed": true,
       "evidence": {
-        "id": "verdict_35ede1f3-3159-41c4-b0de-b0f4c2752291",
-        "artifact_id": "art_3c74c680-98dd-4e67-ac24-8168f28a609e",
-        "task_id": "task_11c5f2e7-ebdb-462b-b6a2-c66db0faff87",
+        "id": "verdict_e89caebb-b790-4a6c-8325-d675678b0e80",
+        "artifact_id": "art_7a3c1c41-e356-4c96-b13e-72837ded91b8",
+        "task_id": "task_8e52f92a-33fc-44cb-ab2c-8bc24b0e5475",
         "passed": 1,
         "checks": [
           {
@@ -185,7 +185,7 @@
           },
           {
             "evidence": {
-              "file": "art_3c74c680-98dd-4e67-ac24-8168f28a609e.json"
+              "file": "art_7a3c1c41-e356-4c96-b13e-72837ded91b8.json"
             },
             "passed": true,
             "type": "file_exists"
@@ -207,20 +207,20 @@
             "type": "json_field"
           }
         ],
-        "created_at": "2026-11-14T15:22:43.850Z"
+        "created_at": "2026-11-14T16:59:12.559Z"
       }
     },
     {
       "name": "release candidate packages actual code and remains immutable",
       "passed": true,
       "evidence": {
-        "releaseId": "rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c",
+        "releaseId": "rel_c22d4a2c-5ca9-4867-bccb-fbd74a2faac7",
         "workspace": {
           "bytes": 264,
           "files": 2,
           "hash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19",
-          "manifestPath": ".until/releases/rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c/workspace/manifest.json",
-          "path": ".until/releases/rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c/workspace"
+          "manifestPath": ".until/releases/rel_c22d4a2c-5ca9-4867-bccb-fbd74a2faac7/workspace/manifest.json",
+          "path": ".until/releases/rel_c22d4a2c-5ca9-4867-bccb-fbd74a2faac7/workspace"
         },
         "candidateHash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19"
       }
@@ -257,8 +257,8 @@
       "name": "the repaired change becomes an independently verified release candidate",
       "passed": true,
       "evidence": {
-        "artifact": "art_dbda7eab-9f07-40b1-b297-a918cb83bbfd",
-        "release": "rel_d96bd1bb-ed53-458c-9b3b-9204495cf85f"
+        "artifact": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85",
+        "release": "rel_06fc7eae-9729-4ba7-9e8d-939ffda37148"
       }
     },
     {

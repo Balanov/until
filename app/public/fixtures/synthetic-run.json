@@ -9,7 +9,7 @@
   },
   "tasks": [
     {
-      "id": "task_acfdff00-7a3f-4cad-b88b-47eab8f1e1a3",
+      "id": "task_81bda9eb-8b21-4246-b509-9eef4eb85a5e",
       "role": "researcher",
       "kind": "research.synthesize",
       "state": "done",
@@ -18,10 +18,10 @@
   ],
   "artifacts": [
     {
-      "id": "art_61344f89-3aa6-49cf-ab88-d8b5f1be532c",
+      "id": "art_ee9ba121-aeeb-4ad1-998d-8539d1af2aac",
       "kind": "research.guide",
       "status": "working",
-      "hash": "95984fbb7a372a2502323a4900a3d07a4a4dab3cf4d62670800ea3d7b8cab1cd"
+      "hash": "7522837b894ccf0e9510a228b8c7d1e7d929cf9ac5a3b82b85056d4809b0b14c"
     }
   ],
   "goal": {
@@ -36,12 +36,12 @@
       "autonomy": "sandbox",
       "maxAttempts": 3
     },
-    "created_at": "2026-11-14T15:22:42.455Z",
-    "updated_at": "2026-11-14T15:22:42.468Z"
+    "created_at": "2026-11-14T16:59:12.259Z",
+    "updated_at": "2026-11-14T16:59:12.275Z"
   },
   "audit": {
     "valid": true,
     "count": 8,
-    "head": "4d9aa0af51ba7df8b80108b37c4843dbefef74828f614785c1a09e82737fd5d2"
+    "head": "adc4aa7f7fd280fb518440f19d1bc5ae89f0e1046c1f5c2ba198745e4981151f"
   }
 }

@@ -17,42 +17,42 @@
   },
   "tasks": [
     {
-      "id": "task_fb01e5a7-7c5b-43f1-8d2a-af4443cfb97b",
+      "id": "task_9d812f7b-1dc2-4c3b-93e0-84114f0850f0",
       "role": "researcher",
       "kind": "research.synthesize",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_0b1eb8e2-fdb5-46c7-9f8b-203266f32d4b",
+      "id": "task_e47fdebf-3bf7-4b4e-bda8-80ea1369a8d6",
       "role": "owner",
       "kind": "product.contract",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_fe8d88a3-f5b1-44b2-89dd-4832b7bca3ef",
+      "id": "task_b381eef6-0f9f-4b21-8dd7-bd9560f9f981",
       "role": "builder",
       "kind": "delivery.build",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_e91f509c-38a9-49d0-af18-5f9a3d7f1e2c",
+      "id": "task_b2cfa703-4617-4c41-a3fb-47688e2a580f",
       "role": "verifier",
       "kind": "quality.verify",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_f62d6899-1b73-4310-8e70-e8f5ff2dfa5e",
+      "id": "task_f9110609-1e0d-419f-a95b-baccaaaba410",
       "role": "release",
       "kind": "release.prepare",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_680eb17e-1ad6-4087-8f84-78c488b223da",
+      "id": "task_5062629c-3527-4fb8-8853-ca6dea5453bb",
       "role": "analyst",
       "kind": "outcome.observe",
       "state": "done",
@@ -60,7 +60,7 @@
     }
   ],
   "artifact": {
-    "id": "art_dbda7eab-9f07-40b1-b297-a918cb83bbfd",
+    "id": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85",
     "status": "verified",
     "repair": {
       "passed": true,
@@ -93,9 +93,9 @@
     }
   },
   "verdict": {
-    "id": "verdict_2088af76-b49e-4393-ac36-e32e7fa904cf",
-    "artifact_id": "art_dbda7eab-9f07-40b1-b297-a918cb83bbfd",
-    "task_id": "task_e91f509c-38a9-49d0-af18-5f9a3d7f1e2c",
+    "id": "verdict_1770d2d6-c4dc-40a9-a85a-b4f6c843d0d1",
+    "artifact_id": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85",
+    "task_id": "task_b2cfa703-4617-4c41-a3fb-47688e2a580f",
     "passed": 1,
     "checks": [
       {
@@ -114,7 +114,7 @@
       },
       {
         "evidence": {
-          "file": "art_dbda7eab-9f07-40b1-b297-a918cb83bbfd.json"
+          "file": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85.json"
         },
         "passed": true,
         "type": "file_exists"
@@ -136,36 +136,36 @@
         "type": "json_field"
       }
     ],
-    "created_at": "2026-11-14T15:22:45.479Z"
+    "created_at": "2026-11-14T16:59:13.143Z"
   },
   "release": {
-    "id": "rel_d96bd1bb-ed53-458c-9b3b-9204495cf85f",
-    "artifact_id": "art_dbda7eab-9f07-40b1-b297-a918cb83bbfd",
+    "id": "rel_06fc7eae-9729-4ba7-9e8d-939ffda37148",
+    "artifact_id": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85",
     "goal_id": "goal_proof",
     "status": "published_candidate",
     "receipt": {
-      "artifactId": "art_dbda7eab-9f07-40b1-b297-a918cb83bbfd",
+      "artifactId": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85",
       "candidate": true,
-      "hash": "f7e300e6d0ed94ca21aa7cf60f91357bd648ac44c3392a017c914ea9fdb9421d",
-      "path": ".until\\releases\\rel_d96bd1bb-ed53-458c-9b3b-9204495cf85f.json",
+      "hash": "c6a2e25fc1a9b6721848bfe59ae99ca72e8123d04c06161ec0592b9e607c2665",
+      "path": ".until\\releases\\rel_06fc7eae-9729-4ba7-9e8d-939ffda37148.json",
       "provider": "until.local",
-      "releaseId": "rel_d96bd1bb-ed53-458c-9b3b-9204495cf85f",
+      "releaseId": "rel_06fc7eae-9729-4ba7-9e8d-939ffda37148",
       "workspace": {
         "bytes": 264,
         "files": 2,
         "hash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19",
-        "manifestPath": ".until/releases/rel_d96bd1bb-ed53-458c-9b3b-9204495cf85f/workspace/manifest.json",
-        "path": ".until/releases/rel_d96bd1bb-ed53-458c-9b3b-9204495cf85f/workspace"
+        "manifestPath": ".until/releases/rel_06fc7eae-9729-4ba7-9e8d-939ffda37148/workspace/manifest.json",
+        "path": ".until/releases/rel_06fc7eae-9729-4ba7-9e8d-939ffda37148/workspace"
       }
     },
-    "idempotency_key": "21a9f42964b12f479c363d502202f1738d380b3189a49a4252bead12cb3c04af",
-    "created_at": "2026-11-14T15:22:45.483Z"
+    "idempotency_key": "ed620987209d2c53bfe4815872a30adce7b1540aa161c8adb9f4bfa8768cb997",
+    "created_at": "2026-11-14T16:59:13.147Z"
   },
   "initialSource": "export function activationSteps() {\n  return [\"account\", \"duplicate-entry\", \"duplicate-entry\", \"profile\"];\n}\n",
   "acceptedSource": "export function activationSteps() {\n  return [\"account\", \"profile\"];\n}\n",
   "audit": {
     "valid": true,
     "count": 36,
-    "head": "344e54b01304bfe14605d7bdbaed96e765d5a5a736530b87002344867183b3fc"
+    "head": "165dffcb705b2835835d7013b19102ef43519e6e0c7faac5816f8a42a1a37995"
   }
 }

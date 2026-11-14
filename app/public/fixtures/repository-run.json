@@ -17,42 +17,42 @@
   },
   "tasks": [
     {
-      "id": "task_69846053-e7c7-424f-b55b-c0d6e11a96b8",
+      "id": "task_e3afd641-66f4-4ee1-bb8e-e6cfd555342b",
       "role": "researcher",
       "kind": "research.synthesize",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_42af4447-cfcd-4ec8-96cc-070da89135e2",
+      "id": "task_064bcf58-afa7-4165-9132-57f2da017433",
       "role": "owner",
       "kind": "product.contract",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_87b37c67-6c0e-4b4c-b59c-2329efc82049",
+      "id": "task_da746b6d-c2bf-41c9-acf5-194b67762bcf",
       "role": "builder",
       "kind": "delivery.build",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_11c5f2e7-ebdb-462b-b6a2-c66db0faff87",
+      "id": "task_8e52f92a-33fc-44cb-ab2c-8bc24b0e5475",
       "role": "verifier",
       "kind": "quality.verify",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_05f195d2-0e13-41d4-ab04-3e553361dc8d",
+      "id": "task_0c714469-d0c5-459d-8523-7f20151f6be3",
       "role": "release",
       "kind": "release.prepare",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_d952dabc-bfef-4aef-9383-c116ab4a1d54",
+      "id": "task_cf101041-ccc7-4614-a0c0-f4aefcd1e37d",
       "role": "analyst",
       "kind": "outcome.observe",
       "state": "done",
@@ -60,9 +60,9 @@
     }
   ],
   "verdict": {
-    "id": "verdict_35ede1f3-3159-41c4-b0de-b0f4c2752291",
-    "artifact_id": "art_3c74c680-98dd-4e67-ac24-8168f28a609e",
-    "task_id": "task_11c5f2e7-ebdb-462b-b6a2-c66db0faff87",
+    "id": "verdict_e89caebb-b790-4a6c-8325-d675678b0e80",
+    "artifact_id": "art_7a3c1c41-e356-4c96-b13e-72837ded91b8",
+    "task_id": "task_8e52f92a-33fc-44cb-ab2c-8bc24b0e5475",
     "passed": 1,
     "checks": [
       {
@@ -89,7 +89,7 @@
       },
       {
         "evidence": {
-          "file": "art_3c74c680-98dd-4e67-ac24-8168f28a609e.json"
+          "file": "art_7a3c1c41-e356-4c96-b13e-72837ded91b8.json"
         },
         "passed": true,
         "type": "file_exists"
@@ -111,30 +111,30 @@
         "type": "json_field"
       }
     ],
-    "created_at": "2026-11-14T15:22:43.850Z"
+    "created_at": "2026-11-14T16:59:12.559Z"
   },
   "release": {
-    "id": "rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c",
-    "artifact_id": "art_3c74c680-98dd-4e67-ac24-8168f28a609e",
+    "id": "rel_c22d4a2c-5ca9-4867-bccb-fbd74a2faac7",
+    "artifact_id": "art_7a3c1c41-e356-4c96-b13e-72837ded91b8",
     "goal_id": "goal_proof",
     "status": "published_candidate",
     "receipt": {
-      "artifactId": "art_3c74c680-98dd-4e67-ac24-8168f28a609e",
+      "artifactId": "art_7a3c1c41-e356-4c96-b13e-72837ded91b8",
       "candidate": true,
-      "hash": "974a375f2f8834f12ec84edbc673e75eaee7f1eec9250177a1afe4dca5526c1b",
-      "path": ".until\\releases\\rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c.json",
+      "hash": "7b2c0199f0846ce7c4305f7b1ec5d3e21c01b16cb50302c4c7b773b29146afcb",
+      "path": ".until\\releases\\rel_c22d4a2c-5ca9-4867-bccb-fbd74a2faac7.json",
       "provider": "until.local",
-      "releaseId": "rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c",
+      "releaseId": "rel_c22d4a2c-5ca9-4867-bccb-fbd74a2faac7",
       "workspace": {
         "bytes": 264,
         "files": 2,
         "hash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19",
-        "manifestPath": ".until/releases/rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c/workspace/manifest.json",
-        "path": ".until/releases/rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c/workspace"
+        "manifestPath": ".until/releases/rel_c22d4a2c-5ca9-4867-bccb-fbd74a2faac7/workspace/manifest.json",
+        "path": ".until/releases/rel_c22d4a2c-5ca9-4867-bccb-fbd74a2faac7/workspace"
       }
     },
-    "idempotency_key": "b13845e695016adf34731c29d44fecc54b3e8522b9c502d1d661ee9271c5b263",
-    "created_at": "2026-11-14T15:22:43.854Z"
+    "idempotency_key": "0a53c282c25f9979ed535a731755293e6b80601e46bd85eafd6cd0c0794f0571",
+    "created_at": "2026-11-14T16:59:12.563Z"
   },
   "initialSource": "export function activationSteps() {\n  return [\"account\", \"duplicate-entry\", \"duplicate-entry\", \"profile\"];\n}\n",
   "acceptedSource": "export function activationSteps() {\n  return [\"account\", \"profile\"];\n}\n",
@@ -142,6 +142,6 @@
   "audit": {
     "valid": true,
     "count": 36,
-    "head": "2c8ef5cae73427958b2a100038910d73fb742b0d05868cef18340a90be01df5d"
+    "head": "3fa6127be7aab1841b8e43a40ab7de26306e3ba87b4f86be3aac625bd6e03a51"
   }
 }
