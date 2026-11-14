@@ -1,0 +1,56 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - run: npm ci --ignore-scripts
+      - name: Run the deterministic proof
+        run: npm run proof
+      - name: Build the proof bundle
+        run: npm run proof:package
+      - name: Checksums
+        working-directory: app/public
+        run: sha256sum until-proof.zip > checksums.txt
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" app/public/until-proof.zip app/public/checksums.txt --clobber
+            gh release edit "${GITHUB_REF_NAME}" --notes-file CHANGELOG.md
+          else
+            gh release create "${GITHUB_REF_NAME}" app/public/until-proof.zip app/public/checksums.txt --notes-file CHANGELOG.md
+          fi
+
+  publish-npm:
+    needs: release
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: https://registry.npmjs.org
+      - run: npm ci --ignore-scripts
+      - name: Publish to npm
+        run: npm publish --provenance --access public
