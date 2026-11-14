@@ -8,6 +8,8 @@ import { actualNodeBinary } from "./node-binary.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const publicRoot = path.join(root, "app", "public");
+const packageMeta = JSON.parse(await readFile(path.join(root, "package.json"), "utf8"));
+const expectedVersion = packageMeta.version;
 await mkdir(publicRoot, { recursive: true });
 const N = 1000;
 const ROUNDS = 15;
@@ -64,7 +66,7 @@ async function startupSample() {
     child.stdout.on("data", (chunk) => { output += chunk; });
     child.on("error", reject);
     child.on("close", (code) => {
-      if (code !== 0 || output.trim() !== "0.2.0") return reject(new Error(`Invalid CLI startup result: ${code} ${output}`));
+      if (code !== 0 || output.trim() !== expectedVersion) return reject(new Error(`Invalid CLI startup result: ${code} ${output}`));
       resolve();
     });
   });
@@ -86,7 +88,7 @@ async function sourceBytes(directory) {
 
 const result = {
   format: "until-benchmark/v1",
-  version: "0.2.0",
+  version: "0.3.0",
   generatedAt: new Date().toISOString(),
   environment: { node: process.version, platform: process.platform, arch: process.arch },
   scenario: {

@@ -1,0 +1,171 @@
+{
+  "format": "until-repair-proof/v1",
+  "mode": "deterministic_harness_with_real_feedback_loop_not_llm_quality",
+  "title": "Failing project test → builder sees the failure → retries → green test → verified candidate",
+  "testBefore": {
+    "status": 1,
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n+ actual - expected\r\n\r\n  [\r\n    'account',\r\n+   'duplicate-entry',\r\n+   'duplicate-entry',\r\n    'profile'\r\n  ]\r\n\r\n    at file:///F:/GitHub/until/proof-runs/latest/repair-cycle/scripts/verify.mjs:3:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: [ 'account', 'duplicate-entry', 'duplicate-entry', 'profile' ],\r\n  expected: [ 'account', 'profile' ],\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.21.0\r\n"
+  },
+  "testAfter": {
+    "status": 0,
+    "output": "ACTIVATION_TEST_OK"
+  },
+  "initial": {
+    "completed": 6,
+    "failed": 0,
+    "cycles": 2
+  },
+  "tasks": [
+    {
+      "id": "task_9d812f7b-1dc2-4c3b-93e0-84114f0850f0",
+      "role": "researcher",
+      "kind": "research.synthesize",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_e47fdebf-3bf7-4b4e-bda8-80ea1369a8d6",
+      "role": "owner",
+      "kind": "product.contract",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_b381eef6-0f9f-4b21-8dd7-bd9560f9f981",
+      "role": "builder",
+      "kind": "delivery.build",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_b2cfa703-4617-4c41-a3fb-47688e2a580f",
+      "role": "verifier",
+      "kind": "quality.verify",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_f9110609-1e0d-419f-a95b-baccaaaba410",
+      "role": "release",
+      "kind": "release.prepare",
+      "state": "done",
+      "attempts": 1
+    },
+    {
+      "id": "task_5062629c-3527-4fb8-8853-ca6dea5453bb",
+      "role": "analyst",
+      "kind": "outcome.observe",
+      "state": "done",
+      "attempts": 1
+    }
+  ],
+  "artifact": {
+    "id": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85",
+    "status": "verified",
+    "repair": {
+      "passed": true,
+      "reason": "verified",
+      "attempts": 2,
+      "changedFiles": [
+        "src/activation.js"
+      ],
+      "workspaceRestored": false,
+      "trail": [
+        {
+          "attempt": 1,
+          "changedFiles": [
+            "src/activation.js"
+          ],
+          "notes": "Removed one duplicate activation step",
+          "passed": false,
+          "output": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n  actual: [ 'account', 'duplicate-entry', 'profile' ],\r\n  expected: [ 'account', 'profile' ],\r\n  operator: 'deepStrictEqual',\r"
+        },
+        {
+          "attempt": 2,
+          "changedFiles": [
+            "src/activation.js"
+          ],
+          "notes": "Removed the remaining duplicate activation step",
+          "passed": true,
+          "output": "ACTIVATION_TEST_OK\n"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "id": "verdict_1770d2d6-c4dc-40a9-a85a-b4f6c843d0d1",
+    "artifact_id": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85",
+    "task_id": "task_b2cfa703-4617-4c41-a3fb-47688e2a580f",
+    "passed": 1,
+    "checks": [
+      {
+        "evidence": {
+          "file": "activation.js"
+        },
+        "passed": true,
+        "type": "file_exists"
+      },
+      {
+        "evidence": {
+          "expectedSubstring": "ACTIVATION_TEST_OK"
+        },
+        "passed": true,
+        "type": "command_profile"
+      },
+      {
+        "evidence": {
+          "file": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85.json"
+        },
+        "passed": true,
+        "type": "file_exists"
+      },
+      {
+        "evidence": {
+          "actual": "implemented",
+          "expected": "implemented"
+        },
+        "passed": true,
+        "type": "json_field"
+      },
+      {
+        "evidence": {
+          "actual": "goal_proof",
+          "expected": "goal_proof"
+        },
+        "passed": true,
+        "type": "json_field"
+      }
+    ],
+    "created_at": "2026-11-14T16:59:13.143Z"
+  },
+  "release": {
+    "id": "rel_06fc7eae-9729-4ba7-9e8d-939ffda37148",
+    "artifact_id": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85",
+    "goal_id": "goal_proof",
+    "status": "published_candidate",
+    "receipt": {
+      "artifactId": "art_a65cfa84-4fe0-44dc-a990-a59ac1e0bd85",
+      "candidate": true,
+      "hash": "c6a2e25fc1a9b6721848bfe59ae99ca72e8123d04c06161ec0592b9e607c2665",
+      "path": ".until\\releases\\rel_06fc7eae-9729-4ba7-9e8d-939ffda37148.json",
+      "provider": "until.local",
+      "releaseId": "rel_06fc7eae-9729-4ba7-9e8d-939ffda37148",
+      "workspace": {
+        "bytes": 264,
+        "files": 2,
+        "hash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19",
+        "manifestPath": ".until/releases/rel_06fc7eae-9729-4ba7-9e8d-939ffda37148/workspace/manifest.json",
+        "path": ".until/releases/rel_06fc7eae-9729-4ba7-9e8d-939ffda37148/workspace"
+      }
+    },
+    "idempotency_key": "ed620987209d2c53bfe4815872a30adce7b1540aa161c8adb9f4bfa8768cb997",
+    "created_at": "2026-11-14T16:59:13.147Z"
+  },
+  "initialSource": "export function activationSteps() {\n  return [\"account\", \"duplicate-entry\", \"duplicate-entry\", \"profile\"];\n}\n",
+  "acceptedSource": "export function activationSteps() {\n  return [\"account\", \"profile\"];\n}\n",
+  "audit": {
+    "valid": true,
+    "count": 36,
+    "head": "165dffcb705b2835835d7013b19102ef43519e6e0c7faac5816f8a42a1a37995"
+  }
+}

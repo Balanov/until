@@ -222,6 +222,122 @@ const repositoryFixture = {
 await writeFile(path.join(publicRoot, "fixtures", "repository-run.json"), JSON.stringify(repositoryFixture, null, 2));
 repository.store.close();
 
+// ── Repair cycle: a builder that sees the failing check and fixes it ──
+const repair = await scenario("repair-cycle");
+await mkdir(path.join(repair.workspace, "src"), { recursive: true });
+await mkdir(path.join(repair.workspace, "scripts"), { recursive: true });
+const repairInitial = `export function activationSteps() {
+  return ["account", "duplicate-entry", "duplicate-entry", "profile"];
+}
+`;
+const repairPartial = `export function activationSteps() {
+  return ["account", "duplicate-entry", "profile"];
+}
+`;
+const repairAccepted = `export function activationSteps() {
+  return ["account", "profile"];
+}
+`;
+await writeFile(path.join(repair.workspace, "src", "activation.js"), repairInitial);
+await writeFile(path.join(repair.workspace, "scripts", "verify.mjs"), `import assert from "node:assert/strict";\nimport { activationSteps } from "../src/activation.js";\nassert.deepEqual(activationSteps(), ["account", "profile"]);\nconsole.log("ACTIVATION_TEST_OK");\n`);
+
+// The harness behaves like a real coding agent: it reads the failing check output
+// and changes its approach. The first attempt is incomplete, the second is correct.
+const repairingBuilder = `import { writeFile } from "node:fs/promises";
+let input = "";
+process.stdin.on("data", (chunk) => { input += chunk; });
+process.stdin.on("end", async () => {
+  const payload = JSON.parse(input);
+  const attempt = payload.attempt ?? 1;
+  const partial = ${JSON.stringify(repairPartial)};
+  const fixed = ${JSON.stringify(repairAccepted)};
+  await writeFile("src/activation.js", attempt === 1 ? partial : fixed, "utf8");
+  process.stdout.write(JSON.stringify({
+    type: "repository_change",
+    summary: attempt === 1 ? "Removed one duplicate activation step" : "Removed the remaining duplicate activation step",
+    repositoryChange: true,
+    attempt,
+    sawFailingCheck: Boolean(payload.feedback),
+  }));
+});
+`;
+const repairingBuilderPath = path.join(repair.workspace, "repairing-builder.mjs");
+await writeFile(repairingBuilderPath, repairingBuilder);
+const repairBefore = spawnSync(actualNodeBinary(), ["scripts/verify.mjs"], { cwd: repair.workspace, encoding: "utf8" });
+repair.agents.builderProfile = { command: actualNodeBinary(), args: [repairingBuilderPath], timeoutMs: 30_000 };
+repair.agents.sandboxConfirmed = true;
+repair.agents.commandProfiles = {
+  repositoryTest: { command: actualNodeBinary(), args: ["scripts/verify.mjs"], timeoutMs: 30_000 },
+};
+repair.store.addGoal({
+  id: "goal_proof",
+  title: "Remove the observed duplicate activation step",
+  outcome: "Increase completed activation",
+  baseline: 0.4,
+  target: 0.55,
+  unit: "ratio",
+  policy: {
+    acceptance: [
+      { type: "file_exists", path: "src/activation.js" },
+      { type: "command_profile", profile: "repositoryTest", expect: { contains: "ACTIVATION_TEST_OK" } },
+    ],
+    releasePaths: ["src/activation.js", "scripts/verify.mjs"],
+    build: { testProfile: "repositoryTest", maxAttempts: 3, allowedPaths: ["src/activation.js"] },
+  },
+});
+repair.store.addSignal({
+  id: "sig_repair",
+  goalId: "goal_proof",
+  kind: "incident",
+  source: "fixture://observed-product/duplicate-entry",
+  content: "A real observed activation run repeated the same data-entry step twice.",
+  consent: true,
+  observedAt: "2026-11-05T00:00:00.000Z",
+});
+const repairRun = await repair.kernel.run({ maxCycles: 8, maxTasks: 20 });
+const repairAfter = spawnSync(actualNodeBinary(), ["scripts/verify.mjs"], { cwd: repair.workspace, encoding: "utf8" });
+const repairArtifact = repair.store.artifactsForGoal("goal_proof").find((item) => item.kind === "product.experiment");
+const repairParsed = repairArtifact ? JSON.parse(repairArtifact.content) : null;
+const repairTrail = repairParsed?.repair?.trail ?? [];
+check("the builder is retried with the failing check as feedback", repairTrail.length === 2
+  && repairTrail[0].passed === false
+  && repairTrail[0].output.length > 0
+  && repairTrail[1].passed === true, {
+  attempts: repairTrail.map((item) => ({ attempt: item.attempt, passed: item.passed, output: item.output.slice(-200) })),
+});
+check("the project's own test passes only after the repair loop", repairBefore.status !== 0
+  && repairAfter.status === 0
+  && repairAfter.stdout.includes("ACTIVATION_TEST_OK")
+  && repairRun.completed === 6
+  && repairRun.failed === 0, {
+  before: repairBefore.status,
+  after: repairAfter.status,
+  completed: repairRun.completed,
+  failed: repairRun.failed,
+});
+check("the repaired change becomes an independently verified release candidate", repair.store.verdictForArtifact(repairArtifact.id)?.passed === 1
+  && repair.store.latestRelease("goal_proof")?.status === "published_candidate", {
+  artifact: repairArtifact?.id,
+  release: repair.store.latestRelease("goal_proof")?.id,
+});
+const repairFixture = {
+  format: "until-repair-proof/v1",
+  mode: "deterministic_harness_with_real_feedback_loop_not_llm_quality",
+  title: "Failing project test → builder sees the failure → retries → green test → verified candidate",
+  testBefore: { status: repairBefore.status, output: `${repairBefore.stdout}${repairBefore.stderr}`.slice(-2000) },
+  testAfter: { status: repairAfter.status, output: repairAfter.stdout.trim() },
+  initial: { completed: repairRun.completed, failed: repairRun.failed, cycles: repairRun.cycles },
+  tasks: repair.store.listTasks().map(({ id, role, kind, state, attempts }) => ({ id, role, kind, state, attempts })),
+  artifact: { id: repairArtifact?.id, status: repairArtifact?.status, repair: repairParsed?.repair ?? null },
+  verdict: repair.store.verdictForArtifact(repairArtifact?.id),
+  release: repair.store.latestRelease("goal_proof"),
+  initialSource: repairInitial,
+  acceptedSource: repairAccepted,
+  audit: repair.store.verifyEvents(),
+};
+await writeFile(path.join(publicRoot, "fixtures", "repair-run.json"), JSON.stringify(repairFixture, null, 2));
+repair.store.close();
+
 const late = await scenario("late-completion");
 addGoal(late.store);
 const queued = late.store.enqueue({
@@ -271,7 +387,7 @@ evolutionStore.close();
 
 const summary = {
   format: "until-proof/v1",
-  version: "0.2.0",
+  version: "0.3.0",
   generatedAt: new Date().toISOString(),
   environment: { node: process.version, platform: process.platform, arch: process.arch },
   mode: "deterministic fixtures and adversarial kernel checks; no LLM quality or business ROI claim",
@@ -285,6 +401,12 @@ const summary = {
     repositoryFilesReleased: repositoryRelease.receipt.workspace.files,
     repositoryRegressionBefore: beforeTest.status,
     repositoryRegressionAfter: afterTest.status,
+    repairCycleTasks: repairRun.completed,
+    repairAttempts: repairTrail.length,
+    repairFirstAttemptPassed: repairTrail[0]?.passed ?? null,
+    repairSecondAttemptPassed: repairTrail[1]?.passed ?? null,
+    repairRegressionBefore: repairBefore.status,
+    repairRegressionAfter: repairAfter.status,
     realEventCount: realAudit.count,
     heldoutBaselineCorrect: `${evolution.baseline.heldout.correct}/${evolution.baseline.heldout.total}`,
     heldoutCandidateCorrect: `${evolution.candidate.heldout.correct}/${evolution.candidate.heldout.total}`,

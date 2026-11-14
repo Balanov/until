@@ -1,21 +1,20 @@
 const text = (minLength = 1, maxLength = 4000) => ({ type: "string", minLength, maxLength });
 
 export function researchSchema(signals) {
+  const ids = signals.map((signal) => signal.id);
   return {
     type: "object",
     additionalProperties: false,
     properties: {
       statement: text(5),
       mechanism: text(5),
-      evidenceIds: {
-        type: "array",
-        minItems: 1,
-        uniqueItems: true,
-        items: { type: "string", enum: signals.map((signal) => signal.id) },
-      },
+      evidenceIds: ids.length
+        ? { type: "array", minItems: 1, uniqueItems: true, items: { type: "string", enum: ids } }
+        : { type: "array", maxItems: 0 },
       score: { type: "number", minimum: 0, maximum: 1 },
     },
-    required: ["statement", "mechanism", "evidenceIds", "score"],
+    // `score` stays optional because the normalizer defaults it to 0.5 when absent.
+    required: ids.length ? ["statement", "mechanism", "evidenceIds"] : ["statement", "mechanism"],
   };
 }
 
@@ -40,7 +39,8 @@ export function specSchema() {
         },
       },
     },
-    required: ["title", "summary", "checks", "risk"],
+    // `risk` stays optional because the normalizer defaults it to "low".
+    required: ["title", "summary", "checks"],
   };
 }
 
@@ -52,16 +52,23 @@ function constrain(schema, segments, value) {
   for (let index = 0; index < segments.length; index += 1) {
     const key = segments[index];
     current.properties ??= {};
-    if (index === segments.length - 1) {
-      current.properties[key] = { const: value };
-    } else {
-      current.properties[key] ??= { type: "object" };
-      current = current.properties[key];
-    }
+    const last = index === segments.length - 1;
+    if (last) current.properties[key] = { const: value };
+    else current.properties[key] ??= { type: "object" };
+    // `required` belongs to the object that declares the property, not to the child.
     current.required = [...new Set([...(current.required ?? []), key])];
+    if (!last) current = current.properties[key];
   }
+  return schema;
 }
 
+/**
+ * Constrains a schema with the owner's acceptance checks.
+ *
+ * `prefix` selects the subtree the checks address: `"implementation."` means the
+ * check field `implementation.repositoryChange` constrains the implementation object
+ * of the root schema, not the root itself.
+ */
 export function withAcceptance(schema, checks = [], prefix = "") {
   for (const check of checks) {
     if (check.type !== "json_field" || !check.field.startsWith(prefix)) continue;

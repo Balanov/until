@@ -1,10 +1,11 @@
 import { spawn } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { runChecks } from "./checks.js";
+import { runChecks, runCommandProfile } from "./checks.js";
 import { assertCheck, assertRoleCapability, assertTaskContract, evaluateEvidenceGate, isRealSignal } from "./policy.js";
 import { implementationSchema, researchSchema, specSchema } from "./schema.js";
 import { atomicWrite, assertObject, assertText, canonicalJson, newId, resolveInside, sha256, stableKey } from "./util.js";
+import { normalizeBuilderResponse, runRepairLoop } from "./executor/repair.js";
 import { materializeWorkspaceRelease, readWorkspaceManifest } from "./workspace-release.js";
 
 const MODEL_SYSTEM = `You are one role inside UNTIL, an evidence-gated product operations system.
@@ -79,7 +80,10 @@ async function runExternalBuilder(profile, input, workspace, sandboxConfirmed) {
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
       child.kill();
-      reject(new Error("External builder timed out"));
+      const tail = output.slice(-2000);
+      const error = new Error(`External builder timed out after ${timeoutMs} ms${tail ? `\n${tail}` : ''}`);
+      error.retry = true;
+      reject(error);
     }, timeoutMs);
     child.stdout.on("data", (chunk) => {
       if (output.length + chunk.length > maxOutputBytes) {
@@ -139,13 +143,26 @@ export class Agents {
         : task.kind === "delivery.build"
           ? implementationSchema(task.contract.spec?.checks ?? [])
           : null;
+    // A rejected answer must not be asked again blind. The model is shown what was
+    // wrong, so the next attempt can be a correction instead of a repeat. Without
+    // this a model with a fixed schema habit loses every attempt the same way.
+    const previousError = task.last_error ? String(task.last_error).slice(0, 600) : null;
+    const payload = previousError
+      ? {
+        ...input,
+        feedback: {
+          previousAttemptError: previousError,
+          instruction: "Your previous answer was rejected. Answer again with exactly the requested fields and no other properties.",
+        },
+      }
+      : input;
     const result = await this.models.complete({
       role,
       taskId: task.id,
       kind: task.kind,
       generation: task.contract.generation ?? 1,
       system: MODEL_SYSTEM,
-      input,
+      input: payload,
       maxTokens: task.contract.maxTokens ?? 4096,
       schema,
     });
@@ -183,7 +200,7 @@ export class Agents {
       signals: signals.map(({ id, kind, source, content, value, unit, observed_at, consent }) => ({
         id, kind, source, content: content.slice(0, 20_000), value, unit, observed_at, consent,
       })),
-      required: { statement: "string", mechanism: "string", evidenceIds: ["existing signal id"], score: "0..1" },
+      responseShape: { statement: "string", mechanism: "string", evidenceIds: ["existing signal id"], score: "0..1" },
     });
     let proposal;
     if (modelValue) {
@@ -282,7 +299,7 @@ export class Agents {
       goal,
       opportunity,
       evidence: signals.filter((signal) => opportunity.evidence_ids.includes(signal.id)),
-      required: {
+      responseShape: {
         title: "string",
         summary: "bounded experiment with explicit scope",
         checks: [{ type: "json_field", field: "status", equals: "implemented" }],
@@ -303,7 +320,10 @@ export class Agents {
       ? [...new Map([...lockedChecks, ...authoredSpec.checks].map((check) => [canonicalJson(check), check])).values()]
       : authoredSpec.checks;
     const spec = normalizeSpec({ ...authoredSpec, checks });
-    if (spec.risk === "high") {
+    // The owner declares the risk the autonomous flow may take. Without that
+    // declaration only low-risk work is allowed to move.
+    const maxRisk = goal.policy?.maxRisk === "high" ? "high" : "low";
+    if (spec.risk === "high" && maxRisk !== "high") {
       this.store.updateOpportunity(opportunity.id, "blocked_risk");
       this.store.updateGoal(task.goal_id, { status: "blocked_risk" });
       const error = new Error("High-risk contracts require a separately configured risk boundary");
@@ -311,6 +331,10 @@ export class Agents {
       throw error;
     }
     this.store.updateOpportunity(opportunity.id, "contracted");
+    // `observe` autonomy stops at the proposal: nothing is built, nothing is shipped.
+    if (goal.policy?.autonomy === "observe") {
+      return { outcome: "contract_proposed", checks: spec.checks.length, risk: spec.risk };
+    }
     const next = this.store.enqueue({
       goalId: task.goal_id,
       opportunityId: opportunity.id,
@@ -318,40 +342,154 @@ export class Agents {
       kind: "delivery.build",
       contract: { goalId: task.goal_id, generation, spec, evidenceIds: opportunity.evidence_ids },
       dependsOn: [task.id],
+      ...(Number.isInteger(goal.policy?.maxAttempts) ? { maxAttempts: goal.policy.maxAttempts } : {}),
     });
     return { outcome: "contract_created", nextTaskId: next.task.id, checks: spec.checks.length };
+  }
+
+  /**
+   * Runs the builder as a repair loop: propose a change, apply it safely, run the
+   * project's own authoritative check, and hand a failure back for another attempt.
+   *
+   * The workspace is restored byte-for-byte if the budget is exhausted, so a failed
+   * attempt never leaves the repository in a half-changed state.
+   */
+  async runBuildRepair(task, { spec, goal, opportunity, buildPolicy, input }) {
+    const profileName = buildPolicy.testProfile;
+    const profile = this.commandProfiles[profileName];
+    if (!profile) throw new Error(`Unknown build test profile: ${profileName}`);
+    const allow = Array.isArray(buildPolicy.allowedPaths) && buildPolicy.allowedPaths.length
+      ? buildPolicy.allowedPaths
+      : null;
+    const maxAttempts = Number.isInteger(buildPolicy.maxAttempts) ? buildPolicy.maxAttempts : 3;
+
+    const result = await runRepairLoop({
+      workspace: this.workspace,
+      allow,
+      maxAttempts,
+      propose: async ({ attempt, feedback }) => {
+        const response = await runExternalBuilder(this.builderProfile, {
+          ...input,
+          protocol: "until-builder/v2",
+          attempt,
+          feedback,
+        }, this.workspace, this.sandboxConfirmed);
+        const normalized = normalizeBuilderResponse(response);
+        if (normalized.edits) return { edits: normalized.edits, notes: normalized.notes };
+        return { applied: true, notes: normalized.notes };
+      },
+      verify: async () => {
+        const outcome = await runCommandProfile(profile, { workspace: this.workspace });
+        return {
+          passed: outcome.code === 0,
+          // The builder gets the failure, not the whole log of passing tests.
+          output: outcome.failures || outcome.output,
+          detail: { exitCode: outcome.code, signal: outcome.signal, rawOutput: String(outcome.output ?? "").slice(-4000) },
+        };
+      },
+    });
+
+    const implementation = result.passed
+      ? {
+        type: "repository_change",
+        summary: result.attempts.at(-1)?.notes ?? spec.summary,
+        repositoryChange: true,
+        files: result.changes.modified.concat(result.changes.added),
+      }
+      : {
+        type: "failed_change",
+        summary: result.attempts.at(-1)?.notes ?? spec.summary,
+        repositoryChange: false,
+        files: [],
+      };
+
+    return { result, implementation, goal, opportunity };
   }
 
   async build(task) {
     assertRoleCapability(task.role, "artifact.build");
     const opportunity = requireOpportunity(this.store, task);
     const spec = normalizeSpec(task.contract.spec);
+    const goal = this.store.getGoal(task.goal_id);
+    const buildPolicy = goal.policy?.build && typeof goal.policy.build === "object" ? goal.policy.build : null;
     const input = {
-      goal: this.store.getGoal(task.goal_id),
+      goal,
       opportunity,
       spec,
       evidenceIds: task.contract.evidenceIds,
       output: "Return JSON with an implementation field containing the experiment artifact. Do not claim verification or release.",
+      // Operator-registered checks the builder may run itself. These are the same
+      // commands the independent verifier will run, so a builder can see its own
+      // failure and correct it without the kernel inventing a definition of done.
+      verification: spec.checks
+        .filter((check) => check.type === "command_profile")
+        .map((check) => {
+          const profile = this.commandProfiles[check.profile];
+          if (!profile) return { profile: check.profile, missing: true };
+          return {
+            profile: check.profile,
+            command: profile.command,
+            args: profile.args ?? [],
+            cwd: profile.cwd ?? null,
+            timeoutMs: profile.timeoutMs ?? null,
+          };
+        }),
+      // The builder runs inside this workspace and may only write these paths.
+      workspace: this.workspace,
+      allowedPaths: Array.isArray(task.contract.allowedPaths) ? task.contract.allowedPaths : [],
+      // The step budget is part of the contract, not of the environment: a builder
+      // must not depend on inheriting variables it cannot see.
+      maxSteps: Number.isInteger(buildPolicy?.maxSteps) ? buildPolicy.maxSteps : null,
     };
-    const modelValue = await this.maybeModel(task.role, task, input);
-    const external = this.builderProfile
-      ? await runExternalBuilder(this.builderProfile, input, this.workspace, this.sandboxConfirmed)
-      : null;
-    const implementation = external ?? modelValue ?? {
-      type: "bounded_experiment",
-      summary: spec.summary,
-      evidenceLinked: true,
-      fixture: !this.builderProfile,
-    };
+
+    let implementation = null;
+    let repair = null;
+
+    if (this.builderProfile && buildPolicy?.testProfile) {
+      const built = await this.runBuildRepair(task, { spec, goal, opportunity, buildPolicy, input });
+      repair = built.result;
+      implementation = built.implementation;
+    } else {
+      const modelValue = await this.maybeModel(task.role, task, input);
+      const external = this.builderProfile
+        ? await runExternalBuilder(this.builderProfile, input, this.workspace, this.sandboxConfirmed)
+        : null;
+      implementation = external ?? modelValue ?? {
+        type: "bounded_experiment",
+        summary: spec.summary,
+        evidenceLinked: true,
+        fixture: !this.builderProfile,
+      };
+    }
+
     const artifact = await this.writeArtifact(task, {
       kind: "product.experiment",
       actor: task.role,
       content: {
         goalId: task.goal_id,
         opportunityId: opportunity.id,
-        status: "implemented",
+        status: repair && !repair.passed ? "rejected" : "implemented",
         evidenceIds: task.contract.evidenceIds,
         implementation,
+        ...(repair
+          ? {
+            repair: {
+              passed: repair.passed,
+              reason: repair.reason,
+              attempts: repair.attempts.length,
+              changedFiles: repair.changes.modified.concat(repair.changes.added),
+              workspaceRestored: repair.workspaceRestored,
+              // Per-attempt evidence: what the check said after each proposal.
+              trail: repair.attempts.map((item) => ({
+                attempt: item.attempt,
+                changedFiles: item.changedFiles,
+                notes: item.notes,
+                passed: item.passed,
+                output: typeof item.output === "string" ? item.output.slice(0, 4000) : "",
+              })),
+            },
+          }
+          : {}),
       },
     });
     const next = this.store.enqueue({

@@ -1,0 +1,877 @@
+{
+  "format": "until-agent-proof/v1",
+  "mode": "real_local_model_agent_on_real_code_through_the_real_kernel",
+  "label": "r11-qwen3_14b",
+  "model": "qwen3:14b",
+  "structuredOwner": false,
+  "task": "The repair loop corrupts binary files when it rolls back",
+  "requirement": null,
+  "workspace": "a copy of this repository, including the real failing regression test",
+  "seededDefect": "snapshotWorkspace() decoded file contents as UTF-8 text before hashing, so binary files hashed wrong and the rollback wrote mangled text back",
+  "seededCheckFailed": true,
+  "seededFailure": "✖ a snapshot hashes a binary file by its real bytes (1077.7739ms)\n✖ a restore returns a binary file byte for byte (45.0843ms)\n✖ failing tests:\n✖ a snapshot hashes a binary file by its real bytes (1077.7739ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n    actual: '5165985b77e8098072174674f28f3a17e9831a055e5774f108f68b4ef8a0c7ca',\n    expected: 'c05982dd4730e3cfb2b3999898068f32d0bcf0071964359eb686bc5b182f4e9a',\n✖ a restore returns a binary file byte for byte (45.0843ms)\n  AssertionError [ERR_ASSERTION]: a binary file must be restored byte for byte\n    actual: 1,\n    expected: 0,",
+  "seededExtraFailures": [],
+  "allowedPaths": [
+    "src/executor/workspace.js"
+  ],
+  "acceptanceCheck": "node --test --test-reporter=spec \"test/*.test.mjs\"",
+  "elapsedMs": 847881,
+  "run": {
+    "cycles": 4,
+    "completed": 12,
+    "failed": 0,
+    "stale": 0
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "changedFiles": [],
+      "notes": "the step budget ran out before the agent finished. steps: 1:run_check → 2:grep → 3:read_file(src/executor/repair.js) → 4:read_file(src/executor/workspace.js) → 5:read_file(test/executor-binary.test.mjs) → 6:read_file(src/executor/repair.js) → 7:read_file(src/executor/workspace.js) → 8:patch_file(src/executor/workspace.js) → 9:read_file(src/executor/workspace.js) → 10:patch_file(src/executor/workspace.js) → 11:read_file(src/executor/repair.js) → 12:read_file(src/executor/repair.js) → 13:read_file(src/executor/repair.js) → 14:read_file(src/executor/repair.js) → 15:read_file(src/executor/workspace.js) → 16:patch_file(src/executor/workspace.js) → 17:read_file(src/executor/repair.js) → 18:read_file(src/executor/repair.js) → 19:read_file(src/executor/workspace.js) → 20:patch_file(src/executor/workspace.js)",
+      "passed": false,
+      "output": "✖ a snapshot hashes a binary file by its real bytes (27.4788ms)\n✖ a restore returns a binary file byte for byte (25.9956ms)\nℹ tests 97\nℹ pass 95\nℹ fail 2\n✖ failing tests:\n✖ a snapshot hashes a binary file by its real bytes (27.4788ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n    actual: '5165985b77e8098072174674f28f3a17e9831a055e5774f108f68b4ef8a0c7ca',\n    expected: 'c05982dd4730e3cfb2b3999898068f32d0bcf0071964359eb686bc5b182f4e9a',\n    operator: 'strictEqual',\n✖ a restore returns a binary file byte for byte (25.9956ms)\n  AssertionError [ERR_ASSERTION]: a binary file must be restored byte for byte\n    actual: 1,\n    expected: 0,\n    operator: 'strictEqual',"
+    },
+    {
+      "attempt": 2,
+      "changedFiles": [],
+      "notes": "the step budget ran out before the agent finished. steps: 1:list_files(test) → 2:grep → 3:read_file(src/executor/repair.js) → 4:read_file(src/executor/workspace.js) → 5:read_file(test/executor-binary.test.mjs) → 6:read_file(src/executor/repair.js) → 7:read_file(src/executor/workspace.js) → 8:read_file(test/executor-binary.test.mjs) → 9:read_file(src/util.js) → 10:read_file(src/executor/repair.js) → 11:read_file(src/executor/workspace.js) → 12:read_file(src/util.js) → 13:read_file(src/executor/repair.js) → 14:read_file(src/executor/workspace.js) → 15:read_file(test/executor-binary.test.mjs) → 16:read_file(src/executor/repair.js) → 17:read_file(src/executor/workspace.js) → 18:read_file(src/util.js) → 19:read_file(src/executor/repair.js) → 20:read_file(src/executor/workspace.js)",
+      "passed": false,
+      "output": "✖ a snapshot hashes a binary file by its real bytes (72.5095ms)\n✖ a restore returns a binary file byte for byte (934.367ms)\nℹ tests 97\nℹ pass 95\nℹ fail 2\n✖ failing tests:\n✖ a snapshot hashes a binary file by its real bytes (72.5095ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n    actual: '5165985b77e8098072174674f28f3a17e9831a055e5774f108f68b4ef8a0c7ca',\n    expected: 'c05982dd4730e3cfb2b3999898068f32d0bcf0071964359eb686bc5b182f4e9a',\n    operator: 'strictEqual',\n✖ a restore returns a binary file byte for byte (934.367ms)\n  AssertionError [ERR_ASSERTION]: a binary file must be restored byte for byte\n    actual: 1,\n    expected: 0,\n    operator: 'strictEqual',"
+    },
+    {
+      "attempt": 3,
+      "changedFiles": [],
+      "notes": "the step budget ran out before the agent finished. steps: 1:run_check → 2:grep → 3:read_file(src/executor/repair.js) → 4:read_file(src/executor/workspace.js) → 5:read_file(test/executor-binary.test.mjs) → 6:read_file(src/executor/repair.js) → 7:read_file(src/executor/workspace.js) → 8:read_file(test/executor-binary.test.mjs) → 9:read_file(src/executor/repair.js) → 10:read_file(src/executor/workspace.js) → 11:read_file(test/executor-binary.test.mjs) → 12:read_file(src/executor/repair.js) → 13:read_file(src/executor/workspace.js) → 14:read_file(test/executor-binary.test.mjs) → 15:read_file(src/executor/repair.js) → 16:read_file(src/executor/workspace.js) → 17:read_file(test/executor-binary.test.mjs) → 18:read_file(src/executor/repair.js) → 19:read_file(src/executor/workspace.js) → 20:read_file(test/executor-binary.test.mjs)",
+      "passed": false,
+      "output": "✖ a snapshot hashes a binary file by its real bytes (18.4329ms)\n✖ a restore returns a binary file byte for byte (22.9284ms)\nℹ tests 97\nℹ pass 95\nℹ fail 2\n✖ failing tests:\n✖ a snapshot hashes a binary file by its real bytes (18.4329ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n    actual: '5165985b77e8098072174674f28f3a17e9831a055e5774f108f68b4ef8a0c7ca',\n    expected: 'c05982dd4730e3cfb2b3999898068f32d0bcf0071964359eb686bc5b182f4e9a',\n    operator: 'strictEqual',\n✖ a restore returns a binary file byte for byte (22.9284ms)\n  AssertionError [ERR_ASSERTION]: a binary file must be restored byte for byte\n    actual: 1,\n    expected: 0,\n    operator: 'strictEqual',"
+    }
+  ],
+  "repair": {
+    "passed": false,
+    "reason": "attempts_exhausted",
+    "attempts": 3,
+    "changedFiles": [],
+    "workspaceRestored": true
+  },
+  "sourceChanged": false,
+  "sourceBytesBefore": 8845,
+  "sourceBytesAfter": 8845,
+  "artifactStatus": "rejected",
+  "verdict": {
+    "passed": 0,
+    "checks": [
+      {
+        "evidence": {
+          "exitCode": 1,
+          "expectedExitCode": 0,
+          "signal": null
+        },
+        "passed": false,
+        "type": "command_profile"
+      },
+      {
+        "evidence": {
+          "actual": "rejected",
+          "expected": "implemented"
+        },
+        "passed": false,
+        "type": "json_field"
+      }
+    ]
+  },
+  "release": null,
+  "audit": {
+    "valid": true,
+    "count": 67,
+    "head": "f1a48b156d4e2de936e9f4a01ac9d99fa548cd741be0bdc3cc478e5a01ea8dea"
+  },
+  "events": [
+    {
+      "id": 1,
+      "type": "goal.created",
+      "actor": "operator",
+      "payload": {
+        "goalId": "goal_binary",
+        "title": "The repair loop corrupts binary files when it rolls back"
+      }
+    },
+    {
+      "id": 2,
+      "type": "signal.added",
+      "actor": "connector",
+      "payload": {
+        "goalId": "goal_binary",
+        "hash": "82413b2af762b3279043103aca8e6ddd36f4a90ac78824af9863f4ae33ba1906",
+        "kind": "incident",
+        "signalId": "sig_binary"
+      }
+    },
+    {
+      "id": 3,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "research.synthesize",
+        "taskId": "task_33885418-e62a-4f17-bc5f-8334dc09f72e"
+      }
+    },
+    {
+      "id": 4,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "research.synthesize",
+        "taskId": "task_33885418-e62a-4f17-bc5f-8334dc09f72e"
+      }
+    },
+    {
+      "id": 5,
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": {
+        "generation": 1,
+        "goalId": "goal_binary",
+        "opportunityId": "opp_a9963222-09d0-4ed1-90bd-e5b429088d0d"
+      }
+    },
+    {
+      "id": 6,
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": {
+        "artifactId": "art_7a077542-77aa-4399-b4e3-25ce7f1f804b",
+        "hash": "dac56f1030b3955d0670591fbce0700131adffc60fbbfbfb64e37b95f791b565",
+        "kind": "research.opportunity",
+        "taskId": "task_33885418-e62a-4f17-bc5f-8334dc09f72e"
+      }
+    },
+    {
+      "id": 7,
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": {
+        "fields": {
+          "status": "open"
+        },
+        "goalId": "goal_binary"
+      }
+    },
+    {
+      "id": 8,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "product.contract",
+        "taskId": "task_7705d555-b4ec-4278-bc14-c4e44c623dc6"
+      }
+    },
+    {
+      "id": 9,
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": {
+        "kind": "research.synthesize",
+        "result": {
+          "nextTaskId": "task_7705d555-b4ec-4278-bc14-c4e44c623dc6",
+          "opportunityId": "opp_a9963222-09d0-4ed1-90bd-e5b429088d0d",
+          "outcome": "opportunity_ready"
+        },
+        "taskId": "task_33885418-e62a-4f17-bc5f-8334dc09f72e"
+      }
+    },
+    {
+      "id": 10,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "product.contract",
+        "taskId": "task_7705d555-b4ec-4278-bc14-c4e44c623dc6"
+      }
+    },
+    {
+      "id": 11,
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": {
+        "opportunityId": "opp_a9963222-09d0-4ed1-90bd-e5b429088d0d",
+        "status": "contracted"
+      }
+    },
+    {
+      "id": 12,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "delivery.build",
+        "taskId": "task_ab761a4b-4566-4d87-aa81-b25dc64aee75"
+      }
+    },
+    {
+      "id": 13,
+      "type": "task.done",
+      "actor": "owner",
+      "payload": {
+        "kind": "product.contract",
+        "result": {
+          "checks": 2,
+          "nextTaskId": "task_ab761a4b-4566-4d87-aa81-b25dc64aee75",
+          "outcome": "contract_created"
+        },
+        "taskId": "task_7705d555-b4ec-4278-bc14-c4e44c623dc6"
+      }
+    },
+    {
+      "id": 14,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "delivery.build",
+        "taskId": "task_ab761a4b-4566-4d87-aa81-b25dc64aee75"
+      }
+    },
+    {
+      "id": 15,
+      "type": "artifact.created",
+      "actor": "builder",
+      "payload": {
+        "artifactId": "art_fee9fccc-bd30-4c95-89bb-130b2b6fd772",
+        "hash": "26623f12faecb6b57d0a2e5ab226ff4e332a41570bcc5ced1076c2b9193bd4bd",
+        "kind": "product.experiment",
+        "taskId": "task_ab761a4b-4566-4d87-aa81-b25dc64aee75"
+      }
+    },
+    {
+      "id": 16,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "quality.verify",
+        "taskId": "task_b1e155ca-27f9-4964-bfa9-a60d20990792"
+      }
+    },
+    {
+      "id": 17,
+      "type": "task.done",
+      "actor": "builder",
+      "payload": {
+        "kind": "delivery.build",
+        "result": {
+          "artifactId": "art_fee9fccc-bd30-4c95-89bb-130b2b6fd772",
+          "nextTaskId": "task_b1e155ca-27f9-4964-bfa9-a60d20990792",
+          "outcome": "artifact_built"
+        },
+        "taskId": "task_ab761a4b-4566-4d87-aa81-b25dc64aee75"
+      }
+    },
+    {
+      "id": 18,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "quality.verify",
+        "taskId": "task_b1e155ca-27f9-4964-bfa9-a60d20990792"
+      }
+    },
+    {
+      "id": 19,
+      "type": "verdict.created",
+      "actor": "verifier",
+      "payload": {
+        "artifactId": "art_fee9fccc-bd30-4c95-89bb-130b2b6fd772",
+        "passed": false,
+        "verdictId": "verdict_46f63589-7d71-41ed-8e6c-819ab44d9df2"
+      }
+    },
+    {
+      "id": 20,
+      "type": "artifact.status",
+      "actor": "verifier",
+      "payload": {
+        "artifactId": "art_fee9fccc-bd30-4c95-89bb-130b2b6fd772",
+        "status": "rejected"
+      }
+    },
+    {
+      "id": 21,
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": {
+        "opportunityId": "opp_a9963222-09d0-4ed1-90bd-e5b429088d0d",
+        "status": "revision_required"
+      }
+    },
+    {
+      "id": 22,
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": {
+        "fields": {
+          "status": "open"
+        },
+        "goalId": "goal_binary"
+      }
+    },
+    {
+      "id": 23,
+      "type": "task.done",
+      "actor": "verifier",
+      "payload": {
+        "kind": "quality.verify",
+        "result": {
+          "artifactId": "art_fee9fccc-bd30-4c95-89bb-130b2b6fd772",
+          "checks": [
+            {
+              "evidence": {
+                "exitCode": 1,
+                "expectedExitCode": 0,
+                "signal": null
+              },
+              "passed": false,
+              "type": "command_profile"
+            },
+            {
+              "evidence": {
+                "actual": "rejected",
+                "expected": "implemented"
+              },
+              "passed": false,
+              "type": "json_field"
+            }
+          ],
+          "outcome": "verification_failed"
+        },
+        "taskId": "task_b1e155ca-27f9-4964-bfa9-a60d20990792"
+      }
+    },
+    {
+      "id": 24,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "research.synthesize",
+        "taskId": "task_cefe682e-f806-4a66-9bfa-7911298bb6b7"
+      }
+    },
+    {
+      "id": 25,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "research.synthesize",
+        "taskId": "task_cefe682e-f806-4a66-9bfa-7911298bb6b7"
+      }
+    },
+    {
+      "id": 26,
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": {
+        "generation": 2,
+        "goalId": "goal_binary",
+        "opportunityId": "opp_99c6251c-08fe-4b1a-910a-1d50072ec950"
+      }
+    },
+    {
+      "id": 27,
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": {
+        "artifactId": "art_d46bbb43-b0a8-41bc-b3c1-0d4c4a36c896",
+        "hash": "499ef6069fa544adca708ab35b625559bcd1cd3a51e33b2db3137a99cf85e076",
+        "kind": "research.opportunity",
+        "taskId": "task_cefe682e-f806-4a66-9bfa-7911298bb6b7"
+      }
+    },
+    {
+      "id": 28,
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": {
+        "fields": {
+          "status": "open"
+        },
+        "goalId": "goal_binary"
+      }
+    },
+    {
+      "id": 29,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "product.contract",
+        "taskId": "task_eb1aaf08-43a2-4728-94e6-a295cf9ebc21"
+      }
+    },
+    {
+      "id": 30,
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": {
+        "kind": "research.synthesize",
+        "result": {
+          "nextTaskId": "task_eb1aaf08-43a2-4728-94e6-a295cf9ebc21",
+          "opportunityId": "opp_99c6251c-08fe-4b1a-910a-1d50072ec950",
+          "outcome": "opportunity_ready"
+        },
+        "taskId": "task_cefe682e-f806-4a66-9bfa-7911298bb6b7"
+      }
+    },
+    {
+      "id": 31,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "product.contract",
+        "taskId": "task_eb1aaf08-43a2-4728-94e6-a295cf9ebc21"
+      }
+    },
+    {
+      "id": 32,
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": {
+        "opportunityId": "opp_99c6251c-08fe-4b1a-910a-1d50072ec950",
+        "status": "contracted"
+      }
+    },
+    {
+      "id": 33,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "delivery.build",
+        "taskId": "task_9762a2d3-0dca-4947-b5ae-767fcfdeeb85"
+      }
+    },
+    {
+      "id": 34,
+      "type": "task.done",
+      "actor": "owner",
+      "payload": {
+        "kind": "product.contract",
+        "result": {
+          "checks": 2,
+          "nextTaskId": "task_9762a2d3-0dca-4947-b5ae-767fcfdeeb85",
+          "outcome": "contract_created"
+        },
+        "taskId": "task_eb1aaf08-43a2-4728-94e6-a295cf9ebc21"
+      }
+    },
+    {
+      "id": 35,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "delivery.build",
+        "taskId": "task_9762a2d3-0dca-4947-b5ae-767fcfdeeb85"
+      }
+    },
+    {
+      "id": 36,
+      "type": "artifact.created",
+      "actor": "builder",
+      "payload": {
+        "artifactId": "art_bca9203e-210a-42c2-9851-f4bd4f57395d",
+        "hash": "5b400c8b14ce4241904341ccc20d54e32095ece0154bb576711b0ac94816b015",
+        "kind": "product.experiment",
+        "taskId": "task_9762a2d3-0dca-4947-b5ae-767fcfdeeb85"
+      }
+    },
+    {
+      "id": 37,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "quality.verify",
+        "taskId": "task_f260fb34-f94e-44ec-b996-392efa646a39"
+      }
+    },
+    {
+      "id": 38,
+      "type": "task.done",
+      "actor": "builder",
+      "payload": {
+        "kind": "delivery.build",
+        "result": {
+          "artifactId": "art_bca9203e-210a-42c2-9851-f4bd4f57395d",
+          "nextTaskId": "task_f260fb34-f94e-44ec-b996-392efa646a39",
+          "outcome": "artifact_built"
+        },
+        "taskId": "task_9762a2d3-0dca-4947-b5ae-767fcfdeeb85"
+      }
+    },
+    {
+      "id": 39,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "quality.verify",
+        "taskId": "task_f260fb34-f94e-44ec-b996-392efa646a39"
+      }
+    },
+    {
+      "id": 40,
+      "type": "verdict.created",
+      "actor": "verifier",
+      "payload": {
+        "artifactId": "art_bca9203e-210a-42c2-9851-f4bd4f57395d",
+        "passed": false,
+        "verdictId": "verdict_e92754b1-d4b3-4e02-b1ae-e9dcb003c3c8"
+      }
+    },
+    {
+      "id": 41,
+      "type": "artifact.status",
+      "actor": "verifier",
+      "payload": {
+        "artifactId": "art_bca9203e-210a-42c2-9851-f4bd4f57395d",
+        "status": "rejected"
+      }
+    },
+    {
+      "id": 42,
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": {
+        "opportunityId": "opp_99c6251c-08fe-4b1a-910a-1d50072ec950",
+        "status": "revision_required"
+      }
+    },
+    {
+      "id": 43,
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": {
+        "fields": {
+          "status": "open"
+        },
+        "goalId": "goal_binary"
+      }
+    },
+    {
+      "id": 44,
+      "type": "task.done",
+      "actor": "verifier",
+      "payload": {
+        "kind": "quality.verify",
+        "result": {
+          "artifactId": "art_bca9203e-210a-42c2-9851-f4bd4f57395d",
+          "checks": [
+            {
+              "evidence": {
+                "exitCode": 1,
+                "expectedExitCode": 0,
+                "signal": null
+              },
+              "passed": false,
+              "type": "command_profile"
+            },
+            {
+              "evidence": {
+                "actual": "rejected",
+                "expected": "implemented"
+              },
+              "passed": false,
+              "type": "json_field"
+            }
+          ],
+          "outcome": "verification_failed"
+        },
+        "taskId": "task_f260fb34-f94e-44ec-b996-392efa646a39"
+      }
+    },
+    {
+      "id": 45,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "research.synthesize",
+        "taskId": "task_080f8ed0-bf2f-47af-b4be-72976cf97bf7"
+      }
+    },
+    {
+      "id": 46,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "research.synthesize",
+        "taskId": "task_080f8ed0-bf2f-47af-b4be-72976cf97bf7"
+      }
+    },
+    {
+      "id": 47,
+      "type": "opportunity.created",
+      "actor": "researcher",
+      "payload": {
+        "generation": 3,
+        "goalId": "goal_binary",
+        "opportunityId": "opp_2056da3b-16eb-4e10-bef1-8c1d4fdcbc15"
+      }
+    },
+    {
+      "id": 48,
+      "type": "artifact.created",
+      "actor": "researcher",
+      "payload": {
+        "artifactId": "art_ed508bea-ed56-4127-93b2-86fecbbe073f",
+        "hash": "c1832b0b9cf0efe32bb583d8ca21e77cd4a68bb429cbaf7c2b6e9f4217ef74f0",
+        "kind": "research.opportunity",
+        "taskId": "task_080f8ed0-bf2f-47af-b4be-72976cf97bf7"
+      }
+    },
+    {
+      "id": 49,
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": {
+        "fields": {
+          "status": "open"
+        },
+        "goalId": "goal_binary"
+      }
+    },
+    {
+      "id": 50,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "product.contract",
+        "taskId": "task_490ab0e3-f91c-4e36-8d78-1322e883e9db"
+      }
+    },
+    {
+      "id": 51,
+      "type": "task.done",
+      "actor": "researcher",
+      "payload": {
+        "kind": "research.synthesize",
+        "result": {
+          "nextTaskId": "task_490ab0e3-f91c-4e36-8d78-1322e883e9db",
+          "opportunityId": "opp_2056da3b-16eb-4e10-bef1-8c1d4fdcbc15",
+          "outcome": "opportunity_ready"
+        },
+        "taskId": "task_080f8ed0-bf2f-47af-b4be-72976cf97bf7"
+      }
+    },
+    {
+      "id": 52,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "product.contract",
+        "taskId": "task_490ab0e3-f91c-4e36-8d78-1322e883e9db"
+      }
+    },
+    {
+      "id": 53,
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": {
+        "opportunityId": "opp_2056da3b-16eb-4e10-bef1-8c1d4fdcbc15",
+        "status": "contracted"
+      }
+    },
+    {
+      "id": 54,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "delivery.build",
+        "taskId": "task_b0794a44-c986-4fef-b31c-96b64ff2d8cd"
+      }
+    },
+    {
+      "id": 55,
+      "type": "task.done",
+      "actor": "owner",
+      "payload": {
+        "kind": "product.contract",
+        "result": {
+          "checks": 2,
+          "nextTaskId": "task_b0794a44-c986-4fef-b31c-96b64ff2d8cd",
+          "outcome": "contract_created"
+        },
+        "taskId": "task_490ab0e3-f91c-4e36-8d78-1322e883e9db"
+      }
+    },
+    {
+      "id": 56,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "delivery.build",
+        "taskId": "task_b0794a44-c986-4fef-b31c-96b64ff2d8cd"
+      }
+    },
+    {
+      "id": 57,
+      "type": "artifact.created",
+      "actor": "builder",
+      "payload": {
+        "artifactId": "art_9f3f3f3a-5a6d-49a2-a92a-5a275149d9ba",
+        "hash": "39749cc44d63d3d453d38b82311ec2c60bd55e80a74809e4ee2cb9c746c492c9",
+        "kind": "product.experiment",
+        "taskId": "task_b0794a44-c986-4fef-b31c-96b64ff2d8cd"
+      }
+    },
+    {
+      "id": 58,
+      "type": "task.queued",
+      "actor": "director",
+      "payload": {
+        "epoch": 0,
+        "goalId": "goal_binary",
+        "kind": "quality.verify",
+        "taskId": "task_cc8983ef-cd9c-4af6-89fc-6e6139d71cd0"
+      }
+    },
+    {
+      "id": 59,
+      "type": "task.done",
+      "actor": "builder",
+      "payload": {
+        "kind": "delivery.build",
+        "result": {
+          "artifactId": "art_9f3f3f3a-5a6d-49a2-a92a-5a275149d9ba",
+          "nextTaskId": "task_cc8983ef-cd9c-4af6-89fc-6e6139d71cd0",
+          "outcome": "artifact_built"
+        },
+        "taskId": "task_b0794a44-c986-4fef-b31c-96b64ff2d8cd"
+      }
+    },
+    {
+      "id": 60,
+      "type": "task.leased",
+      "actor": "worker_471a52fb-ffc5-4873-be82-e4d1cb05dc9f",
+      "payload": {
+        "attempt": 1,
+        "kind": "quality.verify",
+        "taskId": "task_cc8983ef-cd9c-4af6-89fc-6e6139d71cd0"
+      }
+    },
+    {
+      "id": 61,
+      "type": "verdict.created",
+      "actor": "verifier",
+      "payload": {
+        "artifactId": "art_9f3f3f3a-5a6d-49a2-a92a-5a275149d9ba",
+        "passed": false,
+        "verdictId": "verdict_8515b7c3-286c-4f65-9211-da7236fabf6f"
+      }
+    },
+    {
+      "id": 62,
+      "type": "artifact.status",
+      "actor": "verifier",
+      "payload": {
+        "artifactId": "art_9f3f3f3a-5a6d-49a2-a92a-5a275149d9ba",
+        "status": "rejected"
+      }
+    },
+    {
+      "id": 63,
+      "type": "opportunity.updated",
+      "actor": "kernel",
+      "payload": {
+        "opportunityId": "opp_2056da3b-16eb-4e10-bef1-8c1d4fdcbc15",
+        "status": "revision_required"
+      }
+    },
+    {
+      "id": 64,
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": {
+        "fields": {
+          "status": "open"
+        },
+        "goalId": "goal_binary"
+      }
+    },
+    {
+      "id": 65,
+      "type": "task.done",
+      "actor": "verifier",
+      "payload": {
+        "kind": "quality.verify",
+        "result": {
+          "artifactId": "art_9f3f3f3a-5a6d-49a2-a92a-5a275149d9ba",
+          "checks": [
+            {
+              "evidence": {
+                "exitCode": 1,
+                "expectedExitCode": 0,
+                "signal": null
+              },
+              "passed": false,
+              "type": "command_profile"
+            },
+            {
+              "evidence": {
+                "actual": "rejected",
+                "expected": "implemented"
+              },
+              "passed": false,
+              "type": "json_field"
+            }
+          ],
+          "outcome": "verification_failed"
+        },
+        "taskId": "task_cc8983ef-cd9c-4af6-89fc-6e6139d71cd0"
+      }
+    },
+    {
+      "id": 66,
+      "type": "goal.updated",
+      "actor": "kernel",
+      "payload": {
+        "fields": {
+          "status": "blocked_rework"
+        },
+        "goalId": "goal_binary"
+      }
+    },
+    {
+      "id": 67,
+      "type": "goal.blocked_rework",
+      "actor": "director",
+      "payload": {
+        "generation": 4,
+        "goalId": "goal_binary",
+        "maxRevisions": 3
+      }
+    }
+  ]
+}
