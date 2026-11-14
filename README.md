@@ -12,6 +12,7 @@
   </p>
   <p>
     <a href="https://github.com/Balanov/until/actions/workflows/ci.yml"><img src="https://github.com/Balanov/until/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+    <a href="https://github.com/Balanov/until/releases/latest"><img src="https://img.shields.io/github/v/release/Balanov/until?style=flat-square" alt="Latest release"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT license"></a>
     <a href="package.json"><img src="https://img.shields.io/badge/Node.js-24%2B-blue.svg" alt="Node.js 24+"></a>
   </p>
