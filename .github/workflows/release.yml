@@ -52,5 +52,7 @@ jobs:
           node-version: "24"
           registry-url: https://registry.npmjs.org
       - run: npm ci --ignore-scripts
+      - name: Use an npm that supports trusted publishing
+        run: npm install --global npm@latest
       - name: Publish to npm
         run: npm publish --provenance --access public
