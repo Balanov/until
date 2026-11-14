@@ -13,6 +13,7 @@ import { atomicWrite, resolveInside } from "../src/util.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const VERSION = JSON.parse(readFileSync(path.join(ROOT, "package.json"), "utf8")).version;
+
 const HELP = `UNTIL ${VERSION} — done means proven.
 
 Usage: until <command> [options]
