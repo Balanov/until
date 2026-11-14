@@ -1,15 +1,15 @@
 {
   "format": "until-proof/v1",
   "version": "0.3.0",
-  "generatedAt": "2026-11-14T16:52:30.117Z",
+  "generatedAt": "2026-11-14T15:22:45.818Z",
   "environment": {
     "node": "v24.21.0",
     "platform": "win32",
     "arch": "x64"
   },
   "mode": "deterministic fixtures and adversarial kernel checks; no LLM quality or business ROI claim",
-  "passed": 14,
-  "total": 14,
+  "passed": 17,
+  "total": 17,
   "checks": [
     {
       "name": "real cycle completes six role-separated tasks",
@@ -23,16 +23,16 @@
       "name": "builder output receives an independent passing verdict",
       "passed": true,
       "evidence": {
-        "artifactId": "art_2199b58a-a122-4ad5-99fe-5dd11b9ffb8c",
+        "artifactId": "art_8bcccc13-2eac-4678-a428-a3f796a444fc",
         "verdict": {
-          "id": "verdict_4ed8760c-3f3d-41cc-a585-9979e922e74a",
-          "artifact_id": "art_2199b58a-a122-4ad5-99fe-5dd11b9ffb8c",
-          "task_id": "task_b8227ef1-033c-4e2b-b906-afed10b44120",
+          "id": "verdict_3ad5ac49-998d-40c9-8fb8-0d58fa9a4509",
+          "artifact_id": "art_8bcccc13-2eac-4678-a428-a3f796a444fc",
+          "task_id": "task_3573c826-5d61-49ab-88c9-c0845c622b35",
           "passed": 1,
           "checks": [
             {
               "evidence": {
-                "file": "art_2199b58a-a122-4ad5-99fe-5dd11b9ffb8c.json"
+                "file": "art_8bcccc13-2eac-4678-a428-a3f796a444fc.json"
               },
               "passed": true,
               "type": "file_exists"
@@ -54,7 +54,7 @@
               "type": "json_field"
             }
           ],
-          "created_at": "2026-11-14T16:52:29.092Z"
+          "created_at": "2026-11-14T15:22:42.340Z"
         }
       }
     },
@@ -62,14 +62,14 @@
       "name": "release candidate is published locally with a receipt",
       "passed": true,
       "evidence": {
-        "releaseId": "rel_12117d43-ee5f-4e76-a0ae-17aa11861b3f",
+        "releaseId": "rel_2643935c-cd20-43dc-97a7-99162e3b25ef",
         "receipt": {
-          "artifactId": "art_2199b58a-a122-4ad5-99fe-5dd11b9ffb8c",
+          "artifactId": "art_8bcccc13-2eac-4678-a428-a3f796a444fc",
           "candidate": true,
-          "hash": "1f22c00b7bac3a99c01607551f332348ef1e2dc89acc99f15d757e1ac6457f9b",
-          "path": ".until\\releases\\rel_12117d43-ee5f-4e76-a0ae-17aa11861b3f.json",
+          "hash": "ff819683523fe06bd437e03ea538a950ed15ec36128784bc386fed0ef0e28d80",
+          "path": ".until\\releases\\rel_2643935c-cd20-43dc-97a7-99162e3b25ef.json",
           "provider": "until.local",
-          "releaseId": "rel_12117d43-ee5f-4e76-a0ae-17aa11861b3f",
+          "releaseId": "rel_2643935c-cd20-43dc-97a7-99162e3b25ef",
           "workspace": null
         }
       }
@@ -91,8 +91,8 @@
             "autonomy": "sandbox",
             "maxAttempts": 3
           },
-          "created_at": "2026-11-14T16:52:29.047Z",
-          "updated_at": "2026-11-14T16:52:29.121Z"
+          "created_at": "2026-11-14T15:22:42.295Z",
+          "updated_at": "2026-11-14T15:22:42.389Z"
         }
       }
     },
@@ -102,7 +102,7 @@
       "evidence": {
         "valid": true,
         "count": 42,
-        "head": "8a0ec4735697c8c0110b7f23cde400ffc9933c140326264654827b39546e4cf5"
+        "head": "324f1293182203de70105e117125d0cfc63c643b2ad31c8e2ec6937ddf907fa2"
       }
     },
     {
@@ -122,8 +122,8 @@
             "autonomy": "sandbox",
             "maxAttempts": 3
           },
-          "created_at": "2026-11-14T16:52:29.178Z",
-          "updated_at": "2026-11-14T16:52:29.188Z"
+          "created_at": "2026-11-14T15:22:42.455Z",
+          "updated_at": "2026-11-14T15:22:42.468Z"
         },
         "taskKinds": [
           "research.synthesize"
@@ -136,7 +136,7 @@
       "evidence": {
         "before": {
           "status": 1,
-          "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n+ actual - expected\r\n\r\n  [\r\n    'account',\r\n+   'duplicate-entry',\r\n+   'duplicate-entry',\r\n    'profile'\r\n  ]\r\n\r\n    at file:///F:/tmp/gh-triage/until-fix/proof-runs/latest/repository-cycle/scripts/verify.mjs:3:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: [ 'account', 'duplicate-entry', 'duplicate-entry', 'profile' ],\r\n  expected: [ 'account', 'profile' ],\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.21.0\r\n"
+          "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n+ actual - expected\r\n\r\n  [\r\n    'account',\r\n+   'duplicate-entry',\r\n+   'duplicate-entry',\r\n    'profile'\r\n  ]\r\n\r\n    at file:///F:/GitHub/until/proof-runs/latest/repository-cycle/scripts/verify.mjs:3:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: [ 'account', 'duplicate-entry', 'duplicate-entry', 'profile' ],\r\n  expected: [ 'account', 'profile' ],\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.21.0\r\n"
         },
         "after": {
           "status": 0,
@@ -156,9 +156,9 @@
       "name": "independent verifier runs the real repository test",
       "passed": true,
       "evidence": {
-        "id": "verdict_76e3d4a5-7543-46e7-8861-f7b6b343844b",
-        "artifact_id": "art_6d7fba79-42f3-47bf-a4e5-5c6a0ed8edd7",
-        "task_id": "task_fd422aa4-acfe-40af-935d-b3b216019195",
+        "id": "verdict_35ede1f3-3159-41c4-b0de-b0f4c2752291",
+        "artifact_id": "art_3c74c680-98dd-4e67-ac24-8168f28a609e",
+        "task_id": "task_11c5f2e7-ebdb-462b-b6a2-c66db0faff87",
         "passed": 1,
         "checks": [
           {
@@ -185,7 +185,7 @@
           },
           {
             "evidence": {
-              "file": "art_6d7fba79-42f3-47bf-a4e5-5c6a0ed8edd7.json"
+              "file": "art_3c74c680-98dd-4e67-ac24-8168f28a609e.json"
             },
             "passed": true,
             "type": "file_exists"
@@ -207,22 +207,58 @@
             "type": "json_field"
           }
         ],
-        "created_at": "2026-11-14T16:52:29.742Z"
+        "created_at": "2026-11-14T15:22:43.850Z"
       }
     },
     {
       "name": "release candidate packages actual code and remains immutable",
       "passed": true,
       "evidence": {
-        "releaseId": "rel_a0d58ea2-4d10-48f2-84b5-2cf07ada9dc2",
+        "releaseId": "rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c",
         "workspace": {
           "bytes": 264,
           "files": 2,
           "hash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19",
-          "manifestPath": ".until/releases/rel_a0d58ea2-4d10-48f2-84b5-2cf07ada9dc2/workspace/manifest.json",
-          "path": ".until/releases/rel_a0d58ea2-4d10-48f2-84b5-2cf07ada9dc2/workspace"
+          "manifestPath": ".until/releases/rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c/workspace/manifest.json",
+          "path": ".until/releases/rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c/workspace"
         },
         "candidateHash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19"
+      }
+    },
+    {
+      "name": "the builder is retried with the failing check as feedback",
+      "passed": true,
+      "evidence": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "passed": false,
+            "output": "sertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n  actual: [ 'account', 'duplicate-entry', 'profile' ],\r\n  expected: [ 'account', 'profile' ],\r\n  operator: 'deepStrictEqual',\r"
+          },
+          {
+            "attempt": 2,
+            "passed": true,
+            "output": "ACTIVATION_TEST_OK\n"
+          }
+        ]
+      }
+    },
+    {
+      "name": "the project's own test passes only after the repair loop",
+      "passed": true,
+      "evidence": {
+        "before": 1,
+        "after": 0,
+        "completed": 6,
+        "failed": 0
+      }
+    },
+    {
+      "name": "the repaired change becomes an independently verified release candidate",
+      "passed": true,
+      "evidence": {
+        "artifact": "art_dbda7eab-9f07-40b1-b297-a918cb83bbfd",
+        "release": "rel_d96bd1bb-ed53-458c-9b3b-9204495cf85f"
       }
     },
     {
@@ -275,6 +311,12 @@
     "repositoryFilesReleased": 2,
     "repositoryRegressionBefore": 1,
     "repositoryRegressionAfter": 0,
+    "repairCycleTasks": 6,
+    "repairAttempts": 2,
+    "repairFirstAttemptPassed": false,
+    "repairSecondAttemptPassed": true,
+    "repairRegressionBefore": 1,
+    "repairRegressionAfter": 0,
     "realEventCount": 42,
     "heldoutBaselineCorrect": "0/3",
     "heldoutCandidateCorrect": "3/3"

@@ -4,7 +4,7 @@
   "title": "Observed product issue → code change → independent test → immutable repository candidate",
   "beforeTest": {
     "status": 1,
-    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n+ actual - expected\r\n\r\n  [\r\n    'account',\r\n+   'duplicate-entry',\r\n+   'duplicate-entry',\r\n    'profile'\r\n  ]\r\n\r\n    at file:///F:/tmp/gh-triage/until-fix/proof-runs/latest/repository-cycle/scripts/verify.mjs:3:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: [ 'account', 'duplicate-entry', 'duplicate-entry', 'profile' ],\r\n  expected: [ 'account', 'profile' ],\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.21.0\r\n"
+    "output": "node:internal/modules/run_main:107\r\n    triggerUncaughtException(\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\r\n+ actual - expected\r\n\r\n  [\r\n    'account',\r\n+   'duplicate-entry',\r\n+   'duplicate-entry',\r\n    'profile'\r\n  ]\r\n\r\n    at file:///F:/GitHub/until/proof-runs/latest/repository-cycle/scripts/verify.mjs:3:8\r\n    at ModuleJob.run (node:internal/modules/esm/module_job:561:25)\r\n    at async node:internal/modules/esm/loader:647:26\r\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\r\n  generatedMessage: true,\r\n  code: 'ERR_ASSERTION',\r\n  actual: [ 'account', 'duplicate-entry', 'duplicate-entry', 'profile' ],\r\n  expected: [ 'account', 'profile' ],\r\n  operator: 'deepStrictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.21.0\r\n"
   },
   "afterTest": {
     "status": 0,
@@ -17,42 +17,42 @@
   },
   "tasks": [
     {
-      "id": "task_f07d03b2-f193-4eac-bd8a-8311c4843c3d",
+      "id": "task_69846053-e7c7-424f-b55b-c0d6e11a96b8",
       "role": "researcher",
       "kind": "research.synthesize",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_bc195ef1-a510-4329-9ff6-83d743361961",
+      "id": "task_42af4447-cfcd-4ec8-96cc-070da89135e2",
       "role": "owner",
       "kind": "product.contract",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_2530f303-e537-4317-8008-963e75242397",
+      "id": "task_87b37c67-6c0e-4b4c-b59c-2329efc82049",
       "role": "builder",
       "kind": "delivery.build",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_fd422aa4-acfe-40af-935d-b3b216019195",
+      "id": "task_11c5f2e7-ebdb-462b-b6a2-c66db0faff87",
       "role": "verifier",
       "kind": "quality.verify",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_12ff0292-b06d-400c-83be-7eb0bb89abe2",
+      "id": "task_05f195d2-0e13-41d4-ab04-3e553361dc8d",
       "role": "release",
       "kind": "release.prepare",
       "state": "done",
       "attempts": 1
     },
     {
-      "id": "task_f813103a-1c8c-4f3c-89ab-2b6dcb3dfdd5",
+      "id": "task_d952dabc-bfef-4aef-9383-c116ab4a1d54",
       "role": "analyst",
       "kind": "outcome.observe",
       "state": "done",
@@ -60,9 +60,9 @@
     }
   ],
   "verdict": {
-    "id": "verdict_76e3d4a5-7543-46e7-8861-f7b6b343844b",
-    "artifact_id": "art_6d7fba79-42f3-47bf-a4e5-5c6a0ed8edd7",
-    "task_id": "task_fd422aa4-acfe-40af-935d-b3b216019195",
+    "id": "verdict_35ede1f3-3159-41c4-b0de-b0f4c2752291",
+    "artifact_id": "art_3c74c680-98dd-4e67-ac24-8168f28a609e",
+    "task_id": "task_11c5f2e7-ebdb-462b-b6a2-c66db0faff87",
     "passed": 1,
     "checks": [
       {
@@ -89,7 +89,7 @@
       },
       {
         "evidence": {
-          "file": "art_6d7fba79-42f3-47bf-a4e5-5c6a0ed8edd7.json"
+          "file": "art_3c74c680-98dd-4e67-ac24-8168f28a609e.json"
         },
         "passed": true,
         "type": "file_exists"
@@ -111,30 +111,30 @@
         "type": "json_field"
       }
     ],
-    "created_at": "2026-11-14T16:52:29.742Z"
+    "created_at": "2026-11-14T15:22:43.850Z"
   },
   "release": {
-    "id": "rel_a0d58ea2-4d10-48f2-84b5-2cf07ada9dc2",
-    "artifact_id": "art_6d7fba79-42f3-47bf-a4e5-5c6a0ed8edd7",
+    "id": "rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c",
+    "artifact_id": "art_3c74c680-98dd-4e67-ac24-8168f28a609e",
     "goal_id": "goal_proof",
     "status": "published_candidate",
     "receipt": {
-      "artifactId": "art_6d7fba79-42f3-47bf-a4e5-5c6a0ed8edd7",
+      "artifactId": "art_3c74c680-98dd-4e67-ac24-8168f28a609e",
       "candidate": true,
-      "hash": "ac8e1b212551cd14d9270e5bc6bf5a1c5684deaf600404621c3baf91733b07f2",
-      "path": ".until\\releases\\rel_a0d58ea2-4d10-48f2-84b5-2cf07ada9dc2.json",
+      "hash": "974a375f2f8834f12ec84edbc673e75eaee7f1eec9250177a1afe4dca5526c1b",
+      "path": ".until\\releases\\rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c.json",
       "provider": "until.local",
-      "releaseId": "rel_a0d58ea2-4d10-48f2-84b5-2cf07ada9dc2",
+      "releaseId": "rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c",
       "workspace": {
         "bytes": 264,
         "files": 2,
         "hash": "f053fc175fe8b969867199f303fa02d18e83f94c296098e440a4f4d97e779d19",
-        "manifestPath": ".until/releases/rel_a0d58ea2-4d10-48f2-84b5-2cf07ada9dc2/workspace/manifest.json",
-        "path": ".until/releases/rel_a0d58ea2-4d10-48f2-84b5-2cf07ada9dc2/workspace"
+        "manifestPath": ".until/releases/rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c/workspace/manifest.json",
+        "path": ".until/releases/rel_e4f6cc86-a9fd-4345-93cc-ce1957c9596c/workspace"
       }
     },
-    "idempotency_key": "8bf14d3a6e91da3d01ce338733527c1b3f56020d90b51aa693bd3787cd5404bc",
-    "created_at": "2026-11-14T16:52:29.746Z"
+    "idempotency_key": "b13845e695016adf34731c29d44fecc54b3e8522b9c502d1d661ee9271c5b263",
+    "created_at": "2026-11-14T15:22:43.854Z"
   },
   "initialSource": "export function activationSteps() {\n  return [\"account\", \"duplicate-entry\", \"duplicate-entry\", \"profile\"];\n}\n",
   "acceptedSource": "export function activationSteps() {\n  return [\"account\", \"profile\"];\n}\n",
@@ -142,6 +142,6 @@
   "audit": {
     "valid": true,
     "count": 36,
-    "head": "eebb467ccc045e7921ff7c5b5a715c204b644fb78dd36004078b329fa24c3602"
+    "head": "2c8ef5cae73427958b2a100038910d73fb742b0d05868cef18340a90be01df5d"
   }
 }
